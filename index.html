@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="styles/style.css"/>
+        <script src="scripts/script.js"></script>
         <title>Cool Presentation</title>
     </head>
     <body>
-        <body>very cool presentation.</body>
+        <div id="slide-content">
+            <h1>Cool Title</h1>
+            <p id="body-text">This is body text.</p>
+        </div>
+
+        <!-- Footer -->
+        <flex-container class="horizontal-align" id="footer">
+            <flex-item><button onclick="incrementSlide(-1)" id="back-button">Go Backwards</button></flex-item>
+            <flex-item>
+                <flex-container class="vertical-align" id="slide-information">
+                    <flex-item><h2 id="chapter-title">Chapter Title</h2></flex-item>
+                    <flex-item><h3 id="page-number">#1</h3></flex-item>
+                </flex-container>
+            </flex-item>
+            <flex-item><button onclick="incrementSlide(1)" id="forward-button">Go Forwards</button></flex-item>
+        </flex-container>
     </body>
 </html>

@@ -1,0 +1,84 @@
+:root {
+    --dark-grey: #212121;
+    --mid-grey: #434343;
+    --light-grey: #adadad;
+}
+
+body {
+    margin: 0px;
+    background-color: var(--dark-grey);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
+    color: var(--light-grey);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h2 {
+    color: var(--light-grey);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h3 {
+    color: var(--light-grey);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+p {
+    color: var(--light-grey);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+flex-container {
+    display: flex;
+}
+
+flex-item {
+    padding: 5px 0;
+}
+
+#footer {
+    height: 80px;
+    position: fixed;
+    bottom: 0%;
+    width: 100%;
+    background-color: var(--mid-grey);
+}
+
+.horizontal-align {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.vertical-align {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Slide Content */
+#slide-content {
+    margin: 8px;
+}
+
+/* Footer */
+
+#footer #back-button {
+    margin-left: 20px;
+}
+
+#footer #forward-button {
+    margin-right: 20px;
+}
+
+/* Slide Information - contains information about the current slide e.g. slide number and chapter title*/
+
+#slide-information #chapter-title {
+    margin-bottom: 1px;
+}
+
+#slide-information #page-number {
+    margin-top: 1px;
+}
