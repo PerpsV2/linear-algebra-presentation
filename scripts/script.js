@@ -1,13 +1,30 @@
 let currentSlide = 1
 
 function incrementSlide(incrementAmount) {
-    currentSlide = Math.max(currentSlide + incrementAmount, 1);
-    document.getElementById("slide-number").textContent = "#" + currentSlide;
+    setSlide(currentSlide + incrementAmount);
 }
 
 function setSlide(slideNumber) {
-    currentSlide = Math.max(slideNumber, 1);
+    let backButton = document.getElementById("back-button");
+    let forwardButton = document.getElementById("forward-button");
+    let lastSlide = document.getElementsByClassName("slide").length
+
+    currentSlide = Math.min(Math.max(slideNumber, 1), lastSlide);
     document.getElementById("slide-number").textContent = "#" + currentSlide;
+    document.documentElement.style.setProperty("--progress-bar-progress", '' + (currentSlide - 1) / (lastSlide - 1) * 100)
+    
+    // disable the back button on the first slide...
+    if (currentSlide <= 1) {
+        backButton.disabled = true;
+    }
+    // and disable the front button on the last slide
+    else if (currentSlide >= lastSlide) {
+        forwardButton.disabled = true;
+    } 
+    else {
+        backButton.disabled = false;
+        forwardButton.disabled = false;
+    }
 }
 
 function changeSection(pageName, slideNumber = 1) {

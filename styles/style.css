@@ -8,6 +8,8 @@
     --button-hover-color: #5B5B5B;
     --button-color: #606060;
     --text-color: #adadad;
+    --highlight-color: #a6ff8a; 
+    --progress-bar-progress: 0;
 }
 
 body {
@@ -137,52 +139,84 @@ flex-item.light-bg {
     background-color: var(--mid-grey);
 }
 
-#footer button {
-    background-color: transparent;
-    border: none;
+/* Change Slide Buttons */
+
+#back-button, #forward-button {
     width: 0;
     height: 0;
+    background-color: transparent;
+    border: none;
     transition: 0.1s;
     transform: scale(1, 1);
 }
 
-#footer #back-button {
+#back-button {
     border-top: 30px solid transparent;
     border-right: 60px solid var(--button-color);
     border-bottom: 30px solid transparent;
     margin-left: 50px;
 }
 
-#footer #forward-button {
+#forward-button {
     border-top: 30px solid transparent;
     border-left: 60px solid var(--button-color);
     border-bottom: 30px solid transparent;
     margin-right: 50px;
 }
 
-#footer #back-button:hover {
+#back-button:hover:enabled {
     border-right: 60px solid var(--button-hover-color);
     transform: scale(1.1, 1.1);
 }
 
-#footer #forward-button:hover {
+#forward-button:hover:enabled {
     border-left: 60px solid var(--button-hover-color);
     transform: scale(1.1, 1.1);
 }
 
-#footer #back-button:active {
+#back-button:active {
     border-right: 60px solid var(--button-click-color);
 }
 
-#footer #forward-button:active {
+#forward-button:active {
     border-left: 60px solid var(--button-click-color);
 }
 
-/* Slide Information - contains information about the current slide e.g. slide number and chapter title*/
+#back-button:disabled {
+    border-right: 60px solid transparent;
+}
+
+#forward-button:disabled {
+    border-left: 60px solid transparent;
+}
+
+/* Slide Information - contains information about the current slide e.g. slide number and chapter title */
 #slide-information #chapter-title {
     margin-bottom: 1px;
 }
 
 #slide-information #slide-number {
     margin-top: 1px;
+}
+
+/* Progress Bar - indicates the progress of the current section */
+#progress-bar {
+    background-color: black;
+    position: absolute;
+    height: 5px;
+    width: 100vw;
+    bottom: 0;
+    left: 0;
+}
+
+#progress-bar::after {
+    content: '';
+    transition: 0.2s;
+    background-color: var(--highlight-color);
+    position: absolute;
+    height: 5px;
+    width: calc(var(--progress-bar-progress) * 1vw);
+    bottom: 0;
+    left: 0;
+    border-radius: 0 2px 2px 0;
 }
