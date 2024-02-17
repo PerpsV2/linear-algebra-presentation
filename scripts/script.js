@@ -33,7 +33,6 @@ function changeSection(pageName, slideNumber = 1) {
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
-    console.log("Setting current slide to " + localStorage.getItem("slide"));
     setSlide(localStorage.getItem("slide"))
 })
 
