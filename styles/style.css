@@ -10,6 +10,7 @@
     --text-color: #adadad;
     --highlight-color: #a6ff8a; 
     --progress-bar-progress: 0;
+    --slide-anim-time: 0.2s;
 }
 
 body {
@@ -56,13 +57,16 @@ h1, h2, h3, h4, h5, h6, p, a {
 }
 
 /* Containers */
-.horizontal-align {
+.evenly-space {
     justify-content: space-between;
+    gap: 0;
+}
+
+.horizontal-align {
     flex-direction: row;
 }
 
 .vertical-align {
-    justify-content: space-between;
     flex-direction: column;
 }
 
@@ -73,6 +77,7 @@ h1, h2, h3, h4, h5, h6, p, a {
 flex-container {
     display: flex;
     align-items: stretch;
+    gap: 30px;
 }
 
 flex-item {
@@ -89,12 +94,22 @@ flex-item.light-bg {
 
 /* Page Content */
 .content-div {
+    position: relative;
     margin: 40px;
+    padding: 40px;
+}
+
+.slides-content-div {
+    position: relative;
+    width: calc(100vw - 80px);
+    height: calc(100vh - 80px);
+    margin: 40px;
+    overflow: hidden;
 }
 
 .center-content {
-    align-items: center;
     display: flex;
+    align-items: center;
     flex-direction: column;
     justify-content: center;
 }
@@ -105,6 +120,55 @@ flex-item.light-bg {
 
 .hover-underline-link:hover {
     text-decoration: underline;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+/* Slide Content */
+.pulsating-text {
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+    animation-name: pulsate;
+}
+
+@keyframes pulsate {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.highlight {
+    color: var(--highlight-color);
+}
+
+.slide {
+    transition: var(--slide-anim-time);
+    position: absolute;
+    visibility: visible;
+    opacity: 1;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+/* Slide hide/show animation */
+.slide.before-shown {
+    visibility: hidden;
+    opacity: 0;
+    left: 100%;
+}
+
+.slide.after-shown {
+    visibility: hidden;
+    opacity: 0;
+    right: 0;
 }
 
 /* Navigation Page */
@@ -140,7 +204,6 @@ flex-item.light-bg {
 }
 
 /* Change Slide Buttons */
-
 #back-button, #forward-button {
     width: 0;
     height: 0;
@@ -211,7 +274,7 @@ flex-item.light-bg {
 
 #progress-bar::after {
     content: '';
-    transition: 0.2s;
+    transition: var(--slide-anim-time);
     background-color: var(--highlight-color);
     position: absolute;
     height: 5px;

@@ -7,22 +7,115 @@
         <title>Linear Algebra - Introduction</title>
     </head>
     <body id="introduction-page">
-        <div class="content-div">
-            <h1>Cool Title</h1>
-            <p id="body-text">This is body text.</p>
+        <div class="slides-content-div">
+            <div class="slide before-shown"><div class="center-content">
+                <h2>Cool Title</h2>
+                <p>This is stuff inside of a slide.<br>
+                Look at all this text.<br>
+                Blah blah blah blah blah.</p>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                <h2>This is more stuff.</h2>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                <h1>And this is even more stuff.</h1>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                <h3>Some more <span class="highlight">filler</span> text...</h3>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                <a href="javascript:;" onclick="changeSection('introduction', 3)"><h2>This is a link back to a previous slide.</h2></a>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                <h3>Here is an image</h3>
+                <img src="../media/images/test-image.png" alt="Test Image"/>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                <h3>Here is a GIF</h3>
+                <img src="../media/images/test-gif.gif" alt="Test GIF"/>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                    <h3>Here is a video</h3>
+                    <video controls>
+                        <source src="../media/videos/test-video.mp4" type="video/mp4" alt="Test Video"/>
+                    </video>
+            </div></div>
+            <div class="slide before-shown">
+                <h1>Non-Centered Text</h1>
+                <p>Wowie very cool.</p>
+                <p>Its so not centered.</p>
+            </div>
+            <div class="slide before-shown">
+                <flex-container class="horizontal-align evenly-space">
+                    <flex-item><h1>This is a more detailed slide.</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <br>
+                       Suspendisse pharetra vitae dolor sit amet posuere. <br>
+                       Vestibulum id ipsum quis diam vehicula pellentesque. <br>
+                       Praesent maximus sollicitudin venenatis. <br>
+                       Phasellus facilisis fermentum mollis. Vestibulum urna mi, <br>
+                       lobortis sit amet justo in, suscipit pellentesque erat. 
+                    </p>
+                    <video controls>
+                        <source src="../media/videos/test-video.mp4" type="video/mp4" alt="Test Video"/>
+                    </video></flex-item>
+                    <flex-item>
+                        <h1>This is another section of text.</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur <br>
+                            suspendisse pharetra vitae dolor sit <br>
+                            vestibulum id ipsum quis diam vehicula <br>
+                            praesent <span class="highlight">maximus sollicitudin</span> venenatis. <br>
+                            Phasellus facilisis fermentum mollis. <br>
+                            lobortis sit amet justo in, suscipit. <br><br><br>
+                        </p>
+                        <img src="../media/images/test-image.png" alt="Test Image" width="450px" height="250px"/>
+                        <h5>Image caption...</h5>
+                    </flex-item>
+                    <flex-item>
+                        <h1>This is the last section of text.</h1>
+                        <p class="text-align-center">Lorem ipsum consectetur sit amet, consectetur <br>
+                            suspendisse pharetra pharetra dolor sit <br>
+                            vestibulum id ipsum quis diam sit <br>
+                            praesent maximus sollicitudin venenatis. <br>
+                            Phasellus facilisis fermentum mollis. <br>
+                            lobortis sit amet justo in, suscipit. <br>
+                            Lorem ipsum dolor facilisis amet, maximus <br>
+                            suspendisse justo pharetra vitae dolor sit <br>
+                            vestibulum id ipsum quis diam sit <br>
+                            praesent maximus sollicitudin dolor. <br>
+                            Phasellus dolor fermentum mollis. <br>
+                            lobortis sit amet justo in, suscipit. <br>
+                            Lorem ipsum dolor sit amet, quis <br>
+                            suspendisse pharetra vitae dolor sit <br>
+                            lobortis sit amet justo in, suscipit. <br>
+                            Lorem ipsum dolor sit amet, sollicitudin <br>
+                            suspendisse pharetra vitae dolor sit <br>
+                            vestibulum id ipsum quis diam vehicula <br>
+                            praesent maximus sollicitudin ipsum. <br>
+                            Phasellus facilisis fermentum mollis. <br>
+                            lobortis sit amet justo in, suscipit. <br>
+                            Lorem ipsum justo dolor sit amet, dolor <br>
+                            suspendisse pharetra vitae dolor vehicula <br>
+                            vestibulum id ipsum quis diam vehicula <br>
+                        </p>
+                    </flex-item>
+                </flex-container>
+            </div>
+            <div class="slide before-shown"><div class="center-content">
+                <h1><span class="highlight pulsating-text">Cool text</span></h1>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                <h1>The end</h1>
+                <a href="javascript:;" onclick="changeSection('introduction', 1)"><h2>Go back to the start</h2></a>
+                <h2>or...</h2>
+                <a href="javascript:;" onclick="changeSection('vector-operations', 1)"><h2>Go to the next section</h2></a>
+            </div></div>
         </div>
 
-        <!-- Empty slides to see if the progress bar works. -->>
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div><div class="slide"></div>
-        <div class="slide"></div><div class="slide"></div><div class="slide"></div><div class="slide"></div>
-
         <!-- Footer -->
-        <flex-container class="horizontal-align center-align" id="footer">
+        <flex-container class="horizontal-align center-align evenly-space" id="footer">
             <flex-item><button onclick="incrementSlide(-1)" id="back-button"></button></flex-item>
             <flex-item>
-                <flex-container class="vertical-align center-align" id="slide-information">
+                <flex-container class="vertical-align center-align evenly-space" id="slide-information">
                     <flex-item><a class="hover-underline-link" href="../index.html#introduction"><h2 id="chapter-title">Introduction</h2></a></flex-item>
                     <flex-item><h3 id="slide-number">#1</h3></flex-item>
                 </flex-container>
