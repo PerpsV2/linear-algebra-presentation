@@ -4,6 +4,9 @@
     --dark-grey: #3A3A3A;
     --mid-grey: #434343;
     --light-grey: #4F4F4F;
+    --button-click-color: #505050;
+    --button-hover-color: #5B5B5B;
+    --button-color: #606060;
     --text-color: #adadad;
 }
 
@@ -134,12 +137,45 @@ flex-item.light-bg {
     background-color: var(--mid-grey);
 }
 
+#footer button {
+    background-color: transparent;
+    border: none;
+    width: 0;
+    height: 0;
+    transition: 0.1s;
+    transform: scale(1, 1);
+}
+
 #footer #back-button {
-    margin-left: 20px;
+    border-top: 30px solid transparent;
+    border-right: 60px solid var(--button-color);
+    border-bottom: 30px solid transparent;
+    margin-left: 50px;
 }
 
 #footer #forward-button {
-    margin-right: 20px;
+    border-top: 30px solid transparent;
+    border-left: 60px solid var(--button-color);
+    border-bottom: 30px solid transparent;
+    margin-right: 50px;
+}
+
+#footer #back-button:hover {
+    border-right: 60px solid var(--button-hover-color);
+    transform: scale(1.1, 1.1);
+}
+
+#footer #forward-button:hover {
+    border-left: 60px solid var(--button-hover-color);
+    transform: scale(1.1, 1.1);
+}
+
+#footer #back-button:active {
+    border-right: 60px solid var(--button-click-color);
+}
+
+#footer #forward-button:active {
+    border-left: 60px solid var(--button-click-color);
 }
 
 /* Slide Information - contains information about the current slide e.g. slide number and chapter title*/
