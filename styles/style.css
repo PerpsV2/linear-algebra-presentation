@@ -74,10 +74,13 @@ h1, h2, h3, h4, h5, h6, p, a {
     align-items: center;
 }
 
+.flex-gap {
+    gap: 30px;
+}
+
 flex-container {
     display: flex;
     align-items: stretch;
-    gap: 30px;
 }
 
 flex-item {
@@ -162,13 +165,13 @@ flex-item.light-bg {
 .slide.before-shown {
     visibility: hidden;
     opacity: 0;
-    left: 100%;
+    transform: translate(100%, 0);
 }
 
 .slide.after-shown {
     visibility: hidden;
     opacity: 0;
-    right: 0;
+    transform: translate(-100%, 0);
 }
 
 /* Navigation Page */

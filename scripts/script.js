@@ -50,11 +50,7 @@ function changeSection(pageName, slideNumber = 1) {
         return;
     }
     localStorage.setItem("slide", slideNumber);
-    if (window.location.pathname.includes("html/")) {
-        window.location.href = pageName + ".html"
-        return;
-    }
-    window.location.href = "html/" + pageName + ".html";
+    window.location.href = pageName + ".html";
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
