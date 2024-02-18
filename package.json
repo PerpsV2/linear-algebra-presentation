@@ -1,8 +1,27 @@
 {
   "dependencies": {
+    "gh-pages": "^6.1.1",
     "three": "^0.161.0"
   },
   "devDependencies": {
     "vite": "^5.1.3"
-  }
+  },
+  "name": "linear-algebra-presentation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PerpsV2/linear-algebra-presentation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PerpsV2/linear-algebra-presentation/issues"
+  },
+  "homepage": "https://github.com/PerpsV2/linear-algebra-presentation#readme",
+  "description": ""
 }
