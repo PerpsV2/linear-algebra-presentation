@@ -48,11 +48,14 @@
                 </flex-container>
             </div>
             <div class="slide before-shown"><div class="center-content">
-                <h1>This text is very centered</h1>
-                <h3><a href="javascript:;" onclick="changeSection('introduction', 2)">Here is a link back to a previous slide</a></h3>
+                <div class="vertically-center-content" id="vector-demo2-container">
+                    <h1>Spin Box</h1>
+                    <canvas class="demo-canvas" id="vector-demo2-canvas"></canvas>
+                </div>
             </div></div>
             <div class="slide before-shown"><div class="center-content">
-
+                <h1>This text is very centered</h1>
+                <h3><a href="javascript:;" onclick="changeSection('introduction', 2)">Here is a link back to a previous slide</a></h3>
             </div></div>
             <div class="slide before-shown"><div class="center-content">
 
@@ -96,5 +99,6 @@
         <div id="progress-bar"></div>
 
         <script type="module" src="../scripts/vector-demo.js"></script>
+        <script type="module" src="../scripts/vector-demo2.js"></script>
     </body>
 </html>
