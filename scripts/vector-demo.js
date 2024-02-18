@@ -21,11 +21,16 @@ scene.add(cube);
 
 camera.position.z = 5;
 
+let xRotationSlider = document.getElementById("x-rotation-slider");
+let yRotationSlider = document.getElementById("y-rotation-slider");
+let zRotationSlider = document.getElementById("z-rotation-slider");
+
 // render loop
 function animate() {
     requestAnimationFrame(animate);
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    cube.rotation.x += parseFloat(xRotationSlider.value);
+    cube.rotation.y += parseFloat(yRotationSlider.value);
+    cube.rotation.z += parseFloat(zRotationSlider.value);
     renderer.render(scene, camera);
 }
 animate();

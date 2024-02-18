@@ -9,23 +9,47 @@
     <body id="introduction-page">
         <div class="slides-content-div">
             <div class="slide before-shown">
-                <div class="center-content">
+                <div class="vertically-center-content">
                 <h1>Cool Title</h1>
                     <div class="info-box center-content">
                         <h3>Here is an <highlight>image</highlight> and a <highlight>GIF</highlight></h3>
-                        <flex-container class="horizontal-align center-align flex-gap">
+                        <flex-container class="horizontal-flex center-align flex-gap">
                             <image src="../media/images/test-image.png" alt="Test Image" width="200px" height="200px"></image>
                             <image src="../media/images/test-gif.gif" alt="Fish GIF" width="200px" height="200px"></image>
                         </flex-container>
                     </div>
                 </div>
             </div>
-            <div class="slide before-shown"><div class="center-content" id="vector-demo-container">
-                <h1>Using Three.js to render visualizations</h1>
-                <canvas class="demo-canvas" id="vector-demo-canvas"></canvas>
-            </div></div>
+            <div class="slide before-shown">
+                <flex-container class="horizontal-flex flex-gap">
+                    <flex-item>
+                        <div class="vertically-center-content" id="vector-demo-container">
+                            <h1>Using Three.js to render visualizations</h1>
+                            <canvas class="demo-canvas" id="vector-demo-canvas"></canvas>
+                        </div>
+                    </flex-item>
+                    <flex-item>
+                        <div class="center-content">
+                            <h2>The canvas can be controlled from the slides</h2>
+                            <div class="slider-div">
+                                <input type="range" step="0.01" min="0" max="0.1" id="x-rotation-slider"/>
+                                <label> - X Rotation Speed</label>
+                            </div>
+                            <div class="slider-div">
+                                <input type="range" step="0.01" min="0" max="0.1" id="y-rotation-slider"/>
+                                <label> - Y Rotation Speed</label>
+                            </div>
+                            <div class="slider-div">
+                                <input type="range" step="0.01" min="0" max="0.1" id="z-rotation-slider"/>
+                                <label> - Z Rotation Speed</label>
+                            </div>
+                        </div>
+                    </flex-item>
+                </flex-container>
+            </div>
             <div class="slide before-shown"><div class="center-content">
-
+                <h1>This text is very centered</h1>
+                <h3><a href="javascript:;" onclick="changeSection('introduction', 2)">Here is a link back to a previous slide</a></h3>
             </div></div>
             <div class="slide before-shown"><div class="center-content">
 
@@ -57,10 +81,10 @@
         </div>
 
         <!-- Footer -->
-        <flex-container class="horizontal-align center-align evenly-space" id="footer">
+        <flex-container class="horizontal-flex center-align evenly-space" id="footer">
             <flex-item><button onclick="incrementSlide(-1)" id="back-button"></button></flex-item>
             <flex-item>
-                <flex-container class="vertical-align center-align evenly-space" id="slide-information">
+                <flex-container class="vertical-flex center-align evenly-space" id="slide-information">
                     <flex-item><a class="hover-underline-link" href="navigation.html#introduction"><h2 id="chapter-title">Introduction</h2></a></flex-item>
                     <flex-item><h3 id="slide-number">#1</h3></flex-item>
                 </flex-container>

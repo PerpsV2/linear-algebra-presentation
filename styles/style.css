@@ -11,6 +11,7 @@
     --highlight-color: #a6ff8a; 
     --progress-bar-progress: 0;
     --slide-anim-time: 0.2s;
+    --footer-height: 120px;
 }
 
 body {
@@ -50,23 +51,23 @@ a {
     font-size: 1em;
 }
 
-h1, h2, h3, h4, h5, h6, p, a {
+h1, h2, h3, h4, h5, h6, p, a, label {
     color: var(--text-color);
     font-family: Georgia, 'Times New Roman', Times, serif;
     margin: 1em 0;
 }
 
-/* Containers */
+/* Flexboxes */
 .evenly-space {
     justify-content: space-between;
     gap: 0;
 }
 
-.horizontal-align {
+.horizontal-flex {
     flex-direction: row;
 }
 
-.vertical-align {
+.vertical-flex {
     flex-direction: column;
 }
 
@@ -96,21 +97,32 @@ flex-item.light-bg {
 }
 
 /* Page Content */
+/* Div to store main page content */
 .content-div {
     position: relative;
     margin: 40px;
     padding: 40px;
 }
 
+/* Div to store specifically slides */
 .slides-content-div {
     position: relative;
     width: calc(100vw - 80px);
-    height: calc(100vh - 80px);
-    margin: 40px;
+    height: calc(100vh - 80px - var(--footer-height));
+    margin: 40px 40px calc(40px + var(--footer-height)) 40px;
     overflow: hidden;
 }
 
+.vertically-center-content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .center-content {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -130,6 +142,10 @@ flex-item.light-bg {
 }
 
 /* Slide Content */
+.slider-div {
+    margin: 10px 0;
+}
+
 highlight {
     color: var(--highlight-color);
 }
@@ -141,6 +157,8 @@ highlight {
     border-radius: 3px;
     border: double;
     padding: 20px;
+    width: auto;
+    height: auto;
 }
 
 .demo-canvas {
@@ -149,6 +167,7 @@ highlight {
 
 .slide {
     transition: var(--slide-anim-time);
+    height: 100%;
     position: absolute;
     visibility: visible;
     opacity: 1;
@@ -195,7 +214,7 @@ highlight {
 
 /* Footer */
 #footer {
-    height: auto;
+    height: var(--footer-height);
     position: fixed;
     bottom: 0;
     width: 100%;
