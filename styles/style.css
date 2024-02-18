@@ -130,25 +130,21 @@ flex-item.light-bg {
 }
 
 /* Slide Content */
-.pulsating-text {
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
-    animation-name: pulsate;
-}
-
-@keyframes pulsate {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-.highlight {
+highlight {
     color: var(--highlight-color);
+}
+
+.info-box, .demo-canvas {
+    background-color: var(--light-grey);
+    border-color: var(--dark-grey);
+    border-width: 5px;
+    border-radius: 3px;
+    border: double;
+    padding: 20px;
+}
+
+.demo-canvas {
+    padding: 0;
 }
 
 .slide {
