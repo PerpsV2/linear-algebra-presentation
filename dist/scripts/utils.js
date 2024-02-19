@@ -6,3 +6,11 @@ function generateBinaryStates(digits) {
     }
     return states;
 }
+
+function updateOrthographicCameraSize(camera, left, right, top, bottom) {
+    camera.left = left;
+    camera.right = right;
+    camera.top = top;
+    camera.bottom = bottom;
+    camera.updateProjectionMatrix();
+}

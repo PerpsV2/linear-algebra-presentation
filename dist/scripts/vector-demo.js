@@ -4,8 +4,12 @@ var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
 var zoomSlider = document.getElementById("zoom");
 
-const frustumAspectRatio = demoCanvas.offsetWidth / demoCanvas.offsetHeight;
 const displayScale = 0.6;
+const cellSize = 1;
+const gridSize = 20;
+const axisWidth = 0.04;
+
+const frustumAspectRatio = demoCanvas.offsetWidth / demoCanvas.offsetHeight;
 var frustumSize = 2;
 
 var scene;
@@ -25,12 +29,15 @@ function init() {
 
     camera.position.z = 5;
 
-    const lineMaterial = new THREE.LineBasicMaterial( {color: 0xffffff } );
+    const axisMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
+    const lineMaterial = new THREE.LineBasicMaterial( {color: 0xffffff, transparent: true, opacity: 0.3} );
 
     sceneObjects = sceneObjects.concat(createGridMesh(lineMaterial, 1, 20));
-    for (let object of sceneObjects) {
-        scene.add(object);
-    }
+    sceneObjects.push(createCubeMesh(axisMaterial, gridSize * 2, axisWidth, axisWidth));
+    sceneObjects.push(createCubeMesh(axisMaterial, axisWidth, gridSize * 2, axisWidth));
+    sceneObjects.push(createCubeMesh(axisMaterial, axisWidth, axisWidth, gridSize * 2));
+
+    for (let object of sceneObjects) scene.add(object);
     animate();
 }
 
@@ -38,11 +45,7 @@ function init() {
 function animate() {
     requestAnimationFrame(animate);
     frustumSize = zoomSlider.value;
-    camera.left = frustumAspectRatio * frustumSize / -2;
-    camera.right = frustumAspectRatio * frustumSize / 2;
-    camera.top = frustumSize / 2;
-    camera.bottom = frustumSize / -2;
-    camera.updateProjectionMatrix();
+    updateOrthographicCameraSize(camera, frustumAspectRatio * frustumSize / -2, frustumAspectRatio * frustumSize / 2, frustumSize / 2, frustumSize / -2);
     renderer.render(scene, camera);
 }
 init();
