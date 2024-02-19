@@ -23,14 +23,49 @@ function init() {
     renderer.setSize(window.innerWidth * displayScale, window.innerHeight * displayScale);
     demoContainer.appendChild(renderer.domElement);
 
-    const basicMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff } );
-    const greenMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00 } );
-
     camera.position.z = 5;
 
-    createCubeMesh(basicMaterial, 1, 1, 1);
-    createCubeMesh(greenMaterial, 1, 2, 0.5);
+    const basicMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff } );
+    const lineMaterial = new THREE.LineBasicMaterial( {color: 0xffffff } );
+
+    createGridMesh(lineMaterial, 1, 20);
     animate();
+}
+
+function generateBinaryStates(digits) {
+    var states = [];
+    var decimal = parseInt("1".repeat(digits), 2);
+    for (let i = 0; i <= decimal; i++) {
+        states.push(i.toString(2).padStart(digits, '0'));
+    }
+    return states;
+}
+
+function createGridMesh(material, cellSize, gridSize) {
+    for (let d = cellSize; d <= gridSize; d += cellSize) {
+        let points = []
+        let states = generateBinaryStates(3);
+        for(let state of states) {
+            let xPos = gridSize;
+            let yPos = d;
+
+            if (!!parseInt(state[2])) xPos *= -1;
+            if (!!parseInt(state[1])) yPos *= -1;
+            if (!!parseInt(state[0])) [xPos, yPos] = [yPos, xPos]
+            points.push([xPos, yPos, 0]);
+        }
+        for (let p = 0; p < points.length; p+=2) {
+            createLineMesh(material, points[p], points[p + 1]);
+        }
+    }
+}
+
+function createLineMesh(material, startPos, endPos) {
+    let points = [new THREE.Vector3(startPos[0], startPos[1], startPos[2]), new THREE.Vector3(endPos[0], endPos[1], endPos[2])];
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    const line = new THREE.Line(geometry, material);
+    sceneObjects.push(line);
+    scene.add(line);
 }
 
 // create the mesh of a cube
@@ -45,7 +80,6 @@ function createCubeMesh(material, length, width, height) {
 function animate() {
     requestAnimationFrame(animate);
     frustumSize = zoomSlider.value;
-    console.log(frustumSize);
     camera.left = frustumAspectRatio * frustumSize / -2;
     camera.right = frustumAspectRatio * frustumSize / 2;
     camera.top = frustumSize / 2;
