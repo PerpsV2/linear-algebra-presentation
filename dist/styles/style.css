@@ -9,6 +9,7 @@
     --button-color: #606060;
     --text-color: #adadad;
     --highlight-color: #a6ff8a; 
+    --shadow-highlight-color: #a6ff8a70;
     --progress-bar-progress: 0;
     --slide-anim-time: 0.2s;
     --footer-height: 120px;
@@ -49,6 +50,11 @@ p {
 
 a {
     font-size: 1em;
+}
+
+label {
+    font-size: 1.2rem;
+    font-style: bold;
 }
 
 h1, h2, h3, h4, h5, h6, p, a, label {
@@ -141,9 +147,34 @@ flex-item.light-bg {
     text-align: center;
 }
 
-/* Slide Content */
-.slider-div {
-    margin: 10px 0;
+/* Slide Content - stuff that appears in slides */
+.slider-box {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    margin: -0.5rem 0;
+    gap: 2rem;
+}
+
+input[type="range"].demo-slider {
+    appearance: none;
+    cursor: pointer;
+    background: var(--dark-grey);
+    border-radius: 0.4rem;
+    height: 0.8rem;
+    width: 15rem;
+}
+
+input[type="range"].demo-slider::-webkit-slider-thumb {
+    appearance: none;
+    background-color: var(--highlight-color);
+    border-radius: 50%;
+    width: 0.9rem;
+    height: 0.9rem;
+    box-shadow: 0 0 0 0.2rem var(--shadow-highlight-color);
 }
 
 highlight {
