@@ -1,4 +1,6 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import basicVertex from './shaders/basicVertex.js';
+import basicFragment from './shaders/basicFragment.js';
 
 var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
@@ -17,30 +19,16 @@ var camera;
 var renderer;
 var sceneObjects = [];
 
-function vertexShader() {
-    return `
-    uniform mat4 transformation;
-    void main() {
-        vec4 modelViewPosition = modelViewMatrix * transformation * vec4(position, 1.0);
-        gl_Position =  projectionMatrix * modelViewPosition;
-    }`;
-}
+const matrix = new THREE.Matrix4();
+matrix.set (1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            0, 0, 0, 1);
 
-function fragmentShader() {
-    return `
-    void main() {
-        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
-    }
-    `
-}
-
-function lineFragmentShader() {
-    return `
-    void main() {
-        gl_FragColor = vec4(0.4, 0.4, 0.4, 1.0);
-    }
-    `
-}
+let uniforms = {
+    transformation: { type: 'mat4', value: matrix },
+    color: { type: 'vec3', value: new THREE.Vector3(1, 1, 1) }
+};
 
 // initialize scene, camera, renderer and all the objects which will be rendered
 function init() {
@@ -54,28 +42,14 @@ function init() {
 
     camera.position.z = 5;
 
-    const matrix = new THREE.Matrix4();
-    matrix.set (1, 0, 0, 0,
-                0, 1, 0, 0,
-                0, 0, 1, 0,
-                0, 0, 0, 1);
-
-    let uniforms = {
-        transformation: { type: 'mat4', value: matrix }
-    };
-
     const axisMaterial = new THREE.ShaderMaterial({
-        fragmentShader: fragmentShader(),
-        vertexShader: vertexShader(),
+        fragmentShader: basicFragment,
+        vertexShader: basicVertex,
         uniforms: uniforms
     });
 
-    const lineMaterial = new THREE.ShaderMaterial({
-        transparency: true,
-        fragmentShader: lineFragmentShader(),
-        vertexShader: vertexShader(),
-        uniforms: uniforms
-    });
+    const lineMaterial = axisMaterial.clone();
+    lineMaterial.uniforms.color = { type: 'vec3', value: new THREE.Vector3(0.4, 0.4, 0.4) };
 
     sceneObjects = sceneObjects.concat(createGridMesh(lineMaterial, cellSize, gridSize));
     sceneObjects.push(createCubeMesh(axisMaterial, gridSize * 2, axisWidth, axisWidth));
