@@ -148,7 +148,7 @@ flex-item.light-bg {
 }
 
 /* Slide Content - stuff that appears in slides */
-.slider-box {
+.label-input-box {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -159,7 +159,7 @@ flex-item.light-bg {
     gap: 2rem;
 }
 
-input[type="range"].demo-slider {
+input[type="range"].demo-input {
     appearance: none;
     cursor: pointer;
     background: var(--dark-grey);
@@ -168,13 +168,40 @@ input[type="range"].demo-slider {
     width: 15rem;
 }
 
-input[type="range"].demo-slider::-webkit-slider-thumb {
+input[type="range"].demo-input::-webkit-slider-thumb {
     appearance: none;
     background-color: var(--highlight-color);
     border-radius: 50%;
     width: 0.9rem;
     height: 0.9rem;
     box-shadow: 0 0 0 0.2rem var(--shadow-highlight-color);
+}
+
+.multi-input-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+input[type="number"].demo-input {
+    appearance: none;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--dark-grey);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.4rem;
+    text-align: center;
+    color: var(--text-color);
+    width: 4.2rem;
+}
+
+input[type="number"].demo-input::-webkit-inner-spin-button {
+    appearance: none;
+}
+
+input[type="number"].demo-input::-webkit-outer-spin-button {
+    appearance: none;
 }
 
 highlight {
