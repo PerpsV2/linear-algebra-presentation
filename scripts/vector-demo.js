@@ -71,7 +71,6 @@ function init() {
     });
 
     const lineMaterial = new THREE.ShaderMaterial({
-        transparency: true,
         fragmentShader: lineFragmentShader(),
         vertexShader: vertexShader(),
         uniforms: uniforms
