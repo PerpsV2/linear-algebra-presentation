@@ -1,36 +1,96 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
+var demoContainer = document.getElementById("vector-demo-container");
+var demoCanvas = document.getElementById("vector-demo-canvas");
+var zoomSlider = document.getElementById("zoom");
+
 const displayScale = 0.6;
+const cellSize = 1;
+const gridSize = 20;
+const axisWidth = 0.04;
 
-let demoContainer = document.getElementById("vector-demo-container");
-let demoCanvas = document.getElementById("vector-demo-canvas");
+const frustumAspectRatio = demoCanvas.offsetWidth / demoCanvas.offsetHeight;
+var frustumSize = 2;
 
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-const renderer = new THREE.WebGLRenderer({
-    canvas: demoCanvas
-});
+var scene;
+var camera;
+var renderer;
+var sceneObjects = [];
 
-renderer.setSize(window.innerWidth * displayScale, window.innerHeight * displayScale);
-demoContainer.appendChild(renderer.domElement);
+function vertexShader() {
+    return `
+    uniform mat4 transformation;
+    void main() {
+        vec4 modelViewPosition = modelViewMatrix * transformation * vec4(position, 1.0);
+        gl_Position =  projectionMatrix * modelViewPosition;
+    }`;
+}
 
-const geometry = new THREE.BoxGeometry(1, 1, 1);
-const material = new THREE.MeshBasicMaterial( {color: 0xFFFFFF } );
-const cube = new THREE.Mesh(geometry, material);
-scene.add(cube);
+function fragmentShader() {
+    return `
+    void main() {
+        gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+    }
+    `
+}
 
-camera.position.z = 5;
+function lineFragmentShader() {
+    return `
+    void main() {
+        gl_FragColor = vec4(0.4, 0.4, 0.4, 1.0);
+    }
+    `
+}
 
-let xRotationSlider = document.getElementById("x-rotation-slider");
-let yRotationSlider = document.getElementById("y-rotation-slider");
-let zRotationSlider = document.getElementById("z-rotation-slider");
+// initialize scene, camera, renderer and all the objects which will be rendered
+function init() {
+    scene = new THREE.Scene();
+    camera = new THREE.OrthographicCamera(frustumAspectRatio * frustumSize / -2, frustumAspectRatio * frustumSize / 2, 
+    frustumSize / 2, frustumSize / -2, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({canvas: demoCanvas});
+    renderer.setClearColor(0x252525, 1);
+    renderer.setSize(window.innerWidth * displayScale, window.innerHeight * displayScale);
+    demoContainer.appendChild(renderer.domElement);
+
+    camera.position.z = 5;
+
+    const matrix = new THREE.Matrix4();
+    matrix.set (1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1);
+
+    let uniforms = {
+        transformation: { type: 'mat4', value: matrix }
+    };
+
+    const axisMaterial = new THREE.ShaderMaterial({
+        fragmentShader: fragmentShader(),
+        vertexShader: vertexShader(),
+        uniforms: uniforms
+    });
+
+    const lineMaterial = new THREE.ShaderMaterial({
+        transparency: true,
+        fragmentShader: lineFragmentShader(),
+        vertexShader: vertexShader(),
+        uniforms: uniforms
+    });
+
+    sceneObjects = sceneObjects.concat(createGridMesh(lineMaterial, cellSize, gridSize));
+    sceneObjects.push(createCubeMesh(axisMaterial, gridSize * 2, axisWidth, axisWidth));
+    sceneObjects.push(createCubeMesh(axisMaterial, axisWidth, gridSize * 2, axisWidth));
+    sceneObjects.push(createCubeMesh(axisMaterial, axisWidth, axisWidth, gridSize * 2));
+
+    for (let object of sceneObjects) scene.add(object);
+    animate();
+}
 
 // render loop
 function animate() {
     requestAnimationFrame(animate);
-    cube.rotation.x += parseFloat(xRotationSlider.value);
-    cube.rotation.y += parseFloat(yRotationSlider.value);
-    cube.rotation.z += parseFloat(zRotationSlider.value);
+    frustumSize = zoomSlider.value;
+    updateOrthographicCameraSize(camera, frustumAspectRatio * frustumSize / -2, frustumAspectRatio * frustumSize / 2, frustumSize / 2, frustumSize / -2);
     renderer.render(scene, camera);
 }
-animate();
+init();

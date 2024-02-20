@@ -3,7 +3,9 @@
     <head>
         <link rel="stylesheet", href="../styles/reset.css"/>
         <link rel="stylesheet" href="../styles/style.css"/>
-        <script src="../scripts/script.js"></script>
+        <script src="../scripts/utils.js"></script>
+        <script type="module" src="../scripts/meshes.js"></script>
+        <script src="../scripts/slides.js"></script>
         <title>Linear Algebra - Introduction</title>
     </head>
     <body id="introduction-page">
@@ -31,31 +33,38 @@
                     <flex-item>
                         <div class="center-content">
                             <h2>The canvas can be controlled from the slides</h2>
-                            <div class="slider-div">
-                                <input type="range" step="0.01" min="0" max="0.1" id="x-rotation-slider"/>
-                                <label> - X Rotation Speed</label>
-                            </div>
-                            <div class="slider-div">
-                                <input type="range" step="0.01" min="0" max="0.1" id="y-rotation-slider"/>
-                                <label> - Y Rotation Speed</label>
-                            </div>
-                            <div class="slider-div">
-                                <input type="range" step="0.01" min="0" max="0.1" id="z-rotation-slider"/>
-                                <label> - Z Rotation Speed</label>
+                            <div class="info-box center-content">
+                                <div class="label-input-box">
+                                    <label>Zoom</label>
+                                    <input class="demo-input" type="range" step="0.5" min="2" max="15" id="zoom"/>
+                                </div>
+                                <div class="label-input-box">
+                                    <label>Slider #2</label>
+                                    <input class="demo-input" type="range" step="0.5" min="2" max="15"/>
+                                </div>
+                                <div class="label-input-box">
+                                    <label>This Works</label>
+                                    <input class="demo-input" type="range" step="0.5" min="2" max="15"/>
+                                </div>
+                                <div class="label-input-box">
+                                    <label>Numbers</label>
+                                    <div class="multi-input-box">
+                                        <input class="demo-input" type="number"/>
+                                        <input class="demo-input" type="number"/>
+                                        <input class="demo-input" type="number"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </flex-item>
                 </flex-container>
             </div>
             <div class="slide before-shown"><div class="center-content">
-                <div class="vertically-center-content" id="vector-demo2-container">
-                    <h1>Spin Box</h1>
-                    <canvas class="demo-canvas" id="vector-demo2-canvas"></canvas>
-                </div>
-            </div></div>
-            <div class="slide before-shown"><div class="center-content">
                 <h1>This text is very centered</h1>
                 <h3><a href="javascript:;" onclick="changeSection('introduction', 2)">Here is a link back to a previous slide</a></h3>
+            </div></div>
+            <div class="slide before-shown"><div class="center-content">
+                
             </div></div>
             <div class="slide before-shown"><div class="center-content">
 
@@ -99,6 +108,5 @@
         <div id="progress-bar"></div>
 
         <script type="module" src="../scripts/vector-demo.js"></script>
-        <script type="module" src="../scripts/vector-demo2.js"></script>
     </body>
 </html>
