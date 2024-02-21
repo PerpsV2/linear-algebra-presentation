@@ -12,9 +12,11 @@ const gridSize = 20;
 const axisWidth = 0.04;
 
 const frustumAspectRatio = demoCanvas.offsetWidth / demoCanvas.offsetHeight;
-var frustumSize = 2;
+var frustumSize = 1;
 
 var scene;
+var oCamera;
+var pCamera;
 var camera;
 var renderer;
 var sceneObjects = [];
@@ -32,12 +34,20 @@ let uniforms = {
 
 // initialize scene, camera, renderer and all the objects which will be rendered
 function init() {
+    // create scene
     scene = new THREE.Scene();
-    camera = new THREE.OrthographicCamera(frustumAspectRatio * frustumSize / -2, frustumAspectRatio * frustumSize / 2, 
+
+    // create cameras
+    oCamera = new THREE.OrthographicCamera(frustumAspectRatio * frustumSize / -2, frustumAspectRatio * frustumSize / 2, 
     frustumSize / 2, frustumSize / -2, 0.1, 1000);
+    pCamera = new THREE.PerspectiveCamera(75, frustumAspectRatio, 0.1, 1000);
+    setCamera2D();
+
+    // create renderer
     renderer = new THREE.WebGLRenderer({canvas: demoCanvas});
     renderer.setClearColor(0x252525, 1);
     renderer.setSize(window.innerWidth * displayScale, window.innerHeight * displayScale);
+
     demoContainer.appendChild(renderer.domElement);
 
     camera.position.z = 5;
@@ -60,11 +70,22 @@ function init() {
     animate();
 }
 
+function setCamera2D() {
+    camera = oCamera;
+}
+window.setCamera2D = setCamera2D;
+
+function setCamera3D() {
+    camera = pCamera;
+}
+window.setCamera3D = setCamera3D;
+
 // render loop
 function animate() {
     requestAnimationFrame(animate);
     frustumSize = zoomSlider.value;
-    updateOrthographicCameraSize(camera, frustumAspectRatio * frustumSize / -2, frustumAspectRatio * frustumSize / 2, frustumSize / 2, frustumSize / -2);
+    updateOrthographicCameraSize(oCamera, frustumAspectRatio * frustumSize / -2, frustumAspectRatio * frustumSize / 2, frustumSize / 2, frustumSize / -2);
+    pCamera.position.z = frustumSize;
     renderer.render(scene, camera);
 }
 init();
