@@ -1,3 +1,7 @@
+function clamp(value, min, max) {
+    return Math.max(min, Math.min(value, max));
+}
+
 function generateBinaryStates(digits) {
     var states = [];
     var decimal = parseInt("1".repeat(digits), 2);
@@ -12,5 +16,4 @@ function updateOrthographicCameraSize(camera, left, right, top, bottom) {
     camera.right = right;
     camera.top = top;
     camera.bottom = bottom;
-    camera.updateProjectionMatrix();
 }

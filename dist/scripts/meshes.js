@@ -12,7 +12,7 @@ function createGridMesh(material, cellSize, gridSize) {
             if (!!parseInt(state[2])) xPos *= -1;
             if (!!parseInt(state[1])) yPos *= -1;
             if (!!parseInt(state[0])) [xPos, yPos] = [yPos, xPos]
-            points.push([xPos, yPos, 0]);
+            points.push([xPos, 0, yPos]);
         }
         for (let p = 0; p < points.length; p+=2) {
             lineObjects.push(createLineMesh(material, points[p], points[p + 1]));
