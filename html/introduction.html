@@ -22,6 +22,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Vector Demo Slide -->
             <div class="slide before-shown">
                 <flex-container class="horizontal-flex flex-gap">
                     <flex-item>
@@ -33,28 +35,39 @@
                     <flex-item>
                         <div class="center-content">
                             <h2>The canvas can be controlled from the slides</h2>
+
+                            <!-- Demo Input -->
                             <div class="info-box center-content">
                                 <div class="label-input-box">
                                     <label>Zoom</label>
                                     <input class="demo-input" type="range" step="0.5" min="2" max="15" id="zoom"/>
                                 </div>
+
                                 <div class="label-input-box">
-                                    <label>Slider #2</label>
-                                    <input class="demo-input" type="range" step="0.5" min="2" max="15"/>
-                                </div>
-                                <div class="label-input-box">
-                                    <label>This Works</label>
-                                    <input class="demo-input" type="range" step="0.5" min="2" max="15"/>
-                                </div>
-                                <div class="label-input-box">
-                                    <label>Numbers</label>
+                                    <label>Vector</label>
                                     <div class="multi-input-box">
-                                        <input class="demo-input" type="number"/>
-                                        <input class="demo-input" type="number"/>
-                                        <input class="demo-input" type="number"/>
+                                        <input class="demo-input" type="number" value="1" min="-10" max="10"/>
+                                        <input class="demo-input" type="number" value="1" min="-10" max="10"/>
+                                        <input class="demo-input" type="number" value="0" min="-10" max="10"/>
                                     </div>
                                 </div>
+
+                                <div class="radio-input-box center-content">
+                                    <h4 class="radio-input-label">Select Dimension</h4>
+                                    <fieldset>
+                                        <div class="label-input-box">
+                                            <label for="dimension-choice-1">2-Dimensions</label>
+                                            <input class="demo-input" id="dimension-choice-1" type="radio" name="dimension" onclick="setCamera2D()" checked>
+                                        </div>
+                                        
+                                        <div class="label-input-box">
+                                            <label for="dimension-choice-2">3-Dimensions</label>
+                                            <input class="demo-input" id="dimension-choice-2" type="radio" name="dimension" onclick="setCamera3D()">
+                                        </div>
+                                    </fieldset>
+                                </div>
                             </div>
+
                         </div>
                     </flex-item>
                 </flex-container>
