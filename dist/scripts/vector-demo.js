@@ -28,20 +28,66 @@ matrix.set (1, 0, 0, 0,
             0, 0, 1, 0,
             0, 0, 0, 1);
 
-let uniforms = {
+const uniforms = {
     transformation: { type: 'mat4', value: matrix },
     color: { type: 'vec3', value: new THREE.Vector3(1, 1, 1) }
 };
 
+// trackball rotation
+const mouseSensitivity = 2.5;
+var mouseDown = false;
+var mouseX;
+var mouseY;
+var azimuthAngle = 0;
+var elevationAngle = 0;
+
+demoCanvas.addEventListener("mousemove", onMouseMove, false);
+demoCanvas.addEventListener("mousedown", onMouseDown, false);
+demoCanvas.addEventListener("mouseup", onMouseUp, false);
+
+function rotateCamera(camera, deltaX, deltaY) {
+    azimuthAngle += deltaX * mouseSensitivity;
+    elevationAngle = clamp(elevationAngle + deltaY * mouseSensitivity, -Math.PI / 2, Math.PI / 2);
+    camera.position.x = Math.cos(azimuthAngle) * Math.cos(elevationAngle) * zoom;
+    camera.position.y = Math.sin(elevationAngle) * zoom;
+    camera.position.z = Math.sin(azimuthAngle) * Math.cos(elevationAngle) * zoom;
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+}
+
+function onMouseMove(e) {
+    if (!mouseDown) return;
+    if (perspectiveCameraEnabled) {
+        e.preventDefault();
+        var deltaX = (e.clientX - mouseX) * 0.001;
+        var deltaY = (e.clientY - mouseY) * 0.001;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        rotateCamera(pCamera, deltaX, deltaY);
+    }
+}
+
+function onMouseDown(e) {
+    e.preventDefault();
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    mouseDown = true;
+}
+
+function onMouseUp(e) {
+    e.preventDefault();
+    mouseDown = false;
+}
+
+// change camera type functions
 function setCamera2D() {
     camera = oCamera;
-    trackballRotateEnabled = false;
+    perspectiveCameraEnabled = false;
 }
 window.setCamera2D = setCamera2D;
 
 function setCamera3D() {
     camera = pCamera;
-    trackballRotateEnabled = true;
+    perspectiveCameraEnabled = true;
 }
 window.setCamera3D = setCamera3D;
 
@@ -89,55 +135,13 @@ function init() {
     animate();
 }
 
-var mouseDown = false;
-var mouseX;
-var mouseY;
-var azimuthAngle = 0;
-var elevationAngle = 0;
-
-demoCanvas.addEventListener("mousemove", onMouseMove, false);
-demoCanvas.addEventListener("mousedown", onMouseDown, false);
-demoCanvas.addEventListener("mouseup", onMouseUp, false);
-
-function rotateCamera(camera, deltaX, deltaY) {
-    azimuthAngle += deltaX;
-    elevationAngle = clamp(elevationAngle + (deltaY), -Math.PI / 2, Math.PI / 2);
-    camera.position.x = Math.cos(azimuthAngle) * Math.cos(elevationAngle) * zoom;
-    camera.position.y = Math.sin(elevationAngle) * zoom;
-    camera.position.z = Math.sin(azimuthAngle) * Math.cos(elevationAngle) * zoom;
-    camera.lookAt(new THREE.Vector3(0, 0, 0));
-}
-
-function onMouseMove(e) {
-    if (!mouseDown) return;
-    if (perspectiveCameraEnabled) {
-        e.preventDefault();
-        var deltaX = (e.clientX - mouseX) * 0.001;
-        var deltaY = (e.clientY - mouseY) * 0.001;
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        rotateCamera(pCamera, deltaX, deltaY);
-    }
-}
-
-function onMouseDown(e) {
-    e.preventDefault();
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    mouseDown = true;
-}
-
-function onMouseUp(e) {
-    e.preventDefault();
-    mouseDown = false;
-}
-
 // render loop
 function animate() {
     requestAnimationFrame(animate);
     zoom = zoomSlider.value;
-    updateOrthographicCameraSize(oCamera, frustumAspectRatio * zoom / -2, frustumAspectRatio * zoom / 2, zoom / 2, zoom / -2);
-    rotateCamera(pCamera, 0, 0);
+    if (!perspectiveCameraEnabled) 
+        updateOrthographicCameraSize(oCamera, frustumAspectRatio * zoom / -2, frustumAspectRatio * zoom / 2, zoom / 2, zoom / -2);
+    else rotateCamera(pCamera, 0, 0);
     camera.updateProjectionMatrix();
     renderer.render(scene, camera);
 }
