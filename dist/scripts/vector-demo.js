@@ -5,6 +5,7 @@ import basicFragment from './shaders/basicFragment.js';
 var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
 var zoomSlider = document.getElementById("zoom");
+var vectorInputs = document.getElementById("vector-input").children;
 
 const displayScale = 0.6;
 const axisWidth = 0.04;
@@ -12,7 +13,7 @@ const cellSize = 1;
 const gridSize = 20;
 
 const frustumAspectRatio = demoCanvas.offsetWidth / demoCanvas.offsetHeight;
-var zoom = 1;
+var zoom = zoomSlider.value;
 
 var scene;
 var oCamera;
@@ -28,7 +29,7 @@ matrix.set (1, 0, 0, 0,
             0, 0, 1, 0,
             0, 0, 0, 1);
 
-const uniforms = {
+let uniforms = {
     transformation: { type: 'mat4', value: matrix },
     color: { type: 'vec3', value: new THREE.Vector3(1, 1, 1) }
 };
@@ -36,14 +37,15 @@ const uniforms = {
 // trackball rotation
 const mouseSensitivity = 2.5;
 var mouseDown = false;
-var mouseX;
-var mouseY;
 var azimuthAngle = 0;
 var elevationAngle = 0;
+var mouseX;
+var mouseY;
 
 demoCanvas.addEventListener("mousemove", onMouseMove, false);
 demoCanvas.addEventListener("mousedown", onMouseDown, false);
 demoCanvas.addEventListener("mouseup", onMouseUp, false);
+demoCanvas.addEventListener("wheel", onWheel, false);
 
 function rotateCamera(camera, deltaX, deltaY) {
     azimuthAngle += deltaX * mouseSensitivity;
@@ -52,6 +54,11 @@ function rotateCamera(camera, deltaX, deltaY) {
     camera.position.y = Math.sin(elevationAngle) * zoom;
     camera.position.z = Math.sin(azimuthAngle) * Math.cos(elevationAngle) * zoom;
     camera.lookAt(new THREE.Vector3(0, 0, 0));
+}
+
+function onWheel(e) {
+    e.preventDefault();
+    zoom = clamp(zoom + e.deltaY * 0.01, zoomSlider.min, zoomSlider.max);
 }
 
 function onMouseMove(e) {
@@ -122,26 +129,27 @@ function init() {
     // set materials
     const axisMaterial = baseMaterial.clone();
     const lineMaterial = baseMaterial.clone();
-    lineMaterial.uniforms.color = { type: 'vec3', value: new THREE.Vector3(0.4, 0.4, 0.4) };
+    lineMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.4, 0.4, 0.4)};
+    const arrowMaterial = baseMaterial.clone();
+    arrowMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(1.0, 0.0, 0.0)};
 
     // create objects
-    sceneObjects = sceneObjects.concat(createGridMesh(lineMaterial, cellSize, gridSize));
-    sceneObjects.push(createCubeMesh(axisMaterial, gridSize * 2, axisWidth, axisWidth));
-    sceneObjects.push(createCubeMesh(axisMaterial, axisWidth, gridSize * 2, axisWidth));
-    sceneObjects.push(createCubeMesh(axisMaterial, axisWidth, axisWidth, gridSize * 2));
-
-    // add objects to the scene
-    for (let object of sceneObjects) scene.add(object);
+    sceneObjects.push(createGridMesh(scene, lineMaterial, cellSize, gridSize));
+    sceneObjects.push(createBoxMesh(scene, axisMaterial, gridSize * 2, axisWidth, axisWidth));
+    sceneObjects.push(createBoxMesh(scene, axisMaterial, axisWidth, gridSize * 2, axisWidth));
+    sceneObjects.push(createBoxMesh(scene, axisMaterial, axisWidth, axisWidth, gridSize * 2));
+    sceneObjects.push(createArrowMesh(scene, arrowMaterial, 0.05, 0.4, 0.8));
     animate();
 }
 
 // render loop
 function animate() {
     requestAnimationFrame(animate);
-    zoom = zoomSlider.value;
+    zoomSlider.value = zoom;
     if (!perspectiveCameraEnabled) 
         updateOrthographicCameraSize(oCamera, frustumAspectRatio * zoom / -2, frustumAspectRatio * zoom / 2, zoom / 2, zoom / -2);
     else rotateCamera(pCamera, 0, 0);
+    drawVector(sceneObjects[4], new THREE.Vector3(0, 0, 0), new THREE.Vector3(vectorInputs.item(0).value, vectorInputs.item(1).value, vectorInputs.item(2).value));
     camera.updateProjectionMatrix();
     renderer.render(scene, camera);
 }
