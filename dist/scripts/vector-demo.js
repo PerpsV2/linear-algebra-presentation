@@ -1,6 +1,7 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import basicVertex from './shaders/basicVertex.js';
 import basicFragment from './shaders/basicFragment.js';
+import CanvasControl from './canvasControl.js';
 
 var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
@@ -34,6 +35,10 @@ let uniforms = {
     color: { type: 'vec3', value: new THREE.Vector3(1, 1, 1) }
 };
 
+var canvasControl = new CanvasControl(demoCanvas, camera, new THREE.Vector3(0, 0, 0), 1.25);
+canvasControl.enabled = true;
+
+/*
 // trackball rotation
 const mouseSensitivity = 2.5;
 var mouseDown = false;
@@ -83,18 +88,20 @@ function onMouseDown(e) {
 function onMouseUp(e) {
     e.preventDefault();
     mouseDown = false;
-}
+}*/
 
 // change camera type functions
 function setCamera2D() {
     camera = oCamera;
     perspectiveCameraEnabled = false;
+    //canvasControl.enabled = false;
 }
 window.setCamera2D = setCamera2D;
 
 function setCamera3D() {
     camera = pCamera;
     perspectiveCameraEnabled = true;
+    canvasControl.enabled = true;
 }
 window.setCamera3D = setCamera3D;
 
@@ -147,8 +154,9 @@ function animate() {
     requestAnimationFrame(animate);
     zoomSlider.value = zoom;
     if (!perspectiveCameraEnabled) 
-        updateOrthographicCameraSize(oCamera, frustumAspectRatio * zoom / -2, frustumAspectRatio * zoom / 2, zoom / 2, zoom / -2);
-    else rotateCamera(pCamera, 0, 0);
+        updateOrthographicCameraSize(camera, frustumAspectRatio * zoom / -2, frustumAspectRatio * zoom / 2, zoom / 2, zoom / -2);
+    else canvasControl.rotateCamera(camera, 0, 0);
+    zoom = canvasControl.zoom;
     drawVector(sceneObjects[4], new THREE.Vector3(0, 0, 0), new THREE.Vector3(vectorInputs.item(0).value, vectorInputs.item(1).value, vectorInputs.item(2).value));
     camera.updateProjectionMatrix();
     renderer.render(scene, camera);
