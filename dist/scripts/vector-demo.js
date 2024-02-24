@@ -10,14 +10,13 @@ demoScene.mouseSensitivity = 1.7;
 demoScene.addMaterial('arrowMat2').uniforms.color = {type:'vec3', value:new THREE.Vector3(0.5, 0.5, 0.5)};
 demoScene.sceneObjects.vector = createArrowMesh(demoScene.scene, demoScene.materials.arrowMat2, 0.04, 0.5, 0.8);
 
-function animate() {
-    requestAnimationFrame(animate);
-    if (demoScene.pCameraEnabled) demoScene.rotateCamera(0, 0);
-    else updateOrthographicCameraSize(demoScene.camera, demoScene.frustumAspectRatio * demoScene.zoom / -2, 
-    demoScene.frustumAspectRatio * demoScene.zoom / 2, demoScene.zoom / 2, demoScene.zoom / -2);
-    demoScene.renderer.render(demoScene.scene, demoScene.camera);
+function anim() {
+    if (typeof anim.r == 'undefined') anim.r = 0;
+    let red = Math.cos(++anim.r * Math.PI / 180) / 2 + 0.5;
+    demoScene.materials.arrowMat2.uniforms.color = {type:'vec3', value:new THREE.Vector3(red, 0, 0)};
 }
-animate();
+
+demoScene.animate(anim);
 
 function setCam2D() {demoScene.setCamera2D();}
 function setCam3D() {demoScene.setCamera3D();}

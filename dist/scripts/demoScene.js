@@ -148,5 +148,18 @@ class DemoScene {
             thisObj.zoom = clamp(thisObj.zoom + e.deltaY * 0.01 * thisObj.scrollSensitivity, thisObj.minZoom, thisObj.maxZoom);
         })
     }
+
+    animate(animateFunc) {
+        var thisObj = this;
+        var animateWrapper = function() {
+            requestAnimationFrame(function(){thisObj.animate(animateFunc)}.bind(thisObj));
+            if (thisObj.pCameraEnabled) thisObj.rotateCamera(0, 0);
+            else updateOrthographicCameraSize(thisObj.camera, thisObj.frustumAspectRatio * thisObj.zoom / -2, +
+                thisObj.frustumAspectRatio * thisObj.zoom / 2, thisObj.zoom / 2, thisObj.zoom / -2);
+            animateFunc();
+            thisObj.renderer.render(thisObj.scene, thisObj.camera);
+        }
+        animateWrapper();
+    }
 }
 export default DemoScene;
