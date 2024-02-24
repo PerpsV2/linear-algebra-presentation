@@ -1,20 +1,24 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
-// create arrow object [arrowbody, arrowhead]
+// create arrow object {arrowbody, arrowhead, arrowheadLength}
 function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowheadLength) {
-    var arrowObject = [];
     // create arrow body
     const arrowbodyGeometry = new THREE.BoxGeometry(1, arrowbodyWidth, arrowbodyWidth);
-    const arrowbody = THREE.Mesh(arrowbodyGeometry, material);
+    arrowbodyGeometry.translate(0.5, 0, 0);
+    const arrowbody = new THREE.Mesh(arrowbodyGeometry, material);
 
     // create arrow head
     const arrowheadGeometry = new THREE.CylinderGeometry(0, arrowheadWidth / 2, arrowheadLength, 4);
-    const arrowhead = THREE.Mesh(arrowheadGeometry, material);
+    const arrowhead = new THREE.Mesh(arrowheadGeometry, material);
 
-    arrowObject.push(arrowbody);
-    arrowObject.push(arrowhead);
+    arrowhead.rotation.z = -Math.PI / 2;
+
+    scene.add(arrowbody);
+    scene.add(arrowhead);
+    let arrowObject = {arrowbody: arrowbody, arrowhead: arrowhead, arrowheadLength: arrowheadLength};
     return arrowObject;
 }
+window.createArrowMesh = createArrowMesh;
 
 // create grid mesh [line1, line2, line3,... ]
 function createGridMesh(scene, material, cellSize, gridSize) {
