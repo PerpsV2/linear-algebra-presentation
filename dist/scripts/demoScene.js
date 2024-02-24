@@ -23,13 +23,14 @@ class DemoScene {
 
     mouseSensitivity = 1;
     scrollSensitivity = 1;
-    mouseDown = false;
-    azimuthAngle = 0;
-    elevationAngle = 0;
-    mouseX;
-    mouseY;
     minZoom = 1;
     maxZoom = 15;
+
+    #mouseDown = false;
+    #azimuthAngle = 0;
+    #elevationAngle = 0;
+    #mouseX;
+    #mouseY;
 
     constructor(canvas, canvasContainer, displayScale, cellSize, gridSize, axisWidth) {
         this.frustumAspectRatio = canvas.offsetWidth / canvas.offsetHeight;
@@ -84,7 +85,6 @@ class DemoScene {
     }
 
     setCamera2D() {
-        console.log(this);
         this.camera = this.oCamera;
         this.pCameraEnabled = false;
     }
@@ -96,24 +96,24 @@ class DemoScene {
 
     // canvas trackball rotation control
     rotateCamera(deltaX, deltaY) {
-        this.azimuthAngle += deltaX * this.mouseSensitivity;
-        this.elevationAngle = clamp(this.elevationAngle + deltaY * this.mouseSensitivity, -Math.PI / 2, Math.PI / 2);
-        this.camera.position.x = Math.cos(this.azimuthAngle) * Math.cos(this.elevationAngle) * this.zoom;
-        this.camera.position.y = Math.sin(this.elevationAngle) * this.zoom;
-        this.camera.position.z = Math.sin(this.azimuthAngle) * Math.cos(this.elevationAngle) * this.zoom;
+        this.#azimuthAngle += deltaX * this.mouseSensitivity;
+        this.#elevationAngle = clamp(this.#elevationAngle + deltaY * this.mouseSensitivity, -Math.PI / 2, Math.PI / 2);
+        this.camera.position.x = Math.cos(this.#azimuthAngle) * Math.cos(this.#elevationAngle) * this.zoom;
+        this.camera.position.y = Math.sin(this.#elevationAngle) * this.zoom;
+        this.camera.position.z = Math.sin(this.#azimuthAngle) * Math.cos(this.#elevationAngle) * this.zoom;
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
     }
 
     addMouseMoveHandler(element, thisObj) {
         element.addEventListener('mousemove', function(e) {
-            if (!thisObj.mouseDown) return;
+            if (!thisObj.#mouseDown) return;
             if (!thisObj.pCameraEnabled) return;
 
             e.preventDefault();
-            var deltaX = (e.clientX - thisObj.mouseX) * 0.001;
-            var deltaY = (e.clientY - thisObj.mouseY) * 0.001; 
-            thisObj.mouseX = e.clientX;
-            thisObj.mouseY = e.clientY;
+            var deltaX = (e.clientX - thisObj.#mouseX) * 0.001;
+            var deltaY = (e.clientY - thisObj.#mouseY) * 0.001; 
+            thisObj.#mouseX = e.clientX;
+            thisObj.#mouseY = e.clientY;
             thisObj.rotateCamera(deltaX, deltaY);
         })
     }
@@ -121,16 +121,16 @@ class DemoScene {
     addMouseDownHandler(element, thisObj) {
         element.addEventListener('mousedown', function(e) {
             e.preventDefault();
-            thisObj.mouseX = e.clientX;
-            thisObj.mouseY = e.clientY;
-            thisObj.mouseDown = true;
+            thisObj.#mouseX = e.clientX;
+            thisObj.#mouseY = e.clientY;
+            thisObj.#mouseDown = true;
         });
     }
 
     addMouseUpHandler(element, thisObj) {
         element.addEventListener('mouseup', function(e) {
             e.preventDefault();
-            thisObj.mouseDown = false;
+            thisObj.#mouseDown = false;
         })
     }
 
