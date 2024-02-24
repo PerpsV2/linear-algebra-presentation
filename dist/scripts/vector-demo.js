@@ -4,12 +4,11 @@ import DemoScene from './demoScene.js';
 var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
 
-var demoScene = new DemoScene(demoCanvas, demoContainer, 0.6, 1, 20, 0.04);
+var demoScene = new DemoScene(demoCanvas, demoContainer, 0.6);
+demoScene.mouseSensitivity = 1.7;
 
-function setCam2D() {demoScene.setCamera2D();}
-function setCam3D() {demoScene.setCamera3D();}
-window.setCam2D = setCam2D;
-window.setCam3D = setCam3D;
+demoScene.addMaterial('arrowMat2').uniforms.color = {type:'vec3', value:new THREE.Vector3(0.5, 0.5, 0.5)};
+demoScene.sceneObjects.vector = createArrowMesh(demoScene.scene, demoScene.materials.arrowMat2, 0.04, 0.5, 0.8);
 
 function animate() {
     requestAnimationFrame(animate);
@@ -19,3 +18,8 @@ function animate() {
     demoScene.renderer.render(demoScene.scene, demoScene.camera);
 }
 animate();
+
+function setCam2D() {demoScene.setCamera2D();}
+function setCam3D() {demoScene.setCamera3D();}
+window.setCam2D = setCam2D;
+window.setCam3D = setCam3D;

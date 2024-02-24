@@ -4,15 +4,24 @@ import basicFragment from './shaders/basicFragment.js';
 
 class DemoScene {
     scene;
-    oCamera;
-    pCamera;
+    #oCamera;
+    #pCamera;
     camera;
     renderer;
 
     pCameraEnabled;
-    sceneObjects = [];
+    materials = {};
+    sceneObjects = {};
     frustumAspectRatio;
-    zoom = 4;
+    zoom = 5;
+
+    mouseSensitivity = 1;
+    scrollSensitivity = 1;
+    minZoom = 1;
+    maxZoom = 15;
+    #mouseDown = false;
+    #mouseX;
+    #mouseY;
 
     matrix = new THREE.Matrix4();
     
@@ -21,27 +30,22 @@ class DemoScene {
         color: { type: 'vec3', value: new THREE.Vector3(1, 1, 1) }
     };
 
-    mouseSensitivity = 1;
-    scrollSensitivity = 1;
-    minZoom = 1;
-    maxZoom = 15;
+    BASE_MATERIAL = new THREE.ShaderMaterial({
+        fragmentShader: basicFragment,
+        vertexShader: basicVertex,
+        uniforms: this.uniforms
+    });
 
-    #mouseDown = false;
-    #azimuthAngle = 0;
-    #elevationAngle = 0;
-    #mouseX;
-    #mouseY;
-
-    constructor(canvas, canvasContainer, displayScale, cellSize, gridSize, axisWidth) {
+    constructor(canvas, canvasContainer, displayScale, cellSize = 1, gridSize = 20, axisWidth = 0.04) {
         this.frustumAspectRatio = canvas.offsetWidth / canvas.offsetHeight;
 
         // create scene
         this.scene = new THREE.Scene();
 
         // create cameras
-        this.oCamera = new THREE.OrthographicCamera(this.frustumAspectRatio * this.zoom / -2, this.frustumAspectRatio * this.zoom / 2, 
+        this.#oCamera = new THREE.OrthographicCamera(this.frustumAspectRatio * this.zoom / -2, this.frustumAspectRatio * this.zoom / 2, 
         this.zoom / 2, this.zoom / -2, 0.1, 1000);
-        this.pCamera = new THREE.PerspectiveCamera(75, this.frustumAspectRatio, 0.1, 1000);
+        this.#pCamera = new THREE.PerspectiveCamera(75, this.frustumAspectRatio, 0.1, 1000);
         this.setCamera2D();
 
         // create renderer
@@ -51,31 +55,28 @@ class DemoScene {
         canvasContainer.appendChild(this.renderer.domElement);
 
         // position cameras
-        this.pCamera.position.y = 5;
-        this.oCamera.position.y = 5;
-        this.pCamera.lookAt(0, 0, 0);
-        this.oCamera.lookAt(0, 0, 0);
+        this.#pCamera.position.y = 5;
+        this.#oCamera.position.y = 5;
+        this.#pCamera.lookAt(0, 0, 0);
+        this.#oCamera.lookAt(0, 0, 0);
 
         // create materials
         this.matrix.set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
-        const baseMaterial = new THREE.ShaderMaterial({
-            fragmentShader: basicFragment,
-            vertexShader: basicVertex,
-            uniforms: this.uniforms
-        });
 
-        const axisMaterial = baseMaterial.clone();
-        const lineMaterial = baseMaterial.clone();
+        const axisMaterial = this.BASE_MATERIAL.clone();
+        const lineMaterial = this.BASE_MATERIAL.clone();
         lineMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.4, 0.4, 0.4)};
-        const arrowMaterial = baseMaterial.clone();
+        const arrowMaterial = this.BASE_MATERIAL.clone();
         arrowMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(1.0, 0.0, 0.0)};
+        this.materials.axisMat = axisMaterial;
+        this.materials.lineMat = lineMaterial;
+        this.materials.arrowMat = arrowMaterial;
         
         // create objects
-        this.sceneObjects.push(createGridMesh(this.scene, lineMaterial, cellSize, gridSize));
-        this.sceneObjects.push(createBoxMesh(this.scene, axisMaterial, gridSize * 2, axisWidth, axisWidth));
-        this.sceneObjects.push(createBoxMesh(this.scene, axisMaterial, axisWidth, gridSize * 2, axisWidth));
-        this.sceneObjects.push(createBoxMesh(this.scene, axisMaterial, axisWidth, axisWidth, gridSize * 2));
-        this.sceneObjects.push(createArrowMesh(this.scene, arrowMaterial, 0.05, 0.4, 0.8));
+        this.sceneObjects.grid = createGridMesh(this.scene, lineMaterial, cellSize, gridSize);
+        this.sceneObjects.xAxis = createBoxMesh(this.scene, axisMaterial, gridSize * 2, axisWidth, axisWidth);
+        this.sceneObjects.yAxis = createBoxMesh(this.scene, axisMaterial, axisWidth, gridSize * 2, axisWidth);
+        this.sceneObjects.zAxis = createBoxMesh(this.scene, axisMaterial, axisWidth, axisWidth, gridSize * 2);
 
         // bind canvas control event handlers
         this.addMouseMoveHandler(canvas, this);
@@ -84,23 +85,30 @@ class DemoScene {
         this.addWheelHandler(canvas, this);
     }
 
+    addMaterial(name) {
+        this.materials[name] = this.BASE_MATERIAL.clone();
+        return this.materials[name];
+    }
+
     setCamera2D() {
-        this.camera = this.oCamera;
+        this.camera = this.#oCamera;
         this.pCameraEnabled = false;
     }
 
     setCamera3D() {
-        this.camera = this.pCamera;
+        this.camera = this.#pCamera;
         this.pCameraEnabled = true;
     }
 
     // canvas trackball rotation control
     rotateCamera(deltaX, deltaY) {
-        this.#azimuthAngle += deltaX * this.mouseSensitivity;
-        this.#elevationAngle = clamp(this.#elevationAngle + deltaY * this.mouseSensitivity, -Math.PI / 2, Math.PI / 2);
-        this.camera.position.x = Math.cos(this.#azimuthAngle) * Math.cos(this.#elevationAngle) * this.zoom;
-        this.camera.position.y = Math.sin(this.#elevationAngle) * this.zoom;
-        this.camera.position.z = Math.sin(this.#azimuthAngle) * Math.cos(this.#elevationAngle) * this.zoom;
+        if (typeof this.rotateCamera.azimuthAngle == 'undefined') this.rotateCamera.azimuthAngle = 0;
+        if (typeof this.rotateCamera.elevationAngle == 'undefined') this.rotateCamera.elevationAngle = 0;
+        this.rotateCamera.azimuthAngle += deltaX * this.mouseSensitivity;
+        this.rotateCamera.elevationAngle = clamp(this.rotateCamera.elevationAngle + deltaY * this.mouseSensitivity, -Math.PI / 2, Math.PI / 2);
+        this.camera.position.x = Math.cos(this.rotateCamera.azimuthAngle) * Math.cos(this.rotateCamera.elevationAngle) * this.zoom;
+        this.camera.position.y = Math.sin(this.rotateCamera.elevationAngle) * this.zoom;
+        this.camera.position.z = Math.sin(this.rotateCamera.azimuthAngle) * Math.cos(this.rotateCamera.elevationAngle) * this.zoom;
         this.camera.lookAt(new THREE.Vector3(0, 0, 0));
     }
 
