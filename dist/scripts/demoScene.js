@@ -154,8 +154,9 @@ class DemoScene {
         var animateWrapper = function() {
             requestAnimationFrame(function(){thisObj.animate(animateFunc)}.bind(thisObj));
             if (thisObj.pCameraEnabled) thisObj.rotateCamera(0, 0);
-            else updateOrthographicCameraSize(thisObj.camera, thisObj.frustumAspectRatio * thisObj.zoom / -2, +
+            if(!thisObj.pCameraEnabled) updateOrthographicCameraSize(thisObj.camera, thisObj.frustumAspectRatio * thisObj.zoom / -2, +
                 thisObj.frustumAspectRatio * thisObj.zoom / 2, thisObj.zoom / 2, thisObj.zoom / -2);
+            thisObj.camera.updateProjectionMatrix();
             animateFunc();
             thisObj.renderer.render(thisObj.scene, thisObj.camera);
         }
