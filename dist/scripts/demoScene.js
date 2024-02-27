@@ -13,7 +13,9 @@ class DemoScene {
     pCameraEnabled;
     materials = {};
     sceneObjects = {};
-    frustumAspectRatio;
+    #frustumAspectRatio;
+    #displayScale;
+    #canvas;
     zoom = 5;
 
     mouseSensitivity = 1;
@@ -38,15 +40,17 @@ class DemoScene {
     });
 
     constructor(canvas, canvasContainer, displayScale, cellSize = 1, gridSize = 20, axisWidth = 0.04) {
-        this.frustumAspectRatio = canvas.offsetWidth / canvas.offsetHeight;
+        this.#frustumAspectRatio = canvas.offsetWidth / canvas.offsetHeight;
+        this.#displayScale = displayScale;
+        this.#canvas = canvas;
 
         // create scene
         this.scene = new THREE.Scene();
 
         // create cameras
-        this.#oCamera = new THREE.OrthographicCamera(this.frustumAspectRatio * this.zoom / -2, this.frustumAspectRatio * this.zoom / 2, 
+        this.#oCamera = new THREE.OrthographicCamera(this.#frustumAspectRatio * this.zoom / -2, this.#frustumAspectRatio * this.zoom / 2, 
         this.zoom / 2, this.zoom / -2, 0.1, 1000);
-        this.#pCamera = new THREE.PerspectiveCamera(75, this.frustumAspectRatio, 0.1, 1000);
+        this.#pCamera = new THREE.PerspectiveCamera(75, this.#frustumAspectRatio, 0.1, 1000);
         this.setCamera2D();
 
         // create renderer
@@ -154,9 +158,11 @@ class DemoScene {
         var thisObj = this;
         var animateWrapper = function() {
             requestAnimationFrame(function(){thisObj.animate(animateFunc)}.bind(thisObj));
+            thisObj.renderer.setSize(window.innerWidth * thisObj.#displayScale, window.innerHeight * thisObj.#displayScale);
+            thisObj.#frustumAspectRatio = thisObj.#canvas.offsetWidth / thisObj.#canvas.offsetHeight;
             if (thisObj.pCameraEnabled) thisObj.rotateCamera(0, 0);
-            if(!thisObj.pCameraEnabled) Utils.updateOrthographicCameraSize(thisObj.camera, thisObj.frustumAspectRatio * thisObj.zoom / -2, +
-                thisObj.frustumAspectRatio * thisObj.zoom / 2, thisObj.zoom / 2, thisObj.zoom / -2);
+            if(!thisObj.pCameraEnabled) Utils.updateOrthographicCameraSize(thisObj.camera, thisObj.#frustumAspectRatio * thisObj.zoom / -2, +
+                thisObj.#frustumAspectRatio * thisObj.zoom / 2, thisObj.zoom / 2, thisObj.zoom / -2);
             thisObj.camera.updateProjectionMatrix();
             animateFunc();
             thisObj.renderer.render(thisObj.scene, thisObj.camera);
