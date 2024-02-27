@@ -20,7 +20,7 @@ function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowh
 
     scene.add(arrowbody);
     scene.add(arrowhead);
-    let arrowObject = {arrowbody: arrowbody, arrowhead: arrowhead, arrowheadLength: arrowheadLength};
+    let arrowObject = {arrowbody: arrowbody, arrowhead: arrowhead, arrowheadLength: arrowheadLength, visible: true};
     return arrowObject;
 }
 window.createArrowMesh = createArrowMesh;

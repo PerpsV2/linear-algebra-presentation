@@ -30,9 +30,9 @@ function updateOrthographicCameraSize(camera, left, right, top, bottom) {
 
 // draw an arrow mesh with a starting and end point
 function drawVector(arrowObject, startPos, vector) {
+    var magnitude = vector.length();
     var azimuthAngle = Math.atan2(vector.z, vector.x);
     var elevationAngle = Math.atan2(vector.y, Math.sqrt(vector.z ** 2 + vector.x ** 2));
-    var magnitude = vector.length();
     
     // position arrow body
     arrowObject.arrowbody.scale.x = Math.max(magnitude - arrowObject.arrowheadLength, 0);
@@ -48,9 +48,16 @@ function drawVector(arrowObject, startPos, vector) {
     transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, azimuthAngle, elevationAngle, 'XYZ')));
     transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(new THREE.Vector3(Math.max(magnitude - arrowObject.arrowheadLength / 2, 0), 0, 0)));
     arrowObject.arrowhead.matrix = transformationMatrix;
+
+    if (magnitude <= 0 || arrowObject.visible == false){
+        arrowObject.arrowhead.visible = false;
+    } else {
+        arrowObject.arrowhead.visible = true;
+    }
 }
 
 function setArrowVisiblity(arrowObject, visibility) {
+    arrowObject.visible = visibility;
     arrowObject.arrowbody.visible = visibility;
     arrowObject.arrowhead.visible = visibility;
 }
