@@ -38,9 +38,13 @@ function drawVector(arrowObject, startPos, vector) {
     arrowObject.arrowbody.scale.x = Math.max(magnitude - arrowObject.arrowheadLength, 0);
     arrowObject.arrowbody.rotation.y = azimuthAngle;
     arrowObject.arrowbody.rotation.z = elevationAngle;
+    arrowObject.arrowbody.position.x = startPos.x;
+    arrowObject.arrowbody.position.y = startPos.y;
+    arrowObject.arrowbody.position.z = startPos.z;
 
     // position arrow head
     var transformationMatrix = new THREE.Matrix4().identity();
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(startPos));
     transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, azimuthAngle, elevationAngle, 'XYZ')));
     transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(new THREE.Vector3(Math.max(magnitude - arrowObject.arrowheadLength / 2, 0), 0, 0)));
     arrowObject.arrowhead.matrix = transformationMatrix;

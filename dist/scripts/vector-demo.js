@@ -14,7 +14,7 @@ demoScene.sceneObjects.vector = createArrowMesh(demoScene.scene, demoScene.mater
 var vectorInputs = document.getElementById("vector-input").children;
 
 function anim() {
-    Utils.drawVector(demoScene.sceneObjects.vector, new THREE.Vector3(0, 3, 0), 
+    Utils.drawVector(demoScene.sceneObjects.vector, new THREE.Vector3(0, 0, 0), 
         new THREE.Vector3(vectorInputs[0].value, vectorInputs[1].value, vectorInputs[2].value));
 }
 
