@@ -7,12 +7,16 @@ function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowh
     const arrowbodyGeometry = new THREE.BoxGeometry(1, arrowbodyWidth, arrowbodyWidth);
     arrowbodyGeometry.translate(0.5, 0, 0);
     const arrowbody = new THREE.Mesh(arrowbodyGeometry, material);
+    arrowbody.renderOrder = 999;
+    arrowbody.material.depthTest = false;
 
     // create arrow head
     const arrowheadGeometry = new THREE.CylinderGeometry(0, arrowheadWidth / 2, arrowheadLength, 4);
     arrowheadGeometry.rotateZ(-Math.PI / 2);
     const arrowhead = new THREE.Mesh(arrowheadGeometry, material);
     arrowhead.matrixAutoUpdate = false;
+    arrowhead.renderOrder = 999;
+    arrowhead.material.depthTest = false;
 
     scene.add(arrowbody);
     scene.add(arrowhead);
