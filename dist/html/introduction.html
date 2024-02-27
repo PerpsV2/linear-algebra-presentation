@@ -33,11 +33,11 @@
                         </div>
                     </flex-item>
                     <flex-item>
-                        <div class="center-content">
-                            <h2>The canvas can be controlled from the slides</h2>
+                        <flex-container class="vertical-flex center-align">
+                            <h2>Settings</h2>
 
                             <!-- Demo Input -->
-                            <div class="info-box center-content">
+                            <div class="settings-panel center-content">
                                 
                                 <div class="label-input-box">
                                     <label>Vector</label>
@@ -46,6 +46,11 @@
                                         <input class="demo-input" type="number" value="1" min="-10" max="10" name="vector-input-y"/>
                                         <input class="demo-input" type="number" value="0" min="-10" max="10" name="vector-input-z"/>
                                     </div>
+                                </div>
+
+                                <div class="label-input-box">
+                                    <label for="show-component-vectors-1">Show Component Vectors</label>
+                                    <input class="demo-input" id="show-component-vectors-1" type="checkbox" name="show-component-vectors-1" onclick="toggleComponentVectors()">
                                 </div>
 
                                 <div class="radio-input-box center-content">
@@ -62,9 +67,9 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                            </div>
 
-                        </div>
+                            </div>
+                        </flex-container>
                     </flex-item>
                 </flex-container>
             </div>

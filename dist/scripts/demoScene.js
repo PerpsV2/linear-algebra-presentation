@@ -72,7 +72,7 @@ class DemoScene {
         const lineMaterial = this.BASE_MATERIAL.clone();
         lineMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.4, 0.4, 0.4)};
         const arrowMaterial = this.BASE_MATERIAL.clone();
-        arrowMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(1.0, 0.0, 0.0)};
+        arrowMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.8, 0.0, 0.6)};
         this.materials.axisMat = axisMaterial;
         this.materials.lineMat = lineMaterial;
         this.materials.arrowMat = arrowMaterial;

@@ -50,4 +50,9 @@ function drawVector(arrowObject, startPos, vector) {
     arrowObject.arrowhead.matrix = transformationMatrix;
 }
 
-export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, drawVector};
+function setArrowVisiblity(arrowObject, visibility) {
+    arrowObject.arrowbody.visible = visibility;
+    arrowObject.arrowhead.visible = visibility;
+}
+
+export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, drawVector, setArrowVisiblity};

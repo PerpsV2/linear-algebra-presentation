@@ -218,7 +218,8 @@ input[type="number"].demo-input::-webkit-outer-spin-button {
     height: auto;
 }
 
-input[type="radio"].demo-input, input[type="radio"].demo-input:checked {
+input[type="radio"].demo-input, input[type="radio"].demo-input:checked,
+input[type="checkbox"].demo-input, input[type="checkbox"].demo-input:checked {
     appearance: none;
     background-color: var(--dark-grey);
     display: grid;
@@ -228,7 +229,7 @@ input[type="radio"].demo-input, input[type="radio"].demo-input:checked {
     height: 1.2rem;
 }
 
-input[type="radio"].demo-input::after {
+input[type="radio"].demo-input::after, input[type="checkbox"].demo-input::after {
     content: "";
     display: block;
     appearance: none;
@@ -241,7 +242,7 @@ input[type="radio"].demo-input::after {
     transition: 0.1s;
 }
 
-input[type="radio"].demo-input:checked::after {
+input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input:checked::after {
     transform:scale(1);
 }
 
@@ -250,7 +251,7 @@ highlight {
     color: var(--highlight-color);
 }
 
-.info-box, .demo-canvas {
+.info-box, .demo-canvas, .settings-panel {
     background-color: var(--light-grey);
     border-color: var(--dark-grey);
     border-width: 5px;
@@ -263,6 +264,10 @@ highlight {
 
 .demo-canvas {
     padding: 0;
+}
+
+.settings-panel {
+    margin-top: 30px;
 }
 
 .slide {
