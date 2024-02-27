@@ -1,4 +1,5 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import * as Utils from './utils.js';
 import basicVertex from './shaders/basicVertex.js';
 import basicFragment from './shaders/basicFragment.js';
 
@@ -105,7 +106,7 @@ class DemoScene {
         if (typeof this.rotateCamera.azimuthAngle == 'undefined') this.rotateCamera.azimuthAngle = 0;
         if (typeof this.rotateCamera.elevationAngle == 'undefined') this.rotateCamera.elevationAngle = 0;
         this.rotateCamera.azimuthAngle += deltaX * this.mouseSensitivity;
-        this.rotateCamera.elevationAngle = clamp(this.rotateCamera.elevationAngle + deltaY * this.mouseSensitivity, -Math.PI / 2, Math.PI / 2);
+        this.rotateCamera.elevationAngle = Utils.clamp(this.rotateCamera.elevationAngle + deltaY * this.mouseSensitivity, -Math.PI / 2, Math.PI / 2);
         this.camera.position.x = Math.cos(this.rotateCamera.azimuthAngle) * Math.cos(this.rotateCamera.elevationAngle) * this.zoom;
         this.camera.position.y = Math.sin(this.rotateCamera.elevationAngle) * this.zoom;
         this.camera.position.z = Math.sin(this.rotateCamera.azimuthAngle) * Math.cos(this.rotateCamera.elevationAngle) * this.zoom;
@@ -145,7 +146,7 @@ class DemoScene {
     addWheelHandler(element, thisObj) {
         element.addEventListener('wheel', function(e) {
             e.preventDefault();
-            thisObj.zoom = clamp(thisObj.zoom + e.deltaY * 0.01 * thisObj.scrollSensitivity, thisObj.minZoom, thisObj.maxZoom);
+            thisObj.zoom = Utils.clamp(thisObj.zoom + e.deltaY * 0.01 * thisObj.scrollSensitivity, thisObj.minZoom, thisObj.maxZoom);
         })
     }
 
@@ -154,7 +155,7 @@ class DemoScene {
         var animateWrapper = function() {
             requestAnimationFrame(function(){thisObj.animate(animateFunc)}.bind(thisObj));
             if (thisObj.pCameraEnabled) thisObj.rotateCamera(0, 0);
-            if(!thisObj.pCameraEnabled) updateOrthographicCameraSize(thisObj.camera, thisObj.frustumAspectRatio * thisObj.zoom / -2, +
+            if(!thisObj.pCameraEnabled) Utils.updateOrthographicCameraSize(thisObj.camera, thisObj.frustumAspectRatio * thisObj.zoom / -2, +
                 thisObj.frustumAspectRatio * thisObj.zoom / 2, thisObj.zoom / 2, thisObj.zoom / -2);
             thisObj.camera.updateProjectionMatrix();
             animateFunc();

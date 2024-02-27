@@ -1,4 +1,5 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+import * as Utils from './utils.js';
 
 // create arrow object {arrowbody, arrowhead, arrowheadLength}
 function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowheadLength) {
@@ -9,9 +10,9 @@ function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowh
 
     // create arrow head
     const arrowheadGeometry = new THREE.CylinderGeometry(0, arrowheadWidth / 2, arrowheadLength, 4);
+    arrowheadGeometry.rotateZ(-Math.PI / 2);
     const arrowhead = new THREE.Mesh(arrowheadGeometry, material);
-
-    arrowhead.rotation.z = -Math.PI / 2;
+    arrowhead.matrixAutoUpdate = false;
 
     scene.add(arrowbody);
     scene.add(arrowhead);
@@ -25,7 +26,7 @@ function createGridMesh(scene, material, cellSize, gridSize) {
     var lineObjects = [];
     for (let d = cellSize; d <= gridSize; d += cellSize) {
         let points = []
-        let states = generateBinaryStates(3);
+        let states = Utils.generateBinaryStates(3);
         for(let state of states) {
             let xPos = gridSize;
             let yPos = d;

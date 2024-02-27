@@ -1,3 +1,5 @@
+import * as THREE from 'https://unpkg.com/three/build/three.module.js';
+
 // get principal angle
 function getPrincipalAngle(angle) {
     return (Math.PI * 2 + (angle % Math.PI * 2)) % Math.PI * 2;
@@ -32,7 +34,17 @@ function drawVector(arrowObject, startPos, vector) {
     var elevationAngle = Math.atan2(vector.y, Math.sqrt(vector.z ** 2 + vector.x ** 2));
     var magnitude = vector.length();
     
-    arrowObject.arrowbody.scale.x = magnitude;
+    // position arrow body
+    arrowObject.arrowbody.scale.x = Math.max(magnitude - arrowObject.arrowheadLength, 0);
     arrowObject.arrowbody.rotation.y = azimuthAngle;
     arrowObject.arrowbody.rotation.z = elevationAngle;
+
+    // position arrow head
+    var transformationMatrix = new THREE.Matrix4().identity();
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, azimuthAngle, elevationAngle, 'XYZ')));
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(new THREE.Vector3(Math.max(magnitude - arrowObject.arrowheadLength / 2, 0), 0, 0)));
+    console.log(transformationMatrix);
+    arrowObject.arrowhead.matrix = transformationMatrix;
 }
+
+export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, drawVector};
