@@ -43,7 +43,6 @@ function drawVector(arrowObject, startPos, vector) {
     var transformationMatrix = new THREE.Matrix4().identity();
     transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, azimuthAngle, elevationAngle, 'XYZ')));
     transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(new THREE.Vector3(Math.max(magnitude - arrowObject.arrowheadLength / 2, 0), 0, 0)));
-    console.log(transformationMatrix);
     arrowObject.arrowhead.matrix = transformationMatrix;
 }
 
