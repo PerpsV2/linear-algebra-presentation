@@ -4,6 +4,7 @@ import basicVertex from './shaders/basicVertex.js';
 import basicFragment from './shaders/basicFragment.js';
 
 class DemoScene {
+    #bgScene;
     scene;
     #oCamera;
     #pCamera;
@@ -45,7 +46,8 @@ class DemoScene {
         this.#canvas = canvas;
 
         // create scene
-        this.scene = new THREE.Scene();
+        this.#bgScene = new THREE.Scene();
+        this.scene = new THREE.Scene(); // all objects in scene will be drawn over all objects in bgScene
 
         // create cameras
         this.#oCamera = new THREE.OrthographicCamera(this.#frustumAspectRatio * this.zoom / -2, this.#frustumAspectRatio * this.zoom / 2, 
@@ -57,6 +59,7 @@ class DemoScene {
         this.renderer = new THREE.WebGLRenderer({canvas: canvas});
         this.renderer.setClearColor(0x252525, 1);
         this.renderer.setSize(window.innerWidth * displayScale, window.innerHeight * displayScale);
+        this.renderer.autoClear = false;
         canvasContainer.appendChild(this.renderer.domElement);
 
         // position cameras
@@ -78,10 +81,10 @@ class DemoScene {
         this.materials.arrowMat = arrowMaterial;
         
         // create objects
-        this.sceneObjects.grid = createGridMesh(this.scene, lineMaterial, cellSize, gridSize);
-        this.sceneObjects.xAxis = createBoxMesh(this.scene, axisMaterial, gridSize * 2, axisWidth, axisWidth);
-        this.sceneObjects.yAxis = createBoxMesh(this.scene, axisMaterial, axisWidth, gridSize * 2, axisWidth);
-        this.sceneObjects.zAxis = createBoxMesh(this.scene, axisMaterial, axisWidth, axisWidth, gridSize * 2);
+        this.sceneObjects.grid = createGridMesh(this.#bgScene, lineMaterial, cellSize, gridSize);
+        this.sceneObjects.xAxis = createBoxMesh(this.#bgScene, axisMaterial, gridSize * 2, axisWidth, axisWidth);
+        this.sceneObjects.yAxis = createBoxMesh(this.#bgScene, axisMaterial, axisWidth, gridSize * 2, axisWidth);
+        this.sceneObjects.zAxis = createBoxMesh(this.#bgScene, axisMaterial, axisWidth, axisWidth, gridSize * 2);
 
         // bind canvas control event handlers
         this.addMouseMoveHandler(canvas, this);
@@ -165,7 +168,10 @@ class DemoScene {
                 thisObj.#frustumAspectRatio * thisObj.zoom / 2, thisObj.zoom / 2, thisObj.zoom / -2);
             thisObj.camera.updateProjectionMatrix();
             animateFunc();
-            thisObj.renderer.render(thisObj.scene, thisObj.camera);
+            thisObj.renderer.clear();
+            thisObj.renderer.render(thisObj.#bgScene, thisObj.camera);
+            thisObj.renderer.clearDepth();
+            thisObj.renderer.render(thisObj.scene, thisObj.camera)
         }
         animateWrapper();
     }

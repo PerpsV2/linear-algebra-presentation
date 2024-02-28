@@ -35,12 +35,13 @@ function drawVector(arrowObject, startPos, vector) {
     var elevationAngle = Math.atan2(vector.y, Math.sqrt(vector.z ** 2 + vector.x ** 2));
     
     // position arrow body
-    arrowObject.arrowbody.scale.x = Math.max(magnitude - arrowObject.arrowheadLength, 0);
-    arrowObject.arrowbody.rotation.y = azimuthAngle;
-    arrowObject.arrowbody.rotation.z = elevationAngle;
-    arrowObject.arrowbody.position.x = startPos.x;
-    arrowObject.arrowbody.position.y = startPos.y;
-    arrowObject.arrowbody.position.z = startPos.z;
+    var arrowbody = arrowObject.arrowbody;
+    arrowbody.scale.x = Math.max(magnitude - arrowObject.arrowheadLength, 0);
+    arrowbody.rotation.y = azimuthAngle;
+    arrowbody.rotation.z = elevationAngle;
+    arrowbody.position.x = startPos.x;
+    arrowbody.position.y = startPos.y;
+    arrowbody.position.z = startPos.z;
 
     // position arrow head
     var transformationMatrix = new THREE.Matrix4().identity();
