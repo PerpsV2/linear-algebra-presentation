@@ -10,6 +10,8 @@ const arrowheadLength = 0.25;
 // settings
 var vectorInputs = document.getElementById("vector-input").children;
 var matrixInputs = document.getElementById("matrix-input").children;
+var zoomSlider = document.getElementById("zoom-slider");
+//zoomSlider.oninput = updateZoomFromSlider();
 var showComponentVectors = true;
 
 // configure demo scene
@@ -41,6 +43,8 @@ toggleComponentVectors();
 toggleInputDimension();
 
 function anim() {
+    zoomSlider.value = demoScene.zoom;
+
     // read the values so the input appears in the form XZY
     let vecX = vectorInputs[0].value;
     let vecY = vectorInputs[2].value; 
@@ -61,6 +65,14 @@ function anim() {
     Utils.drawVector(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, 0, 0));
     Utils.drawVector(objs.zComponentVector, new THREE.Vector3(vecX, 0, 0), new THREE.Vector3(0, 0, vecZ));
     Utils.drawVector(objs.yComponentVector, new THREE.Vector3(vecX, 0, vecZ), new THREE.Vector3(0, vecY, 0));
+}
+
+// update zoom when slider is adjusted manually
+zoomSlider.oninput = function(e) {
+    if (e.isTrusted) {
+        e.preventDefault();
+        demoScene.zoom = zoomSlider.value;
+    }
 }
 
 function getTransformation() {

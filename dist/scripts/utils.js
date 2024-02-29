@@ -46,8 +46,6 @@ function drawVector(arrowObject, s, v) {
     var elevationAngle = Math.atan2(vector.y, Math.sqrt(vector.z ** 2 + vector.x ** 2));
     var scaleFactor = Math.max(magnitude - arrowObject.arrowheadLength, 0);
 
-    console.log(arrowObject.material, startPos);
-
     // position arrow body
     var transformationMatrix = new THREE.Matrix4().identity();
     transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(startPos.x, startPos.y, startPos.z));
