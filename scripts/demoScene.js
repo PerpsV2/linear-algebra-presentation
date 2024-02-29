@@ -153,7 +153,7 @@ class DemoScene {
     addWheelHandler(element, thisObj) {
         element.addEventListener('wheel', function(e) {
             e.preventDefault();
-            thisObj.zoom = Utils.clamp(thisObj.zoom + e.deltaY * 0.01 * thisObj.scrollSensitivity, thisObj.minZoom, thisObj.maxZoom);
+            thisObj.zoom = Utils.clamp(Math.round(thisObj.zoom) + e.deltaY * 0.01 * thisObj.scrollSensitivity, thisObj.minZoom, thisObj.maxZoom);
         })
     }
 

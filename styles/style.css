@@ -204,6 +204,10 @@ input[type="number"].demo-input::-webkit-outer-spin-button {
     appearance: none;
 }
 
+input[type="number"].demo-input:disabled {
+    background-color: var(--mid-grey);
+}
+
 .radio-input-label {
     margin-top: 0;
 }
