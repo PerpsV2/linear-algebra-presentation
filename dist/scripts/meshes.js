@@ -7,6 +7,7 @@ function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowh
     const arrowbodyGeometry = new THREE.BoxGeometry(1, arrowbodyWidth, arrowbodyWidth);
     arrowbodyGeometry.translate(0.5, 0, 0);
     const arrowbody = new THREE.Mesh(arrowbodyGeometry, material);
+    arrowbody.matrixAutoUpdate = false;
 
     // create arrow head
     const arrowheadGeometry = new THREE.CylinderGeometry(0, arrowheadWidth / 2, arrowheadLength, 4);
@@ -16,7 +17,12 @@ function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowh
 
     scene.add(arrowbody);
     scene.add(arrowhead);
-    let arrowObject = {arrowbody: arrowbody, arrowhead: arrowhead, arrowheadLength: arrowheadLength, visible: true};
+    let arrowObject = {
+        arrowbody: arrowbody, 
+        arrowhead: arrowhead, 
+        material: material,
+        arrowheadLength: arrowheadLength, 
+        visible: true};
     return arrowObject;
 }
 window.createArrowMesh = createArrowMesh;
@@ -24,7 +30,7 @@ window.createArrowMesh = createArrowMesh;
 // create grid mesh [line1, line2, line3,... ]
 function createGridMesh(scene, material, cellSize, gridSize) {
     var lineObjects = [];
-    for (let d = cellSize; d <= gridSize; d += cellSize) {
+    for (let d = 0; d <= gridSize; d += cellSize) {
         let points = []
         let states = Utils.generateBinaryStates(3);
         for(let state of states) {
@@ -49,6 +55,7 @@ function createLineMesh(scene, material, startPos, endPos) {
     let points = [new THREE.Vector3(startPos[0], startPos[1], startPos[2]), new THREE.Vector3(endPos[0], endPos[1], endPos[2])];
     const geometry = new THREE.BufferGeometry().setFromPoints(points);
     const line = new THREE.Line(geometry, material);
+    line.matrixAutoUpdate = false;
     scene.add(line);
     return line;
 }
@@ -57,8 +64,9 @@ window.createLineMesh = createLineMesh;
 // create mesh of a box
 function createBoxMesh(scene, material, length, width, height) {
     const geometry = new THREE.BoxGeometry(length, width, height);
-    const mesh = new THREE.Mesh(geometry, material)
-    scene.add(mesh);
-    return mesh;
+    const box = new THREE.Mesh(geometry, material)
+    box.matrixAutoUpdate = false;
+    scene.add(box);
+    return box;
 }
 window.createBoxMesh = createBoxMesh;
