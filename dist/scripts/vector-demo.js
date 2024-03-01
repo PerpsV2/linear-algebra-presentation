@@ -11,7 +11,6 @@ const arrowheadLength = 0.25;
 var vectorInputs = document.getElementById("vector-input").children;
 var matrixInputs = document.getElementById("matrix-input").children;
 var zoomSlider = document.getElementById("zoom-slider");
-//zoomSlider.oninput = updateZoomFromSlider();
 var showComponentVectors = true;
 
 // configure demo scene
@@ -19,6 +18,7 @@ var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
 var demoScene = new DemoScene(demoCanvas, demoContainer, 0.6);
 demoScene.mouseSensitivity = 1.7;
+var inputTransformation = getTransformation();
 
 // create scene objects
 var objs = demoScene.sceneObjects;
@@ -49,10 +49,10 @@ function anim() {
     let vecX = vectorInputs[0].value;
     let vecY = vectorInputs[2].value; 
     let vecZ = vectorInputs[1].value; 
-    let transformation = getTransformation();
+    let transform = inputTransformation;
 
     // apply transformation to materials
-    let transformUniform = {type: "mat4", value:transformation};
+    let transformUniform = {type: "mat4", value:transform};
     demoScene.materials.xArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.yArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.zArrowMat.uniforms.transformation = transformUniform;
@@ -75,14 +75,6 @@ zoomSlider.oninput = function(e) {
     }
 }
 
-function getTransformation() {
-    return new THREE.Matrix4
-    (matrixInputs[0].value, matrixInputs[2].value, matrixInputs[1].value, 0,
-     matrixInputs[6].value, matrixInputs[8].value, matrixInputs[7].value, 0,
-    -matrixInputs[3].value,-matrixInputs[5].value,-matrixInputs[4].value, 0,
-     0                    , 0                    , 0                    , 1);
-}
-
 function toggleInputDimension() {
     // disabled/enable the inputs used for the third dimension
     matrixInputs[2].disabled ^= true;
@@ -98,6 +90,20 @@ function toggleInputDimension() {
     matrixInputs[7].value = 0;
     matrixInputs[8].value = 1;
     vectorInputs[2].value = 0;
+}
+
+// read transformation from settings
+function getTransformation() {
+    return new THREE.Matrix4
+    (matrixInputs[0].value, matrixInputs[2].value, matrixInputs[1].value, 0,
+     matrixInputs[6].value, matrixInputs[8].value, matrixInputs[7].value, 0,
+    -matrixInputs[3].value,-matrixInputs[5].value,-matrixInputs[4].value, 0,
+     0                    , 0                    , 0                    , 1);
+}
+
+// update the current transformation from settings
+function applyTransformation() {
+    inputTransformation = getTransformation();
 }
 
 function setDemo2D() {
@@ -119,6 +125,7 @@ function toggleComponentVectors() {
 
 window.setDemo2D = setDemo2D;
 window.setDemo3D = setDemo3D;
+window.applyTransformation = applyTransformation;
 window.toggleComponentVectors = toggleComponentVectors;
 
 // run animation

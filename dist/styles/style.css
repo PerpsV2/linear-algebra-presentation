@@ -4,6 +4,8 @@
     --dark-grey: #3A3A3A;
     --mid-grey: #434343;
     --light-grey: #4F4F4F;
+    --dark-button-click-color: #454545;
+    --dark-button-hover-color: #4B4B4B;
     --button-click-color: #505050;
     --button-hover-color: #5B5B5B;
     --button-color: #606060;
@@ -166,7 +168,6 @@ flex-item {
     column-gap: 0.85rem;
 }
 
-
 input[type="range"].demo-input {
     appearance: none;
     cursor: pointer;
@@ -184,6 +185,7 @@ input[type="range"].demo-input::-webkit-slider-thumb {
     height: 0.9rem;
     box-shadow: 0 0 0 0.2rem var(--shadow-highlight-color);
 }
+
 input[type="number"].demo-input {
     appearance: none;
     border: none;
@@ -208,15 +210,32 @@ input[type="number"].demo-input:disabled {
     background-color: var(--mid-grey);
 }
 
+button.demo-input {
+    appearance: none;
+    border: solid var(--dark-grey);
+    border-radius: 3px;
+    background-color: var(--light-grey);
+    padding: 0 1rem;
+}
+
+button.demo-input:hover {
+    background-color: var(--dark-button-hover-color);
+}
+
+button.demo-input:active {
+    background-color: var(--dark-button-click-color);
+}
+
+/* Radio Buttons */
+
 .radio-input-label {
     margin-top: 0;
 }
 
 .radio-input-box {
-    border: solid;
+    border: solid var(--dark-grey); 
     padding: 10px 20px;
     margin: 10px;
-    border-color: var(--dark-grey);
     border-radius: 3px;
     width: auto;
     height: auto;
