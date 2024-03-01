@@ -1,11 +1,14 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import * as Utils from './utils.js';
+import * as Objects from './sceneObjects.js';
 import DemoScene from './demoScene.js';
 
 // constants
 const arrowbodyWidth = 0.04;
 const arrowheadWidth = 0.16;
 const arrowheadLength = 0.25;
+const transformTransitionTime = 1; // in seconds
+const transformTransitionFPS = 30;
 
 // settings
 var vectorInputs = document.getElementById("vector-input").children;
@@ -22,7 +25,7 @@ var inputTransformation = getTransformation();
 
 // create scene objects
 var objs = demoScene.sceneObjects;
-objs.vector = createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.vector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 
 // create component vectors
 var xArrowMat = demoScene.addMaterial("xArrowMat");
@@ -34,9 +37,9 @@ yArrowMat.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.0, 0.0, 1.0
 var zArrowMat = demoScene.addMaterial("zArrowMat");
 zArrowMat.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.0, 1.0, 0.0)};
 
-objs.xComponentVector = createArrowMesh(demoScene.scene, demoScene.materials.xArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.yComponentVector = createArrowMesh(demoScene.scene, demoScene.materials.yArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.zComponentVector = createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.xComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.xArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.yArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.zComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 toggleComponentVectors();
 
 // begin in 2D with the 3D inputs disabled
@@ -60,11 +63,11 @@ function anim() {
     demoScene.materials.lineMat.uniforms.transformation = transformUniform;
 
     // draw special objects
-    Utils.drawGridLines(objs.grid);
-    Utils.drawVector(objs.vector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, vecY, vecZ));
-    Utils.drawVector(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, 0, 0));
-    Utils.drawVector(objs.zComponentVector, new THREE.Vector3(vecX, 0, 0), new THREE.Vector3(0, 0, vecZ));
-    Utils.drawVector(objs.yComponentVector, new THREE.Vector3(vecX, 0, vecZ), new THREE.Vector3(0, vecY, 0));
+    Objects.drawGridLines(objs.grid);
+    Objects.drawArrow(objs.vector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, vecY, vecZ));
+    Objects.drawArrow(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, 0, 0));
+    Objects.drawArrow(objs.zComponentVector, new THREE.Vector3(vecX, 0, 0), new THREE.Vector3(0, 0, vecZ));
+    Objects.drawArrow(objs.yComponentVector, new THREE.Vector3(vecX, 0, vecZ), new THREE.Vector3(0, vecY, 0));
 }
 
 // update zoom when slider is adjusted manually
@@ -101,8 +104,9 @@ function getTransformation() {
      0                    , 0                    , 0                    , 1);
 }
 
-// update the current transformation from settings
+// update the current transformation from settings and slowly transition to it
 function applyTransformation() {
+    var transitionProgress = 0;
     inputTransformation = getTransformation();
 }
 
@@ -118,9 +122,9 @@ function setDemo3D() {
 
 function toggleComponentVectors() {
     showComponentVectors = !showComponentVectors;
-    Utils.setArrowVisiblity(objs.xComponentVector, showComponentVectors);
-    Utils.setArrowVisiblity(objs.yComponentVector, showComponentVectors);
-    Utils.setArrowVisiblity(objs.zComponentVector, showComponentVectors);
+    Objects.setArrowVisiblity(objs.xComponentVector, showComponentVectors);
+    Objects.setArrowVisiblity(objs.yComponentVector, showComponentVectors);
+    Objects.setArrowVisiblity(objs.zComponentVector, showComponentVectors);
 }
 
 window.setDemo2D = setDemo2D;

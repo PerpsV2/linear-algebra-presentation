@@ -25,7 +25,46 @@ function createArrowMesh(scene, material, arrowbodyWidth, arrowheadWidth, arrowh
         visible: true};
     return arrowObject;
 }
-window.createArrowMesh = createArrowMesh;
+
+// draw an arrow mesh with a starting and end point
+function drawArrow(arrowObject, s, v) {
+    var materialMatrix = arrowObject.material.uniforms.transformation.value;
+    var startPos = s.applyMatrix4(materialMatrix);
+    var vector = v.applyMatrix4(materialMatrix);
+
+    var magnitude = vector.length();
+    var azimuthAngle = Math.atan2(vector.z, vector.x);
+    var elevationAngle = Math.atan2(vector.y, Math.sqrt(vector.z ** 2 + vector.x ** 2));
+    var scaleFactor = Math.max(magnitude - arrowObject.arrowheadLength, 0);
+
+    // position arrow body
+    var transformationMatrix = new THREE.Matrix4().identity();
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(startPos.x, startPos.y, startPos.z));
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, -azimuthAngle, elevationAngle, 'XYZ')));
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeScale(scaleFactor, 1, 1));
+    arrowObject.arrowbody.matrix = transformationMatrix;
+
+    // position arrow head
+    var transformationMatrix = new THREE.Matrix4().identity();
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(startPos.x, startPos.y, startPos.z));
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, -azimuthAngle, elevationAngle, 'XYZ')));
+    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(new THREE.Vector3(Math.max(magnitude - arrowObject.arrowheadLength / 2, 0), 0, 0)));
+    arrowObject.arrowhead.matrix = transformationMatrix;
+
+    if (magnitude <= 0 || arrowObject.visible == false){ 
+        arrowObject.arrowhead.visible = false;
+        arrowObject.arrowbody.visible = false;
+    } else {
+        arrowObject.arrowhead.visible = true;
+        arrowObject.arrowbody.visible = true;
+    }
+}
+
+function setArrowVisiblity(arrowObject, visibility) {
+    arrowObject.visible = visibility;
+    arrowObject.arrowbody.visible = visibility;
+    arrowObject.arrowhead.visible = visibility;
+}
 
 // create grid mesh [line1, line2, line3,... ]
 function createGridMesh(scene, material, cellSize, gridSize) {
@@ -48,7 +87,13 @@ function createGridMesh(scene, material, cellSize, gridSize) {
     }
     return lineObjects
 }
-window.createGridMesh = createGridMesh;
+
+function drawGridLines(gridLines) {
+    for (let line of gridLines) {
+        var transformationMatrix = line.material.uniforms.transformation.value;
+        line.matrix = transformationMatrix;
+    }
+}
 
 // create single line mesh
 function createLineMesh(scene, material, startPos, endPos) {
@@ -59,7 +104,6 @@ function createLineMesh(scene, material, startPos, endPos) {
     scene.add(line);
     return line;
 }
-window.createLineMesh = createLineMesh;
 
 // create mesh of a box
 function createBoxMesh(scene, material, length, width, height) {
@@ -69,4 +113,5 @@ function createBoxMesh(scene, material, length, width, height) {
     scene.add(box);
     return box;
 }
-window.createBoxMesh = createBoxMesh;
+
+export {createArrowMesh, createGridMesh, createLineMesh, createBoxMesh, drawArrow, drawGridLines, setArrowVisiblity};

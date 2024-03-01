@@ -1,5 +1,6 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import * as Utils from './utils.js';
+import * as Objects from './sceneObjects.js';
 import basicVertex from './shaders/basicVertex.js';
 import basicFragment from './shaders/basicFragment.js';
 
@@ -81,10 +82,10 @@ class DemoScene {
         this.materials.arrowMat = arrowMaterial;
         
         // create objects
-        this.sceneObjects.grid = createGridMesh(this.#bgScene, lineMaterial, cellSize, gridSize);
-        this.sceneObjects.xAxis = createBoxMesh(this.#bgScene, axisMaterial, gridSize * 2, axisWidth, axisWidth);
-        this.sceneObjects.yAxis = createBoxMesh(this.#bgScene, axisMaterial, axisWidth, gridSize * 2, axisWidth);
-        this.sceneObjects.zAxis = createBoxMesh(this.#bgScene, axisMaterial, axisWidth, axisWidth, gridSize * 2);
+        this.sceneObjects.grid = Objects.createGridMesh(this.#bgScene, lineMaterial, cellSize, gridSize);
+        this.sceneObjects.xAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, gridSize * 2, axisWidth, axisWidth);
+        this.sceneObjects.yAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, axisWidth, gridSize * 2, axisWidth);
+        this.sceneObjects.zAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, axisWidth, axisWidth, gridSize * 2);
 
         // bind canvas control event handlers
         this.addMouseMoveHandler(canvas, this);
