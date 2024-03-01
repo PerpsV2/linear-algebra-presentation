@@ -28,4 +28,15 @@ function updateOrthographicCameraSize(camera, left, right, top, bottom) {
     camera.bottom = bottom;
 }
 
-export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize};
+function nearlyEqual(a, b, epsilon) {
+    if (a === b) return true;
+
+    var absA = Math.abs(a);
+    var absB = Math.abs(b);
+    var diff = Math.abs(a - b);
+
+    if (a == 0 || b == 0 || diff < Number.MIN_VALUE) return diff < epsilon * Number.MIN_VALUE;
+    else return diff / Math.min(absA + absB, Number.MAX_VALUE) < epsilon;
+}
+
+export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, nearlyEqual};

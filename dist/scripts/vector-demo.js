@@ -1,6 +1,6 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import * as Utils from './utils.js';
-import * as Objects from './sceneObjects.js';
+import * as Objects from './sceneObjects.js'
 import DemoScene from './demoScene.js';
 
 // constants
@@ -107,7 +107,19 @@ function getTransformation() {
 // update the current transformation from settings and slowly transition to it
 function applyTransformation() {
     var transitionProgress = 0;
+    var intervalId;
+    
+    // loop function to iterate through transition
+    var progressTransformation = function() {
+        if (Utils.nearlyEqual(transitionProgress, 1, 0.0001) || transitionProgress > 1) {
+            clearInterval(intervalId);
+            return;
+        }
+        transitionProgress += 1 / transformTransitionTime / transformTransitionFPS;
+    }
+
     inputTransformation = getTransformation();
+    intervalId = setInterval(progressTransformation, 1 / transformTransitionFPS);
 }
 
 function setDemo2D() {
