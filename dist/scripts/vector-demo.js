@@ -42,8 +42,8 @@ objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.mater
 objs.zComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 toggleComponentVectors();
 
-// begin in 2D with the 3D inputs disabled
-toggleInputDimension();
+// begin with 2D inputs
+setInputDimension(2);
 
 function anim() {
     zoomSlider.value = demoScene.zoom;
@@ -78,21 +78,15 @@ zoomSlider.oninput = function(e) {
     }
 }
 
-function toggleInputDimension() {
+function setInputDimension(dimension) {
     // disabled/enable the inputs used for the third dimension
-    matrixInputs[2].disabled ^= true;
-    matrixInputs[5].disabled ^= true;
-    matrixInputs[6].disabled ^= true;
-    matrixInputs[7].disabled ^= true;
-    matrixInputs[8].disabled ^= true;
-    vectorInputs[2].disabled ^= true;
-    // reset values so any 3D components of a vector or matrix won't appear in 2D view
-    matrixInputs[2].value = 0;
-    matrixInputs[5].value = 0;
-    matrixInputs[6].value = 0;
-    matrixInputs[7].value = 0;
-    matrixInputs[8].value = 1;
-    vectorInputs[2].value = 0;
+    var matrixInputsArray = Array.from(matrixInputs);
+    matrixInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
+    matrixInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
+
+    var vectorInputsArray = Array.from(vectorInputs);
+    vectorInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
+    vectorInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
 }
 
 // read transformation from settings
@@ -124,12 +118,12 @@ function applyTransformation() {
 
 function setDemo2D() {
     demoScene.setCamera2D();
-    toggleInputDimension();
+    setInputDimension(2);
 }
 
 function setDemo3D() {
     demoScene.setCamera3D();
-    toggleInputDimension();
+    setInputDimension(3);
 }
 
 function toggleComponentVectors() {
