@@ -3,9 +3,9 @@
     <head>
         <link rel="stylesheet" href="../styles/reset.css">
         <link rel="stylesheet" href="../styles/style.css">
+        <script src="../scripts/slides.js"></script>
         <script type="module" src="../scripts/utils.js"></script>
         <script type="module" src="../scripts/sceneObjects.js"></script>
-        <script src="../scripts/slides.js"></script>
         <title>Linear Algebra - Introduction</title>
     </head>
     <body id="introduction-page">
@@ -45,19 +45,19 @@
 
                             <div class="label-input-box center-align">
                                 <label>Vector</label>
-                                <div class="multi-input-box" id="vector-input">
+                                <x-vector-input id="vector-input" data-dimension="3">
                                     <input class="demo-input" type="number" value="1" min="-10" max="10" data-default="1" data-dimension="1">
                                     <input class="demo-input" type="number" value="1" min="-10" max="10" data-default="1" data-dimension="2">
                                     <input class="demo-input" type="number" value="0" min="-10" max="10" data-default="0" data-dimension="3">
-                                </div>
+                                </x-vector-input>
                             </div>
 
                             <x-vector-input class=""></x-vector-input>
 
                             <div class="label-input-box">
                                 <label>Transform</label>
-                                <div class="matrix-input-box" id="matrix-input">
-                                    <input class="demo-input" type="number" value="1" min="-10" max="10" data-default="1" data-dimension="1">
+                                <x-matrix-input id="matrix-input" data-dimension="3">
+                                    <!--<input class="demo-input" type="number" value="1" min="-10" max="10" data-default="1" data-dimension="1">
                                     <input class="demo-input" type="number" value="0" min="-10" max="10" data-default="0" data-dimension="2">
                                     <input class="demo-input" type="number" value="0" min="-10" max="10" data-default="0" data-dimension="3">
                                     <input class="demo-input" type="number" value="0" min="-10" max="10" data-default="0" data-dimension="2">
@@ -65,8 +65,8 @@
                                     <input class="demo-input" type="number" value="0" min="-10" max="10" data-default="0" data-dimension="3">
                                     <input class="demo-input" type="number" value="0" min="-10" max="10" data-default="0" data-dimension="3">
                                     <input class="demo-input" type="number" value="0" min="-10" max="10" data-default="0" data-dimension="3">
-                                    <input class="demo-input" type="number" value="1" min="-10" max="10" data-default="1" data-dimension="3">
-                                </div>
+                                    <input class="demo-input" type="number" value="1" min="-10" max="10" data-default="1" data-dimension="3">-->
+                                </x-matrix-input>
                             </div>
 
                             <div class="label-input-box center-align">

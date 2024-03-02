@@ -60,6 +60,23 @@ function changeSection(pageName, slideNumber = 1) {
 
 document.addEventListener('DOMContentLoaded', (event) => {
     setSlide(localStorage.getItem('slide'))
+
+    console.log("loaded");
+    // populate matrix inputs and vector inputs
+    for(let matrixInput of document.getElementsByTagName("x-matrix-input")) {
+        let dimension = Number.parseInt(matrixInput.dataset.dimension);
+        for (let i = 0; i < dimension * dimension; ++i) {
+            let input = document.createElement('input');
+            input.classList.add('demo-input');
+            input.type = 'number';
+            input.dataset.default = 0;
+            if (i % (dimension + 1) === 0)
+                input.dataset.default = 1;
+            input.value = input.dataset.default;
+            input.dataset.dimension = Math.max(i % dimension + 1, Math.floor(i / dimension) + 1);
+            matrixInput.appendChild(input);
+        }
+    }
 })
 
 // detect for key presses

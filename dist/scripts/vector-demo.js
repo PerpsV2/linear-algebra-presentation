@@ -21,10 +21,9 @@ var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
 var demoScene = new DemoScene(demoCanvas, demoContainer, 0.6);
 demoScene.mouseSensitivity = 1.7;
-var inputTransformation = getTransformation();
+var objs = demoScene.sceneObjects;
 
 // create scene objects
-var objs = demoScene.sceneObjects;
 objs.vector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 
 // create component vectors
@@ -42,8 +41,14 @@ objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.mater
 objs.zComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 toggleComponentVectors();
 
-// begin with 2D inputs
-setInputDimension(2);
+var inputTransformation;
+
+// once document is fully loaded, read input transformation, set dimension and start drawing
+document.addEventListener('DOMContentLoaded', (event) => {
+    inputTransformation = getTransformation();
+    setInputDimension(2);
+    demoScene.animate(anim);
+});
 
 function anim() {
     zoomSlider.value = demoScene.zoom;
@@ -137,6 +142,3 @@ window.setDemo2D = setDemo2D;
 window.setDemo3D = setDemo3D;
 window.applyTransformation = applyTransformation;
 window.toggleComponentVectors = toggleComponentVectors;
-
-// run animation
-demoScene.animate(anim);

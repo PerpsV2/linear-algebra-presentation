@@ -149,14 +149,14 @@ flex-container {
     gap: 1rem;
 }
 
-.multi-input-box {
+x-vector-input {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 0.85rem;
 }
 
-.matrix-input-box {
+x-matrix-input {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
