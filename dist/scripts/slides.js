@@ -1,33 +1,38 @@
-let currentSlide = 1;
+var currentSlide = 1;
+
+document.createElement('flex-container');
+document.createElement('x-highlight');
+document.createElement('x-vector-input');
+document.createElement('x-matrix-input');
 
 function incrementSlide(incrementAmount) {
     setSlide(currentSlide + incrementAmount);
 }
 
 function setSlideVisibilities(slides) {
-    slides[currentSlide - 1].classList.remove("before-shown");
-    slides[currentSlide - 1].classList.remove("after-shown");
+    slides[currentSlide - 1].classList.remove('before-shown');
+    slides[currentSlide - 1].classList.remove('after-shown');
     for (let i = 0; i < currentSlide - 1; i++) {
         slideClassList = slides[i].classList;
-        slideClassList.remove("before-shown");
-        slideClassList.add("after-shown");
+        slideClassList.remove('before-shown');
+        slideClassList.add('after-shown');
     }
     for (let i = currentSlide; i < slides.length; i++) {
         slideClassList = slides[i].classList;
-        slideClassList.remove("after-shown");
-        slideClassList.add("before-shown");
+        slideClassList.remove('after-shown');
+        slideClassList.add('before-shown');
     }
 }
 
 function setSlide(slideNumber) {
-    let backButton = document.getElementById("back-button");
-    let forwardButton = document.getElementById("forward-button");
-    let slides = document.getElementsByClassName("slide");
-    let lastSlide = slides.length;
+    var backButton = document.getElementById('back-button');
+    var forwardButton = document.getElementById('forward-button');
+    var slides = document.getElementsByClassName('slide');
+    var lastSlide = slides.length;
 
     currentSlide = Math.min(Math.max(slideNumber, 1), lastSlide);
-    document.getElementById("slide-number").textContent = "#" + currentSlide;
-    document.documentElement.style.setProperty("--progress-bar-progress", '' + (currentSlide - 1) / (lastSlide - 1) * 100);
+    document.getElementById('slide-number').textContent = '#' + currentSlide;
+    document.documentElement.style.setProperty('--progress-bar-progress', '' + (currentSlide - 1) / (lastSlide - 1) * 100);
     setSlideVisibilities(slides);
     
     backButton.disabled = false;
@@ -43,22 +48,22 @@ function setSlide(slideNumber) {
 }
 
 function changeSection(pageName, slideNumber = 1) {
-    let path = window.location.pathname;
-    let page = path.split('/').pop();
-    if (pageName + ".html" == page) {
+    var path = window.location.pathname;
+    var page = path.split('/').pop();
+    if (pageName + '.html' == page) {
         setSlide(slideNumber);
         return;
     }
-    localStorage.setItem("slide", slideNumber);
-    window.location.href = pageName + ".html";
+    localStorage.setItem('slide', slideNumber);
+    window.location.href = pageName + '.html';
 }
 
-document.addEventListener("DOMContentLoaded", (event) => {
-    setSlide(localStorage.getItem("slide"))
+document.addEventListener('DOMContentLoaded', (event) => {
+    setSlide(localStorage.getItem('slide'))
 })
 
 // detect for key presses
 document.addEventListener('keydown', (event) => {
-    if (event.key === "ArrowRight" || event.key === 'd') incrementSlide(1);
-    if (event.key === "ArrowLeft"  || event.key === 'a') incrementSlide(-1);
+    if (event.key === 'ArrowRight' || event.key === 'd') incrementSlide(1);
+    if (event.key === 'ArrowLeft'  || event.key === 'a') incrementSlide(-1);
 });

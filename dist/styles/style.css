@@ -94,10 +94,6 @@ flex-container {
     align-items: stretch;
 }
 
-flex-item {
-    padding: 5px 0;
-}
-
 /* Page Content */
 /* Div to store main page content */
 .content-div {
@@ -270,7 +266,7 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 }
 
 /* Slide Content - stuff that appears in slides */
-highlight {
+x-highlight {
     color: var(--highlight-color);
 }
 
