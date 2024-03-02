@@ -58,23 +58,32 @@ function changeSection(pageName, slideNumber = 1) {
     window.location.href = pageName + '.html';
 }
 
+function createDemoNumberInput(defaultValue, dimension) {
+    var input = document.createElement('input');
+    input.type = 'number';
+    input.classList.add('demo-input');
+    input.dataset.default = defaultValue;
+    input.dataset.dimension = Math.max(i % dimension + 1, Math.floor(i / dimension) + 1);
+    input.value = input.dataset.default;
+    return input;
+}
+
 document.addEventListener('DOMContentLoaded', (event) => {
     setSlide(localStorage.getItem('slide'))
 
     console.log("loaded");
     // populate matrix inputs and vector inputs
-    for(let matrixInput of document.getElementsByTagName("x-matrix-input")) {
+    for(let matrixInput of document.getElementsByTagName('x-matrix-input')) {
         let dimension = Number.parseInt(matrixInput.dataset.dimension);
         for (let i = 0; i < dimension * dimension; ++i) {
-            let input = document.createElement('input');
-            input.classList.add('demo-input');
-            input.type = 'number';
-            input.dataset.default = 0;
-            if (i % (dimension + 1) === 0)
-                input.dataset.default = 1;
-            input.value = input.dataset.default;
-            input.dataset.dimension = Math.max(i % dimension + 1, Math.floor(i / dimension) + 1);
-            matrixInput.appendChild(input);
+            matrixInput.appendChild(createDemoNumberInput(i % (dimension + 1) === 0 ? 1 : 0, Math.max(i % dimension + 1, Math.floor(i / dimension) + 1)));
+        }
+    }
+
+    for (let vectorInput of document.getElementsByTagName('x-vector-input')) {
+        let dimension = Number.parseInt(vectorInput.dataset.dimension);
+        for (let i = 0; i < dimension; ++i) {
+            vectorInput.appendChild(createDemoNumberInput(i <= 2 ? 1 : 0, i));
         }
     }
 })

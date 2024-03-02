@@ -12,9 +12,7 @@ const transformTransitionFPS = 30;
 
 // settings
 var vectorInput = document.getElementById("vector-input");
-var vectorInputs = vectorInput.children;
 var matrixInput = document.getElementById("matrix-input");
-var matrixInputs = matrixInput.children;
 var zoomSlider = document.getElementById("zoom-slider");
 var showComponentVectors = true;
 
@@ -56,9 +54,9 @@ function anim() {
     zoomSlider.value = demoScene.zoom;
 
     // read the values so the input appears in the form XZY
-    let vecX = vectorInputs[0].value;
-    let vecY = vectorInputs[2].value; 
-    let vecZ = vectorInputs[1].value; 
+    let vecX = vectorInput.children[0].value;
+    let vecY = vectorInput.children[2].value; 
+    let vecZ = vectorInput.children[1].value; 
     let transform = inputTransformation;
 
     // apply transformation to materials
@@ -87,6 +85,7 @@ zoomSlider.oninput = function(e) {
 
 // read transformation from settings
 function getTransformation() {
+    let matrixInputs = matrixInput.children;
     return new THREE.Matrix4
     (matrixInputs[0].value, matrixInputs[2].value, matrixInputs[1].value, 0,
      matrixInputs[6].value, matrixInputs[8].value, matrixInputs[7].value, 0,
@@ -112,21 +111,25 @@ function applyTransformation() {
     intervalId = setInterval(progressTransformation, 1 / transformTransitionFPS);
 }
 
+// set the dimension of all the inputs
 function setInputDimension(dimension) {
     Utils.setMatrixInputDimension(matrixInput, dimension);
     Utils.setVectorInputDimension(vectorInput, dimension);
 }
 
+// set demo dimension to 2D
 function setDemo2D() {
     demoScene.setCamera2D();
     setInputDimension(2);
 }
 
+// set demo dimension to 3D
 function setDemo3D() {
     demoScene.setCamera3D();
     setInputDimension(3);
 }
 
+// toggle visible component vectors
 function toggleComponentVectors() {
     showComponentVectors = !showComponentVectors;
     Objects.setArrowVisiblity(objs.xComponentVector, showComponentVectors);

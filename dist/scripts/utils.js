@@ -39,7 +39,7 @@ function nearlyEqual(a, b, epsilon) {
     else return diff / Math.min(absA + absB, Number.MAX_VALUE) < epsilon;
 }
 
-// disable/enable some inputs of a matrix to fit a certain dimension
+// disable/enable some inputs of a matrix/vector to fit a certain dimension
 function setMatrixInputDimension(matrixInput, dimension) {
     var matrixInputsArray = Array.from(matrixInput.children);
     matrixInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
@@ -50,6 +50,11 @@ function setVectorInputDimension(vectorInput, dimension) {
     var vectorInputsArray = Array.from(vectorInput.children);
     vectorInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
     vectorInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
+}
+
+// create a THREE matrix using matrix input for up to 3 dimensions
+function readMatrixInput(matrixInput) {
+
 }
 
 export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, nearlyEqual, setMatrixInputDimension, setVectorInputDimension};
