@@ -11,8 +11,10 @@ const transformTransitionTime = 1; // in seconds
 const transformTransitionFPS = 30;
 
 // settings
-var vectorInputs = document.getElementById("vector-input").children;
-var matrixInputs = document.getElementById("matrix-input").children;
+var vectorInput = document.getElementById("vector-input");
+var vectorInputs = vectorInput.children;
+var matrixInput = document.getElementById("matrix-input");
+var matrixInputs = matrixInput.children;
 var zoomSlider = document.getElementById("zoom-slider");
 var showComponentVectors = true;
 
@@ -83,17 +85,6 @@ zoomSlider.oninput = function(e) {
     }
 }
 
-function setInputDimension(dimension) {
-    // disabled/enable the inputs used for the third dimension
-    var matrixInputsArray = Array.from(matrixInputs);
-    matrixInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
-    matrixInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
-
-    var vectorInputsArray = Array.from(vectorInputs);
-    vectorInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
-    vectorInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
-}
-
 // read transformation from settings
 function getTransformation() {
     return new THREE.Matrix4
@@ -119,6 +110,11 @@ function applyTransformation() {
 
     inputTransformation = getTransformation();
     intervalId = setInterval(progressTransformation, 1 / transformTransitionFPS);
+}
+
+function setInputDimension(dimension) {
+    Utils.setMatrixInputDimension(matrixInput, dimension);
+    Utils.setVectorInputDimension(vectorInput, dimension);
 }
 
 function setDemo2D() {

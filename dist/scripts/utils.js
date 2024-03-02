@@ -39,4 +39,17 @@ function nearlyEqual(a, b, epsilon) {
     else return diff / Math.min(absA + absB, Number.MAX_VALUE) < epsilon;
 }
 
-export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, nearlyEqual};
+// disable/enable some inputs of a matrix to fit a certain dimension
+function setMatrixInputDimension(matrixInput, dimension) {
+    var matrixInputsArray = Array.from(matrixInput.children);
+    matrixInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
+    matrixInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
+}
+
+function setVectorInputDimension(vectorInput, dimension) {
+    var vectorInputsArray = Array.from(vectorInput.children);
+    vectorInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
+    vectorInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
+}
+
+export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, nearlyEqual, setMatrixInputDimension, setVectorInputDimension};
