@@ -49,7 +49,7 @@ function createDemoNumberInput(defaultValue, dimension) {
     return input;
 }
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', (e) => {
     setSlide(localStorage.getItem('slide'))
 
     // populate matrix inputs and vector inputs
@@ -61,13 +61,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     for (let vectorInput of document.getElementsByTagName('x-vector-input')) {
         let dimension = Number.parseInt(vectorInput.dataset.dimension);
-        for (let i = 0; i < dimension; ++i) 
-            vectorInput.appendChild(createDemoNumberInput(i <= 2 ? 1 : 0, i));
+        for (let i = 0; i < dimension; ++i)
+            vectorInput.appendChild(createDemoNumberInput(i <= 1 ? 1 : 0, i + 1));
     }
 })
 
 // detect for key presses
-document.addEventListener('keydown', (event) => {
-    if (event.key === 'ArrowRight' || event.key === 'd') incrementSlide(1);
-    if (event.key === 'ArrowLeft'  || event.key === 'a') incrementSlide(-1);
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'd') incrementSlide(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'a') incrementSlide(-1);
 });
