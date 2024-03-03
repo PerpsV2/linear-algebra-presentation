@@ -41,11 +41,11 @@ objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.mater
 objs.zComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 toggleComponentVectors();
 
-var inputTransformation;
+var matrix;
 
 // once document is fully loaded, read input transformation, set dimension and start drawing
 document.addEventListener('DOMContentLoaded', (e) => {
-    inputTransformation = Utils.readMatrixInput4(matrixInput);
+    matrix = Utils.readMatrixInput4(matrixInput);
     setInputDimension(2);
     demoScene.animate(anim);
 });
@@ -57,7 +57,7 @@ function anim() {
     let vec = Utils.readVectorInput3(vectorInput);
 
     // apply transformation to materials
-    let transformUniform = {type: "mat4", value:inputTransformation};
+    let transformUniform = {type: "mat4", value:matrix};
     demoScene.materials.xArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.yArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.zArrowMat.uniforms.transformation = transformUniform;
@@ -82,20 +82,25 @@ zoomSlider.oninput = (e) => {
 
 // update the current transformation from settings and slowly transition to it
 function applyTransformation() {
+    var startMatrix = new THREE.Matrix4().copy(matrix);
+    var endMatrix = Utils.readMatrixInput4(matrixInput);
     var transitionProgress = 0;
     var intervalId;
     
     // loop function to iterate through transition
     var progressTransformation = function() {
-        if (Utils.nearlyEqual(transitionProgress, 1, 0.0001) || transitionProgress > 1) {
+        // once animation is done, stop calling function and return
+        if (Utils.nearlyEqual(transitionProgress, 1, 0.0001) || transitionProgress > 1) { 
             clearInterval(intervalId);
             return;
         }
+        
         transitionProgress += 1 / transformTransitionTime / transformTransitionFPS;
+        matrix = Utils.interpolateMatrix(startMatrix, endMatrix, transitionProgress);
+        //Utils.interpolateMatrix(startMatrix, endMatrix, transitionProgress);
     }
 
-    inputTransformation = Utils.readMatrixInput4(matrixInput);
-    intervalId = setInterval(progressTransformation, 1 / transformTransitionFPS);
+    intervalId = setInterval(progressTransformation, 1 / transformTransitionFPS * 1000);
 }
 
 // set the dimension of all the inputs

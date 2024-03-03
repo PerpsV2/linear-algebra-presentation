@@ -66,3 +66,21 @@ export function readMatrixInput4(matrixInput) {
 export function readVectorInput3(vectorInput) {
     return new THREE.Vector3(vectorInput.children[0].value, vectorInput.children[2].value, vectorInput.children[1].value);
 }
+
+export function interpolateMatrix(startMatrix, endMatrix, alpha) {
+    var startPosition = new THREE.Vector3();
+    var startRotation = new THREE.Quaternion();
+    var startScale = new THREE.Vector3();
+    startMatrix.decompose(startPosition, startRotation, startScale);
+
+    var endPosition = new THREE.Vector3();
+    var endRotation = new THREE.Quaternion();
+    var endScale = new THREE.Vector3();
+    endMatrix.decompose(endPosition, endRotation, endScale);
+
+    var lerpPosition = startPosition.lerp(endPosition, alpha);
+    var lerpScale = startScale.lerp(endScale, alpha);
+    var slerpRotation = startRotation.slerp(endRotation, alpha);
+
+    return new THREE.Matrix4().compose(lerpPosition, slerpRotation, lerpScale)
+}
