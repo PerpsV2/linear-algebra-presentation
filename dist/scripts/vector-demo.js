@@ -44,8 +44,8 @@ toggleComponentVectors();
 var inputTransformation;
 
 // once document is fully loaded, read input transformation, set dimension and start drawing
-document.addEventListener('DOMContentLoaded', (event) => {
-    inputTransformation = getTransformation();
+document.addEventListener('DOMContentLoaded', (e) => {
+    inputTransformation = Utils.readMatrixInput4(matrixInput);
     setInputDimension(2);
     demoScene.animate(anim);
 });
@@ -54,13 +54,10 @@ function anim() {
     zoomSlider.value = demoScene.zoom;
 
     // read the values so the input appears in the form XZY
-    let vecX = vectorInput.children[0].value;
-    let vecY = vectorInput.children[2].value; 
-    let vecZ = vectorInput.children[1].value; 
-    let transform = inputTransformation;
+    let vec = Utils.readVectorInput3(vectorInput);
 
     // apply transformation to materials
-    let transformUniform = {type: "mat4", value:transform};
+    let transformUniform = {type: "mat4", value:inputTransformation};
     demoScene.materials.xArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.yArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.zArrowMat.uniforms.transformation = transformUniform;
@@ -69,28 +66,18 @@ function anim() {
 
     // draw special objects
     Objects.drawGridLines(objs.grid);
-    Objects.drawArrow(objs.vector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, vecY, vecZ));
-    Objects.drawArrow(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, 0, 0));
-    Objects.drawArrow(objs.zComponentVector, new THREE.Vector3(vecX, 0, 0), new THREE.Vector3(0, 0, vecZ));
-    Objects.drawArrow(objs.yComponentVector, new THREE.Vector3(vecX, 0, vecZ), new THREE.Vector3(0, vecY, 0));
+    Objects.drawArrow(objs.vector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, vec.y, vec.z));
+    Objects.drawArrow(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, 0, 0));
+    Objects.drawArrow(objs.zComponentVector, new THREE.Vector3(vec.x, 0, 0), new THREE.Vector3(0, 0, vec.z));
+    Objects.drawArrow(objs.yComponentVector, new THREE.Vector3(vec.x, 0, vec.z), new THREE.Vector3(0, vec.y, 0));
 }
 
 // update zoom when slider is adjusted manually
-zoomSlider.oninput = function(e) {
+zoomSlider.oninput = (e) => {
     if (e.isTrusted) {
         e.preventDefault();
         demoScene.zoom = zoomSlider.value;
     }
-}
-
-// read transformation from settings
-function getTransformation() {
-    let matrixInputs = matrixInput.children;
-    return new THREE.Matrix4
-    (matrixInputs[0].value, matrixInputs[2].value, matrixInputs[1].value, 0,
-     matrixInputs[6].value, matrixInputs[8].value, matrixInputs[7].value, 0,
-    -matrixInputs[3].value,-matrixInputs[5].value,-matrixInputs[4].value, 0,
-     0                    , 0                    , 0                    , 1);
 }
 
 // update the current transformation from settings and slowly transition to it
@@ -107,7 +94,7 @@ function applyTransformation() {
         transitionProgress += 1 / transformTransitionTime / transformTransitionFPS;
     }
 
-    inputTransformation = getTransformation();
+    inputTransformation = Utils.readMatrixInput4(matrixInput);
     intervalId = setInterval(progressTransformation, 1 / transformTransitionFPS);
 }
 

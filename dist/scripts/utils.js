@@ -1,17 +1,17 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 // get principal angle
-function getPrincipalAngle(angle) {
+export function getPrincipalAngle(angle) {
     return (Math.PI * 2 + (angle % Math.PI * 2)) % Math.PI * 2;
 }
 
 // clamp a value between two limits
-function clamp(value, min, max) {
+export function clamp(value, min, max) {
     return Math.max(min, Math.min(value, max));
 }
 
 // generate all binary numbers with a specified number of digits
-function generateBinaryStates(digits) {
+export function generateBinaryStates(digits) {
     var states = [];
     var decimal = parseInt("1".repeat(digits), 2);
     for (let i = 0; i <= decimal; i++) {
@@ -21,14 +21,14 @@ function generateBinaryStates(digits) {
 }
 
 // update the bounds of an orgthographic camera
-function updateOrthographicCameraSize(camera, left, right, top, bottom) {
+export function updateOrthographicCameraSize(camera, left, right, top, bottom) {
     camera.left = left;
     camera.right = right;
     camera.top = top;
     camera.bottom = bottom;
 }
 
-function nearlyEqual(a, b, epsilon) {
+export function nearlyEqual(a, b, epsilon) {
     if (a === b) return true;
 
     var absA = Math.abs(a);
@@ -40,21 +40,29 @@ function nearlyEqual(a, b, epsilon) {
 }
 
 // disable/enable some inputs of a matrix/vector to fit a certain dimension
-function setMatrixInputDimension(matrixInput, dimension) {
+export function setMatrixInputDimension(matrixInput, dimension) {
     var matrixInputsArray = Array.from(matrixInput.children);
     matrixInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
     matrixInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
 }
 
-function setVectorInputDimension(vectorInput, dimension) {
+export function setVectorInputDimension(vectorInput, dimension) {
     var vectorInputsArray = Array.from(vectorInput.children);
     vectorInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
     vectorInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
 }
 
-// create a THREE matrix using matrix input for up to 3 dimensions
-function readMatrixInput(matrixInput) {
-
+// create a 4x4 THREE matrix using a matrix input
+export function readMatrixInput4(matrixInput) {
+    var matrixInputs = matrixInput.children;
+    return new THREE.Matrix4
+    (matrixInputs[0].value, matrixInputs[2].value, matrixInputs[1].value, 0,
+     matrixInputs[6].value, matrixInputs[8].value, matrixInputs[7].value, 0,
+    -matrixInputs[3].value,-matrixInputs[5].value,-matrixInputs[4].value, 0,
+     0                    , 0                    , 0                    , 1);
 }
 
-export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, nearlyEqual, setMatrixInputDimension, setVectorInputDimension};
+// create a 3D THREE vector using a vector input
+export function readVectorInput3(vectorInput) {
+    return new THREE.Vector3(vectorInput.children[0].value, vectorInput.children[2].value, vectorInput.children[1].value);
+}
