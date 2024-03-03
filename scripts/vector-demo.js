@@ -1,17 +1,19 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 import * as Utils from './utils.js';
+import * as Objects from './sceneObjects.js'
 import DemoScene from './demoScene.js';
 
 // constants
 const arrowbodyWidth = 0.04;
 const arrowheadWidth = 0.16;
 const arrowheadLength = 0.25;
+const transformTransitionTime = 1; // in seconds
+const transformTransitionFPS = 30;
 
 // settings
-var vectorInputs = document.getElementById("vector-input").children;
-var matrixInputs = document.getElementById("matrix-input").children;
+var vectorInput = document.getElementById("vector-input");
+var matrixInput = document.getElementById("matrix-input");
 var zoomSlider = document.getElementById("zoom-slider");
-//zoomSlider.oninput = updateZoomFromSlider();
 var showComponentVectors = true;
 
 // configure demo scene
@@ -19,10 +21,10 @@ var demoContainer = document.getElementById("vector-demo-container");
 var demoCanvas = document.getElementById("vector-demo-canvas");
 var demoScene = new DemoScene(demoCanvas, demoContainer, 0.6);
 demoScene.mouseSensitivity = 1.7;
+var objs = demoScene.sceneObjects;
 
 // create scene objects
-var objs = demoScene.sceneObjects;
-objs.vector = createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.vector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 
 // create component vectors
 var xArrowMat = demoScene.addMaterial("xArrowMat");
@@ -34,25 +36,28 @@ yArrowMat.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.0, 0.0, 1.0
 var zArrowMat = demoScene.addMaterial("zArrowMat");
 zArrowMat.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.0, 1.0, 0.0)};
 
-objs.xComponentVector = createArrowMesh(demoScene.scene, demoScene.materials.xArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.yComponentVector = createArrowMesh(demoScene.scene, demoScene.materials.yArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.zComponentVector = createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.xComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.xArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.yArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.zComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 toggleComponentVectors();
 
-// begin in 2D with the 3D inputs disabled
-toggleInputDimension();
+var matrix;
+
+// once document is fully loaded, read input transformation, set dimension and start drawing
+document.addEventListener('DOMContentLoaded', (e) => {
+    matrix = Utils.readMatrixInput4(matrixInput);
+    setInputDimension(2);
+    demoScene.animate(anim);
+});
 
 function anim() {
     zoomSlider.value = demoScene.zoom;
 
     // read the values so the input appears in the form XZY
-    let vecX = vectorInputs[0].value;
-    let vecY = vectorInputs[2].value; 
-    let vecZ = vectorInputs[1].value; 
-    let transformation = getTransformation();
+    let vec = Utils.readVectorInput3(vectorInput);
 
     // apply transformation to materials
-    let transformUniform = {type: "mat4", value:transformation};
+    let transformUniform = {type: "mat4", value:matrix};
     demoScene.materials.xArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.yArrowMat.uniforms.transformation = transformUniform;
     demoScene.materials.zArrowMat.uniforms.transformation = transformUniform;
@@ -60,66 +65,71 @@ function anim() {
     demoScene.materials.lineMat.uniforms.transformation = transformUniform;
 
     // draw special objects
-    Utils.drawGridLines(objs.grid);
-    Utils.drawVector(objs.vector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, vecY, vecZ));
-    Utils.drawVector(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vecX, 0, 0));
-    Utils.drawVector(objs.zComponentVector, new THREE.Vector3(vecX, 0, 0), new THREE.Vector3(0, 0, vecZ));
-    Utils.drawVector(objs.yComponentVector, new THREE.Vector3(vecX, 0, vecZ), new THREE.Vector3(0, vecY, 0));
+    Objects.drawGridLines(objs.grid);
+    Objects.drawArrow(objs.vector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, vec.y, vec.z));
+    Objects.drawArrow(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, 0, 0));
+    Objects.drawArrow(objs.zComponentVector, new THREE.Vector3(vec.x, 0, 0), new THREE.Vector3(0, 0, vec.z));
+    Objects.drawArrow(objs.yComponentVector, new THREE.Vector3(vec.x, 0, vec.z), new THREE.Vector3(0, vec.y, 0));
 }
 
 // update zoom when slider is adjusted manually
-zoomSlider.oninput = function(e) {
+zoomSlider.oninput = (e) => {
     if (e.isTrusted) {
         e.preventDefault();
         demoScene.zoom = zoomSlider.value;
     }
 }
 
-function getTransformation() {
-    return new THREE.Matrix4
-    (matrixInputs[0].value, matrixInputs[2].value, matrixInputs[1].value, 0,
-     matrixInputs[6].value, matrixInputs[8].value, matrixInputs[7].value, 0,
-    -matrixInputs[3].value,-matrixInputs[5].value,-matrixInputs[4].value, 0,
-     0                    , 0                    , 0                    , 1);
+// update the current transformation from settings and slowly transition to it
+function applyTransformation() {
+    var startMatrix = new THREE.Matrix4().copy(matrix);
+    var endMatrix = Utils.readMatrixInput4(matrixInput);
+    var transitionProgress = 0;
+    var intervalId;
+    
+    // loop function to iterate through transition
+    var progressTransformation = function() {
+        // once animation is done, stop calling function and return
+        if (Utils.nearlyEqual(transitionProgress, 1, 0.0001) || transitionProgress > 1) { 
+            clearInterval(intervalId);
+            return;
+        }
+        
+        transitionProgress += 1 / transformTransitionTime / transformTransitionFPS;
+        matrix = Utils.interpolateMatrix(startMatrix, endMatrix, transitionProgress);
+        //Utils.interpolateMatrix(startMatrix, endMatrix, transitionProgress);
+    }
+
+    intervalId = setInterval(progressTransformation, 1 / transformTransitionFPS * 1000);
 }
 
-function toggleInputDimension() {
-    // disabled/enable the inputs used for the third dimension
-    matrixInputs[2].disabled ^= true;
-    matrixInputs[5].disabled ^= true;
-    matrixInputs[6].disabled ^= true;
-    matrixInputs[7].disabled ^= true;
-    matrixInputs[8].disabled ^= true;
-    vectorInputs[2].disabled ^= true;
-    // reset values so any 3D components of a vector or matrix won't appear in 2D view
-    matrixInputs[2].value = 0;
-    matrixInputs[5].value = 0;
-    matrixInputs[6].value = 0;
-    matrixInputs[7].value = 0;
-    matrixInputs[8].value = 1;
-    vectorInputs[2].value = 0;
+// set the dimension of all the inputs
+function setInputDimension(dimension) {
+    Utils.setMatrixInputDimension(matrixInput, dimension);
+    Utils.setVectorInputDimension(vectorInput, dimension);
 }
 
+// set demo dimension to 2D
 function setDemo2D() {
     demoScene.setCamera2D();
-    toggleInputDimension();
+    setInputDimension(2);
 }
 
+// set demo dimension to 3D
 function setDemo3D() {
     demoScene.setCamera3D();
-    toggleInputDimension();
+    setInputDimension(3);
 }
 
+// toggle visible component vectors
 function toggleComponentVectors() {
     showComponentVectors = !showComponentVectors;
-    Utils.setArrowVisiblity(objs.xComponentVector, showComponentVectors);
-    Utils.setArrowVisiblity(objs.yComponentVector, showComponentVectors);
-    Utils.setArrowVisiblity(objs.zComponentVector, showComponentVectors);
+    Objects.setArrowVisiblity(objs.xComponentVector, showComponentVectors);
+    Objects.setArrowVisiblity(objs.yComponentVector, showComponentVectors);
+    Objects.setArrowVisiblity(objs.zComponentVector, showComponentVectors);
 }
 
 window.setDemo2D = setDemo2D;
 window.setDemo3D = setDemo3D;
+window.applyTransformation = applyTransformation;
 window.toggleComponentVectors = toggleComponentVectors;
-
-// run animation
-demoScene.animate(anim);

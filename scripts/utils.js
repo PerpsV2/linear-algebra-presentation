@@ -1,17 +1,17 @@
 import * as THREE from 'https://unpkg.com/three/build/three.module.js';
 
 // get principal angle
-function getPrincipalAngle(angle) {
+export function getPrincipalAngle(angle) {
     return (Math.PI * 2 + (angle % Math.PI * 2)) % Math.PI * 2;
 }
 
 // clamp a value between two limits
-function clamp(value, min, max) {
+export function clamp(value, min, max) {
     return Math.max(min, Math.min(value, max));
 }
 
 // generate all binary numbers with a specified number of digits
-function generateBinaryStates(digits) {
+export function generateBinaryStates(digits) {
     var states = [];
     var decimal = parseInt("1".repeat(digits), 2);
     for (let i = 0; i <= decimal; i++) {
@@ -21,58 +21,66 @@ function generateBinaryStates(digits) {
 }
 
 // update the bounds of an orgthographic camera
-function updateOrthographicCameraSize(camera, left, right, top, bottom) {
+export function updateOrthographicCameraSize(camera, left, right, top, bottom) {
     camera.left = left;
     camera.right = right;
     camera.top = top;
     camera.bottom = bottom;
 }
 
-function drawGridLines(gridLines) {
-    for (let line of gridLines) {
-        var transformationMatrix = line.material.uniforms.transformation.value;
-        line.matrix = transformationMatrix;
-    }
+export function nearlyEqual(a, b, epsilon) {
+    if (a === b) return true;
+
+    var absA = Math.abs(a);
+    var absB = Math.abs(b);
+    var diff = Math.abs(a - b);
+
+    if (a == 0 || b == 0 || diff < Number.MIN_VALUE) return diff < epsilon * Number.MIN_VALUE;
+    else return diff / Math.min(absA + absB, Number.MAX_VALUE) < epsilon;
 }
 
-// draw an arrow mesh with a starting and end point
-function drawVector(arrowObject, s, v) {
-    var materialMatrix = arrowObject.material.uniforms.transformation.value;
-    var startPos = s.applyMatrix4(materialMatrix);
-    var vector = v.applyMatrix4(materialMatrix);
-
-    var magnitude = vector.length();
-    var azimuthAngle = Math.atan2(vector.z, vector.x);
-    var elevationAngle = Math.atan2(vector.y, Math.sqrt(vector.z ** 2 + vector.x ** 2));
-    var scaleFactor = Math.max(magnitude - arrowObject.arrowheadLength, 0);
-
-    // position arrow body
-    var transformationMatrix = new THREE.Matrix4().identity();
-    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(startPos.x, startPos.y, startPos.z));
-    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, -azimuthAngle, elevationAngle, 'XYZ')));
-    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeScale(scaleFactor, 1, 1));
-    arrowObject.arrowbody.matrix = transformationMatrix;
-
-    // position arrow head
-    var transformationMatrix = new THREE.Matrix4().identity();
-    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(startPos.x, startPos.y, startPos.z));
-    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeRotationFromEuler(new THREE.Euler(0, -azimuthAngle, elevationAngle, 'XYZ')));
-    transformationMatrix = transformationMatrix.multiply(new THREE.Matrix4().makeTranslation(new THREE.Vector3(Math.max(magnitude - arrowObject.arrowheadLength / 2, 0), 0, 0)));
-    arrowObject.arrowhead.matrix = transformationMatrix;
-
-    if (magnitude <= 0 || arrowObject.visible == false){ 
-        arrowObject.arrowhead.visible = false;
-        arrowObject.arrowbody.visible = false;
-    } else {
-        arrowObject.arrowhead.visible = true;
-        arrowObject.arrowbody.visible = true;
-    }
+// disable/enable some inputs of a matrix/vector to fit a certain dimension
+export function setMatrixInputDimension(matrixInput, dimension) {
+    var matrixInputsArray = Array.from(matrixInput.children);
+    matrixInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
+    matrixInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
 }
 
-function setArrowVisiblity(arrowObject, visibility) {
-    arrowObject.visible = visibility;
-    arrowObject.arrowbody.visible = visibility;
-    arrowObject.arrowhead.visible = visibility;
+export function setVectorInputDimension(vectorInput, dimension) {
+    var vectorInputsArray = Array.from(vectorInput.children);
+    vectorInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
+    vectorInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
 }
 
-export {getPrincipalAngle, clamp, generateBinaryStates, updateOrthographicCameraSize, drawGridLines, drawVector, setArrowVisiblity};
+// create a 4x4 THREE matrix using a matrix input
+export function readMatrixInput4(matrixInput) {
+    var matrixInputs = matrixInput.children;
+    return new THREE.Matrix4
+    (matrixInputs[0].value, matrixInputs[2].value, matrixInputs[1].value, 0,
+     matrixInputs[6].value, matrixInputs[8].value, matrixInputs[7].value, 0,
+    -matrixInputs[3].value,-matrixInputs[5].value,-matrixInputs[4].value, 0,
+     0                    , 0                    , 0                    , 1);
+}
+
+// create a 3D THREE vector using a vector input
+export function readVectorInput3(vectorInput) {
+    return new THREE.Vector3(vectorInput.children[0].value, vectorInput.children[2].value, vectorInput.children[1].value);
+}
+
+export function interpolateMatrix(startMatrix, endMatrix, alpha) {
+    var startPosition = new THREE.Vector3();
+    var startRotation = new THREE.Quaternion();
+    var startScale = new THREE.Vector3();
+    startMatrix.decompose(startPosition, startRotation, startScale);
+
+    var endPosition = new THREE.Vector3();
+    var endRotation = new THREE.Quaternion();
+    var endScale = new THREE.Vector3();
+    endMatrix.decompose(endPosition, endRotation, endScale);
+
+    var lerpPosition = startPosition.lerp(endPosition, alpha);
+    var lerpScale = startScale.lerp(endScale, alpha);
+    var slerpRotation = startRotation.slerp(endRotation, alpha);
+
+    return new THREE.Matrix4().compose(lerpPosition, slerpRotation, lerpScale)
+}
