@@ -68,6 +68,9 @@ document.addEventListener('DOMContentLoaded', (e) => {
 
 // detect for key presses
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'd') incrementSlide(1);
-    if (e.key === 'ArrowLeft'  || e.key === 'a') incrementSlide(-1);
+    // only register key presses if an input box is not selected
+    if (document.activeElement.nodeName != 'INPUT') {
+        if (e.key === 'ArrowRight' || e.key === 'd') incrementSlide(1);
+        if (e.key === 'ArrowLeft'  || e.key === 'a') incrementSlide(-1);
+    }
 });
