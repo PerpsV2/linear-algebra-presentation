@@ -27,14 +27,9 @@ var objs = demoScene.sceneObjects;
 objs.vector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 
 // create component vectors
-var xArrowMat = demoScene.addMaterial("xArrowMat");
-xArrowMat.uniforms.color = {type: 'vec3', value: new THREE.Vector3(1.0, 0.0, 0.0)};
-
-var yArrowMat = demoScene.addMaterial("yArrowMat");
-yArrowMat.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.0, 0.0, 1.0)};
-
-var zArrowMat = demoScene.addMaterial("zArrowMat");
-zArrowMat.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.0, 1.0, 0.0)};
+demoScene.addMaterialWithColor('xArrowMat', new THREE.Vector3(1.0, 0.0, 0.0));
+demoScene.addMaterialWithColor('yArrowMat', new THREE.Vector3(0.0, 0.0, 1.0));
+demoScene.addMaterialWithColor('zArrowMat', new THREE.Vector3(0.0, 1.0, 0.0));
 
 objs.xComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.xArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.yArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);

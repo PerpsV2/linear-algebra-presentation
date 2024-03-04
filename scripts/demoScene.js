@@ -99,6 +99,10 @@ class DemoScene {
         return this.materials[name];
     }
 
+    addMaterialWithColor(name, color) {
+        this.addMaterial(name).uniforms.color = {type: 'vec3', value: color};
+    }
+
     setCamera2D() {
         this.camera = this.#oCamera;
         this.pCameraEnabled = false;
@@ -122,7 +126,7 @@ class DemoScene {
     }
 
     addMouseMoveHandler(element, thisObj) {
-        element.addEventListener('mousemove', function(e) {
+        element.addEventListener('mousemove', (e) => {
             if (!thisObj.#mouseDown) return;
             if (!thisObj.pCameraEnabled) return;
 
@@ -136,7 +140,7 @@ class DemoScene {
     }
 
     addMouseDownHandler(element, thisObj) {
-        element.addEventListener('mousedown', function(e) {
+        element.addEventListener('mousedown', (e) => {
             e.preventDefault();
             thisObj.#mouseX = e.clientX;
             thisObj.#mouseY = e.clientY;
@@ -145,14 +149,14 @@ class DemoScene {
     }
 
     addMouseUpHandler(element, thisObj) {
-        element.addEventListener('mouseup', function(e) {
+        element.addEventListener('mouseup', (e) => {
             e.preventDefault();
             thisObj.#mouseDown = false;
         })
     }
 
     addWheelHandler(element, thisObj) {
-        element.addEventListener('wheel', function(e) {
+        element.addEventListener('wheel', (e) => {
             e.preventDefault();
             thisObj.zoom = Utils.clamp(Math.round(thisObj.zoom) + e.deltaY * 0.01 * thisObj.scrollSensitivity, thisObj.minZoom, thisObj.maxZoom);
         })
