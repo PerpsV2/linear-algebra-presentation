@@ -1,7 +1,7 @@
 var currentSlide = 1;
 
 document.createElement('flex-container');
-document.createElement('x-highlight');
+document.createElement('x-hl');
 document.createElement('x-vector-input');
 document.createElement('x-matrix-input');
 

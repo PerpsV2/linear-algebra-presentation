@@ -47,7 +47,8 @@ h6 {
 }
 
 p {
-    font-size: 1rem;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
 }
 
 a {
@@ -92,6 +93,10 @@ h1, h2, h3, h4, h5, h6 {
 flex-container {
     display: flex;
     align-items: stretch;
+}
+
+.white {
+    color: white;
 }
 
 /* Page Content */
@@ -266,7 +271,7 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 }
 
 /* Slide Content - stuff that appears in slides */
-x-highlight {
+x-hl {
     color: var(--highlight-color);
 }
 
