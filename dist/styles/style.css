@@ -55,8 +55,8 @@ h1.large {
 }
 
 p {
-    font-size: 2.4rem;
-    line-height: 3.6rem;
+    font-size: 2.2rem;
+    line-height: 3.4rem;
 }
 
 a {
@@ -79,6 +79,11 @@ h1, h2, h3, h4, h5, h6 {
 /* Utilities */
 .evenly-space {
     justify-content: space-between;
+    gap: 0;
+}
+
+.evenly-space-around {
+    justify-content: space-around;
     gap: 0;
 }
 
