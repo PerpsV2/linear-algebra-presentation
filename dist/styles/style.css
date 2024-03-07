@@ -309,6 +309,14 @@ x-hl {
     height: auto;
 }
 
+.image-box {
+    background-color: var(--light-grey);
+    border-color: var(--dark-grey);
+    border-width: 8px;
+    border-radius: 3px;
+    border: double;
+}
+
 .demo-canvas {
     padding: 0;
 }
