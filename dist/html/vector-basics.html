@@ -9,9 +9,9 @@
         <script type="text/javascript"
             src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
         </script>
-        <title>Linear Algebra - Basics</title>
+        <title>Linear Algebra - Vector Basics</title>
     </head>
-    <body id="introduction-page">
+    <body id="vector-basics-page">
         <div class="slides-content-div">
             <!-- SLIDE #1 -->
             <div class="slide before-shown"><flex-container class="vertical-flex">
@@ -50,7 +50,60 @@
                     </div>
                 </flex-container>
             </flex-container></div>
-            <!-- Vector Demo Slide --> <!-- SLIDE #2 -->
+            <!-- SLIDE #2 -->
+            <div class="slide before-shown"><flex-container class="vertical-flex">
+                <div class="vertically-center-content">
+                    <h1 class="large">What is a Vector?</h1>
+                </div>
+                <p>Vectors are special type of quantity which can't be represented by just one value.<br class="large">
+                    
+                    The exact definition of a vector varies slightly from field to field. For example, in physics, a 
+                    vector is anything with a <x-hl>magnitude</x-hl> and a <x-hl>direction</x-hl>. In other cases, a 
+                    vector can simply be thought of as a list of numbers.<br class="large">
+
+                    A generalized definition of a vector however, is anything in which <em>vector addition</em> and 
+                    <em>scalar multiplication</em> can be meaningfully applied to.<br class="large">
+
+                    In this section, we'll start with the magnitude and direction approach and look over the different 
+                    ways to represent a vector.
+                </p>    
+            </flex-container></div>
+            <div class="slide before-shown">
+                <div class="vertically-center-content">
+                    <h1 class="large">Magnitude and Direction</h1>
+                </div>
+                <p>
+                    The magnitude of a vector is measured as a <x-hl>scalar</x-hl>. That is to say, any quanity which 
+                    can be represented by just one value.<br class="large">
+
+                    This representation is often used in physics. For example, speed is a scalar quantity, as there is 
+                    no discernable direction. Velocity is a vector as it has a magnitude (speed) and a direction.<br class="large">
+
+                    Scalars have a more formal definition, but for now, think of them as any 'ordinary' number, 
+                    like \(3\), or \(-3\), or \(\pi\).
+                </p> 
+            </div>
+            <!-- SLIDE #3 -->
+            <div class="slide before-shown">
+                <flex-container class="horizontal-flex">
+                    <div>
+                        <div class="vertically-center-content">
+                            <h1 class="large">Visual Interpretation</h1>
+                        </div>
+                        <p>
+                            Another way of describing a vector is through a geometric intuition, specifically by drawing an arrow in space <br class="large">
+                            It is important to realize that a vector can have <em>any</em> amount of dimensions. The space we choose to draw the vector in 
+                            depends on how many dimensions the vector has. <br>
+                            In this example, we will be working with a 2D vector. <br class="large">
+                            To draw the arrow, first determine the direction it will be pointing in. The length of the arrow represents the magnitude.<br>
+                            As long as the direction and magnitude stay the same, this vector can be moved anywhere in space, but generally it is drawn 
+                            from the origin \((0, 0)\) for readability.
+                        </p>  
+                    </div>
+                    <img src="../media/images/test-image.png" width="200", height="500" id="vector-img-0">  
+                </flex-container>
+            </div>
+            <!-- Vector Demo Slide --> <!-- SLIDE #4 -->
             <div class="slide before-shown">
                 <flex-container class="horizontal-flex flex-gap"> 
 
@@ -116,7 +169,7 @@
             <button onclick="incrementSlide(-1)" id="back-button"></button>
             
             <flex-container class="vertical-flex center-align evenly-space" id="slide-information">
-                <a class="hover-underline-link" href="navigation.html#basics"><h2 id="chapter-title">Basics</h2></a>
+                <a class="hover-underline-link" href="navigation.html#vector-basics"><h2 id="chapter-title">Vector Basics</h2></a>
                 <h3 id="slide-number">#1</h3>
             </flex-container>
             

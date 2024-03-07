@@ -63,6 +63,12 @@ a {
     font-size: 1em;
 }
 
+br.large {
+    display: block;
+    content: "";
+    margin: 3.2rem 0;
+}
+
 label {
     font-size: 1.2rem;
 }
@@ -101,6 +107,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .flex-gap {
     gap: 30px;
+}
+
+.float {
+    float: true;
 }
 
 flex-container {
@@ -450,4 +460,10 @@ flex-item.light-bg {
     bottom: 0;
     left: 0;
     border-radius: 0 2px 2px 0;
+}
+
+/* Slide Images */
+
+#vector-img-0 {
+    margin-top: 10rem;
 }
