@@ -395,21 +395,19 @@ flex-item.light-bg {
     height: 0;
     background-color: transparent;
     border: none;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
     transition: 0.1s;
     transform: scale(1, 1);
 }
 
 #back-button {
-    border-top: 30px solid transparent;
     border-right: 60px solid var(--button-color);
-    border-bottom: 30px solid transparent;
     margin-left: 50px;
 }
 
 #forward-button {
-    border-top: 30px solid transparent;
     border-left: 60px solid var(--button-color);
-    border-bottom: 30px solid transparent;
     margin-right: 50px;
 }
 
