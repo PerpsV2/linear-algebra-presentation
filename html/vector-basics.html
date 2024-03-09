@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../styles/reset.css">
+        <link rel="stylesheet" href="../styles/style.css">
+        <script src="../scripts/slides.js"></script>
+        <script type="module" src="../scripts/utils.js"></script>
+        <script type="module" src="../scripts/sceneObjects.js"></script>
+        <script type="text/javascript"
+            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        <title>Linear Algebra - Vector Basics</title>
+    </head>
+    <body id="vector-basics-page">
+        <div class="slides-content-div">
+            <!-- SLIDE #1 -->
+            <div class="slide before-shown"><flex-container class="vertical-flex">
+                <div class="vertically-center-content">
+                    <h1 class="large">What is Linear Algebra?</h1>
+                </div>
+                <p>Linear algebra is a branch of mathematics which mainly deals with <em>vector spaces</em> and <em>linear transformations</em>.<br>
+                    These concepts can be represented through <x-hl>vectors</x-hl> and <x-hl>matrices</x-hl>, two of the most important concepts in linear algebra.<br><br>
+                    The basics of many of these concepts can be explained much more clearly through a geometric intuition.
+                </p>
+                <!-- Matrix and vector notation example -->
+                <flex-container class="horizontal-flex evenly-space-around">
+                    <div class="vertically-center-content">
+                        <p class="equation">
+                            $$
+                            \begin{bmatrix}
+                                2 \\
+                                -4 \\
+                                0
+                            \end{bmatrix}
+                            $$
+                        </p>
+                        <h2>3-Dimensional Vector</h2>
+                    </div>
+                    <div class="vertically-center-content">
+                        <p class="equation">
+                            $$
+                            \begin{bmatrix}
+                                0 &  2 & -3 \\
+                                4 & -1 & -8 \\
+                                9 &  0 & -8
+                            \end{bmatrix}
+                            $$
+                        </p>
+                        <h2>3x3 Matrix</h2>
+                    </div>
+                </flex-container>
+            </flex-container></div>
+            <!-- SLIDE #2 -->
+            <div class="slide before-shown"><flex-container class="vertical-flex">
+                <div class="vertically-center-content">
+                    <h1 class="large">What is a Vector?</h1>
+                </div>
+                <p>Vectors are special type of quantity which can't be represented by just one value.<br class="large">
+                    
+                    The exact definition of a vector varies slightly from field to field. For example, in physics, a 
+                    vector is anything with a <x-hl>magnitude</x-hl> and a <x-hl>direction</x-hl>. In other cases, a 
+                    vector can simply be thought of as a list of numbers.<br class="large">
+
+                    A generalized definition of a vector however, is anything in which <em>vector addition</em> and 
+                    <em>scalar multiplication</em> can be meaningfully applied to.<br class="large">
+
+                    In this section, we'll start with the magnitude and direction approach and look over the different 
+                    ways to represent a vector.
+                </p>    
+            </flex-container></div>
+            <div class="slide before-shown">
+                <div class="vertically-center-content">
+                    <h1 class="large">Magnitude and Direction</h1>
+                </div>
+                <p>
+                    The magnitude of a vector is measured as a <x-hl>scalar</x-hl>. That is to say, any quanity which 
+                    can be represented by just one value.<br class="large">
+
+                    This representation is often used in physics. For example, speed is a scalar quantity, as there is 
+                    no discernable direction. Velocity is a vector as it has a magnitude (speed) and a direction.<br class="large">
+
+                    Scalars have a more formal definition, but for now, think of them as any 'ordinary' number, 
+                    like \(3\), or \(-3\), or \(\pi\).
+                </p> 
+            </div>
+            <!-- SLIDE #3 -->
+            <div class="slide before-shown">
+                <div class="vertically-center-content">
+                    <h1 class="large">Visual Interpretation</h1>
+                </div>
+                <flex-container class="horizontal-flex flex-gap">
+                    <div>  
+                        <p>
+                            Another way of describing a vector is through a geometric intuition, specifically by drawing an arrow in space <br class="large">
+                            It is important to realize that a vector can have <em>any</em> amount of dimensions. The space we choose to draw the vector in 
+                            depends on how many dimensions the vector has. <br>
+                            In this example, we will be working with a 2D vector. <br class="large">
+                            To draw the arrow, first determine the direction it will be pointing in. The length of the arrow represents the magnitude.<br>
+                            As long as the direction and magnitude stay the same, this vector can be moved anywhere in space, but generally it is drawn 
+                            from the origin \((0, 0)\) for readability.
+                        </p>  
+                    </div>
+                    <img src="../media/images/2D-vector-visual4.png" width="300", height="500" class="image-box" id="vector-img-0">  
+                </flex-container>
+            </div>
+            <!-- Vector Demo Slide --> <!-- SLIDE #4 -->
+            <div class="slide before-shown">
+                <flex-container class="horizontal-flex flex-gap"> 
+
+                    <div class="vertically-center-content" id="vector-demo-container">
+                        <h1>Using Three.js to render visualizations</h1>
+                        <canvas class="demo-canvas" id="vector-demo-canvas"></canvas>
+                    </div>
+
+                    <flex-container class="vertical-flex center-align">
+                        <h2>Settings</h2>
+
+                        <!-- Demo Input -->
+                        <div class="settings-panel center-content">
+                            
+                            <div class="label-input-box center-align">
+                                <label>Zoom</label>
+                                <input class="demo-input" id="zoom-slider" type="range" name="zoom-slider" value="5" min="1" max="15" step="0.01">
+                            </div>
+
+                            <div class="label-input-box center-align">
+                                <label>Vector</label>
+                                <x-vector-input id="vector-input" data-dimension="3"></x-vector-input>
+                            </div>
+
+                            <div class="label-input-box">
+                                <label>Transform</label>
+                                <x-matrix-input id="matrix-input" data-dimension="3"></x-matrix-input>
+                            </div>
+
+                            <div class="label-input-box center-align">
+                                <label for="show-component-vectors-1">Show Component Vectors</label>
+                                <input class="demo-input" id="show-component-vectors-1" type="checkbox" name="show-component-vectors-1" onclick="toggleComponentVectors()">
+                            </div>
+
+                            <div class="radio-input-box center-content">
+                                <h4 class="radio-input-label">Select Dimension</h4>
+                                <fieldset>
+                                    <div class="label-input-box center-align">
+                                        <label for="dimension-choice-1">2-Dimensions</label>
+                                        <input class="demo-input" id="dimension-choice-1" type="radio" name="dimension" onclick="setDemo2D()" checked>
+                                    </div>
+                                    
+                                    <div class="label-input-box center-align">
+                                        <label for="dimension-choice-2">3-Dimensions</label>
+                                        <input class="demo-input" id="dimension-choice-2" type="radio" name="dimension" onclick="setDemo3D()">
+                                    </div>
+                                </fieldset>
+                            </div>
+
+                            <button class="demo-input" onclick="applyTransformation()">
+                                <h5>Apply Transform</h5>
+                            </button>
+
+                        </div>
+                    </flex-container>
+
+                </flex-container>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <flex-container class="horizontal-flex center-align evenly-space" id="footer">
+            <button onclick="incrementSlide(-1)" id="back-button"></button>
+            
+            <flex-container class="vertical-flex center-align evenly-space" id="slide-information">
+                <a class="hover-underline-link" href="navigation.html#vector-basics"><h2 id="chapter-title">Vector Basics</h2></a>
+                <h3 id="slide-number">#1</h3>
+            </flex-container>
+            
+            <button onclick="incrementSlide(1)" id="forward-button"></button>
+        </flex-container>
+
+        <!-- Progress bar -->
+        <div id="progress-bar"></div>
+
+        <script type="module" src="../scripts/vector-demo.js"></script>
+    </body>
+</html>

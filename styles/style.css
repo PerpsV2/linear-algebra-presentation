@@ -22,6 +22,10 @@ body {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
+em {
+    font-style: italic;
+}
+
 h1 {
     font-size: 2rem;
 }
@@ -46,12 +50,23 @@ h6 {
     font-size: 0.67rem;
 }
 
+h1.large {
+    font-size: 3.2rem;
+}
+
 p {
-    font-size: 1rem;
+    font-size: 2.2rem;
+    line-height: 3.4rem;
 }
 
 a {
     font-size: 1em;
+}
+
+br.large {
+    display: block;
+    content: "";
+    margin: 3.2rem 0;
 }
 
 label {
@@ -73,6 +88,11 @@ h1, h2, h3, h4, h5, h6 {
     gap: 0;
 }
 
+.evenly-space-around {
+    justify-content: space-around;
+    gap: 0;
+}
+
 .horizontal-flex {
     flex-direction: row;
 }
@@ -89,9 +109,17 @@ h1, h2, h3, h4, h5, h6 {
     gap: 30px;
 }
 
+.float {
+    float: true;
+}
+
 flex-container {
     display: flex;
     align-items: stretch;
+}
+
+.white {
+    color: white;
 }
 
 /* Page Content */
@@ -266,7 +294,7 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 }
 
 /* Slide Content - stuff that appears in slides */
-x-highlight {
+x-hl {
     color: var(--highlight-color);
 }
 
@@ -279,6 +307,14 @@ x-highlight {
     padding: 20px;
     width: auto;
     height: auto;
+}
+
+.image-box {
+    background-color: var(--light-grey);
+    border-color: var(--dark-grey);
+    border-width: 8px;
+    border-radius: 3px;
+    border: double;
 }
 
 .demo-canvas {
@@ -359,21 +395,19 @@ flex-item.light-bg {
     height: 0;
     background-color: transparent;
     border: none;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
     transition: 0.1s;
     transform: scale(1, 1);
 }
 
 #back-button {
-    border-top: 30px solid transparent;
     border-right: 60px solid var(--button-color);
-    border-bottom: 30px solid transparent;
     margin-left: 50px;
 }
 
 #forward-button {
-    border-top: 30px solid transparent;
     border-left: 60px solid var(--button-color);
-    border-bottom: 30px solid transparent;
     margin-right: 50px;
 }
 
@@ -432,4 +466,10 @@ flex-item.light-bg {
     bottom: 0;
     left: 0;
     border-radius: 0 2px 2px 0;
+}
+
+/* Slide Images */
+
+#vector-img-0 {
+    margin-top: 4rem;
 }
