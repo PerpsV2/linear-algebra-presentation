@@ -26,11 +26,12 @@ function setSlide(slideNumber) {
     var forwardButton = document.getElementById('forward-button');
     var lastSlideNumber = slides.length;
 
-    currentSlide = Math.min(Math.max(slideNumber, 1), lastSlideNumber);
+    let newSlide = Math.min(Math.max(slideNumber, 1), lastSlideNumber);
+    setRevealVisibility(newSlide >= currentSlide ? 0 : Number.MAX_SAFE_INTEGER, slides[newSlide - 1]);
+    currentSlide = newSlide;
     document.getElementById('slide-number').textContent = '#' + currentSlide;
     document.documentElement.style.setProperty('--progress-bar-progress', '' + (currentSlide - 1) / (lastSlideNumber - 1) * 100);
     setSlideVisibilities();
-    setRevealVisibility(0, slides[currentSlide - 1]);
 
     backButton.disabled = currentSlide <= 1;
     forwardButton.disabled = currentSlide >= lastSlideNumber;
@@ -42,6 +43,7 @@ function setRevealVisibility(value, parentElement) {
         for(element of root.children) {
             // TODO: fix traverse slide elements from looping through all the mathjax elements in a slide
             if (typeof element.dataset.revealIndex !== 'undefined') {
+                element.style.transition
                 if (currentRevealIndex < element.dataset.revealIndex) element.style.visibility = 'hidden';
                 else element.style.visibility = 'visible';
             }
