@@ -468,8 +468,32 @@ flex-item.light-bg {
     border-radius: 0 2px 2px 0;
 }
 
+/* Grids */
+grid-container {
+    display: grid;
+}
+
+.dual-grid {  
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 5rem;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "grid-left grid-right";
+}
+
+.grid-left {
+    grid-area: "grid-left";
+}
+
+.grid-right {
+    grid-area: "grid-right";
+}
+  
+
 /* Slide Images */
 
 #vector-img-0 {
-    margin-top: 4rem;
+    margin-top: 0;
 }
