@@ -18,13 +18,14 @@
                 <div class="vertically-center-content">
                     <h1 class="large">What is Linear Algebra?</h1>
                 </div>
-                <p>Linear algebra is a branch of mathematics which mainly deals with <em>vector spaces</em> and <em>linear transformations</em>.<br>
-                    These concepts can be represented through <x-hl>vectors</x-hl> and <x-hl>matrices</x-hl>, two of the most important concepts in linear algebra.<br><br>
+                <p data-reveal-index="1">Linear algebra is a branch of mathematics which mainly deals with <em>vector spaces</em> and <em>linear transformations</em>.<br>
+                    These concepts can be represented through <x-hl>vectors</x-hl> and <x-hl>matrices</x-hl> which are two of the most important 
+                    concepts in linear algebra.<br><br>
                     The basics of many of these concepts can be explained much more clearly through a geometric intuition.
                 </p>
                 <!-- Matrix and vector notation example -->
                 <flex-container class="horizontal-flex evenly-space-around">
-                    <div class="vertically-center-content">
+                    <div class="vertically-center-content" data-reveal-index="2">
                         <p class="equation">
                             $$
                             \begin{bmatrix}
@@ -36,7 +37,7 @@
                         </p>
                         <h2>3-Dimensional Vector</h2>
                     </div>
-                    <div class="vertically-center-content">
+                    <div class="vertically-center-content" data-reveal-index="2">
                         <p class="equation">
                             $$
                             \begin{bmatrix}
@@ -51,37 +52,22 @@
                 </flex-container>
             </flex-container></div>
             <!-- SLIDE #2 -->
-            <div class="slide before-shown"><flex-container class="vertical-flex">
-                <div class="vertically-center-content">
-                    <h1 class="large">What is a Vector?</h1>
-                </div>
-                <p>Vectors are special type of quantity which can't be represented by just one value.<br class="large">
-                    
-                    The exact definition of a vector varies slightly from field to field. For example, in physics, a 
-                    vector is anything with a <x-hl>magnitude</x-hl> and a <x-hl>direction</x-hl>. In other cases, a 
-                    vector can simply be thought of as a list of numbers.<br class="large">
-
-                    A generalized definition of a vector however, is anything in which <em>vector addition</em> and 
-                    <em>scalar multiplication</em> can be meaningfully applied to.<br class="large">
-
-                    In this section, we'll start with the magnitude and direction approach and look over the different 
-                    ways to represent a vector.
-                </p>    
-            </flex-container></div>
             <div class="slide before-shown">
                 <div class="vertically-center-content">
-                    <h1 class="large">Magnitude and Direction</h1>
+                    <h1 class="large" data-reveal-index="1">What is a Vector?</h1>
                 </div>
                 <p>
-                    The magnitude of a vector is measured as a <x-hl>scalar</x-hl>. That is to say, any quanity which 
-                    can be represented by just one value.<br class="large">
+                    <span data-reveal-index="2">In short, vectors are special type of quantity which can't be represented by just one value, but 
+                    the exact definition of a vector varies slightly from field to field.</span><br class="large">
 
-                    This representation is often used in physics. For example, speed is a scalar quantity, as there is 
-                    no discernable direction. Velocity is a vector as it has a magnitude (speed) and a direction.<br class="large">
+                    <span data-reveal-index="3">For instance, in physics, a vector is anything with a <x-hl>magnitude</x-hl> and a <x-hl>direction</x-hl>,
+                    and in other cases, a vector can simply be thought of as a list of numbers.</span><br class="large">
 
-                    Scalars have a more formal definition, but for now, think of them as any 'ordinary' number, 
-                    like \(3\), or \(-3\), or \(\pi\).
-                </p> 
+                    <span data-reveal-index="4">A generalized definition of a vector however, is anything in which <em>vector addition</em> and 
+                    <em>scalar multiplication</em> can be meaningfully applied to.</span><br class="large">
+
+                    <span data-reveal-index="5">In this section, we'll look over the different ways to represent a vector.</span>
+                </p>     
             </div>
             <!-- SLIDE #3 -->
             <div class="slide before-shown">
@@ -89,21 +75,54 @@
                     <h1 class="large">Visual Interpretation</h1>
                 </div>
                 <flex-container class="horizontal-flex flex-gap">
-                    <div>  
-                        <p>
-                            Another way of describing a vector is through a geometric intuition, specifically by drawing an arrow in space <br class="large">
-                            It is important to realize that a vector can have <em>any</em> amount of dimensions. The space we choose to draw the vector in 
-                            depends on how many dimensions the vector has. <br>
-                            In this example, we will be working with a 2D vector. <br class="large">
-                            To draw the arrow, first determine the direction it will be pointing in. The length of the arrow represents the magnitude.<br>
-                            As long as the direction and magnitude stay the same, this vector can be moved anywhere in space, but generally it is drawn 
-                            from the origin \((0, 0)\) for readability.
-                        </p>  
-                    </div>
+                    <p>
+                        Visually, vectors are usually drawn as an arrow where the length is the magnitude of the vector.<br class="large">
+
+                        <span data-reveal-index="1">It is important to realize that a vector can have <em>any</em> amount of dimensions. The space we choose to draw the vector in 
+                        depends on how many dimensions the vector has.</span><br>
+
+                        <span data-reveal-index="2">In this example, we will be working with a 2D vector.</span><br class="large">
+
+                        <span data-reveal-index="3">To draw the arrow, first determine the direction it will be pointing in. The length of the arrow represents the magnitude.<br>
+                        As long as the direction and magnitude stay the same, this vector can be moved anywhere in space, but generally it is drawn 
+                        from the origin \((0, 0)\) for readability sakes.</span>
+                    </p>  
                     <img src="../media/images/2D-vector-visual4.png" width="300", height="500" class="image-box" id="vector-img-0">  
                 </flex-container>
             </div>
-            <!-- Vector Demo Slide --> <!-- SLIDE #4 -->
+            <!-- SLIDE #4 -->
+            <div class="slide before-shown">
+                <div class="vertically-center-content">
+                    <h1 class="large">Vector Components</h1>
+                </div>
+                <grid-container class="dual-grid">
+                    <flex-container class="horizontal-flex flex-gap grid-left">
+                        <p data-reveal-index="1">
+                            If we draw all of our vectors from the origin, functionally there is no point in drawing the line of the arrow.<br class="large">
+                            This gives us another method of describing a vector using just the arrowhead position.<br>
+                        </p>  
+                        <img data-reveal-index="1" src="../media/images/2D-vector-visual5.png" width="200", height="333" class="image-box" id="vector-img-0">
+                    </flex-container>
+    
+                    <flex-container class="horizontal-flex flex-gap grid-right">
+                        <p data-reveal-index="2">
+                            As you can see, the vector can also be described by the individual x & y coordinates of the arrow tip <br class="large">
+                            These coordinates are called the <x-hl>components</x-hl> of a vector.
+                        </p>  
+                        <img data-reveal-index="2" src="../media/images/2D-vector-visual6.png" width="200", height="333" class="image-box" id="vector-img-0">  
+                    </flex-container>
+                </grid-container>
+            </div>
+            <!-- SLIDE #5 -->
+            <div class="slide before-shown">
+                <div class="vertically-center-content">
+                    <h1 class="large">Notation</h1>
+                </div>
+                <div>
+                    <p>blah blah blah</p>
+                </div>
+            </div>
+            <!-- Vector Demo Slide -->
             <div class="slide before-shown">
                 <flex-container class="horizontal-flex flex-gap"> 
 

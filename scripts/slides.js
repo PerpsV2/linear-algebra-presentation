@@ -1,4 +1,6 @@
 var currentSlide = 1;
+var currentRevealIndex = 0; // controls which items to reveal within a slide
+var slides = document.getElementsByClassName('slide');
 
 document.createElement('flex-container');
 document.createElement('x-hl');
@@ -9,7 +11,7 @@ function incrementSlide(incrementAmount) {
     setSlide(currentSlide + incrementAmount);
 }
 
-function setSlideVisibilities(slides) {
+function setSlideVisibilities() {
     for (let i = 0; i < slides.length; ++i) {
         let slideClassList = slides[i].classList;
         slideClassList.remove('after-shown');
@@ -22,16 +24,33 @@ function setSlideVisibilities(slides) {
 function setSlide(slideNumber) {
     var backButton = document.getElementById('back-button');
     var forwardButton = document.getElementById('forward-button');
-    var slides = document.getElementsByClassName('slide');
     var lastSlideNumber = slides.length;
 
-    currentSlide = Math.min(Math.max(slideNumber, 1), lastSlideNumber);
+    let newSlide = Math.min(Math.max(slideNumber, 1), lastSlideNumber);
+    setRevealVisibility(newSlide >= currentSlide ? 0 : Number.MAX_SAFE_INTEGER, slides[newSlide - 1]);
+    currentSlide = newSlide;
     document.getElementById('slide-number').textContent = '#' + currentSlide;
     document.documentElement.style.setProperty('--progress-bar-progress', '' + (currentSlide - 1) / (lastSlideNumber - 1) * 100);
-    setSlideVisibilities(slides);
+    setSlideVisibilities();
 
     backButton.disabled = currentSlide <= 1;
     forwardButton.disabled = currentSlide >= lastSlideNumber;
+}
+
+function setRevealVisibility(value, parentElement) {
+    currentRevealIndex = value;
+    function traverseSlideElements(root) {
+        for(element of root.children) {
+            // TODO: fix traverse slide elements from looping through all the mathjax elements in a slide
+            if (typeof element.dataset.revealIndex !== 'undefined') {
+                element.style.transition
+                if (currentRevealIndex < element.dataset.revealIndex) element.style.visibility = 'hidden';
+                else element.style.visibility = 'visible';
+            }
+            traverseSlideElements(element);       
+        }
+    }
+    traverseSlideElements(parentElement);
 }
 
 function setPage(pageName, slideNumber = 1) {
@@ -72,5 +91,6 @@ document.addEventListener('keydown', (e) => {
     if (document.activeElement.nodeName != 'INPUT') {
         if (e.key === 'ArrowRight' || e.key === 'd') incrementSlide(1);
         if (e.key === 'ArrowLeft'  || e.key === 'a') incrementSlide(-1);
+        if (e.key === ' ') setRevealVisibility(currentRevealIndex + 1, slides[currentSlide - 1]);
     }
 });
