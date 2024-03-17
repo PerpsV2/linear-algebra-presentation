@@ -1,5 +1,5 @@
 var currentSlide = 1;
-var currentRevealIndex = 0; // controls which items to reveal within a slide
+var revealIndices = [0]; // controls which items to reveal within a slide
 var slides = document.getElementsByClassName('slide');
 
 document.createElement('flex-container');
@@ -26,9 +26,8 @@ function setSlide(slideNumber) {
     var forwardButton = document.getElementById('forward-button');
     var lastSlideNumber = slides.length;
 
-    let newSlide = Math.min(Math.max(slideNumber, 1), lastSlideNumber);
-    setRevealVisibility(newSlide >= currentSlide ? 0 : Number.MAX_SAFE_INTEGER, slides[newSlide - 1]);
-    currentSlide = newSlide;
+    currentSlide = Math.min(Math.max(slideNumber, 1), lastSlideNumber);
+    updateRevealVisibility();
     document.getElementById('slide-number').textContent = '#' + currentSlide;
     document.documentElement.style.setProperty('--progress-bar-progress', '' + (currentSlide - 1) / (lastSlideNumber - 1) * 100);
     setSlideVisibilities();
@@ -37,20 +36,24 @@ function setSlide(slideNumber) {
     forwardButton.disabled = currentSlide >= lastSlideNumber;
 }
 
-function setRevealVisibility(value, parentElement) {
-    currentRevealIndex = value;
+function updateRevealVisibility() {
     function traverseSlideElements(root) {
         for(element of root.children) {
             // TODO: fix traverse slide elements from looping through all the mathjax elements in a slide
             if (typeof element.dataset.revealIndex !== 'undefined') {
                 element.style.transition
-                if (currentRevealIndex < element.dataset.revealIndex) element.style.visibility = 'hidden';
+                if (revealIndices[currentSlide - 1] < element.dataset.revealIndex) element.style.visibility = 'hidden';
                 else element.style.visibility = 'visible';
             }
             traverseSlideElements(element);       
         }
     }
-    traverseSlideElements(parentElement);
+    traverseSlideElements(slides[currentSlide - 1]);
+}
+
+function setRevealVisibility(value) {
+    revealIndices[currentSlide - 1] = value;
+    updateRevealVisibility();
 }
 
 function setPage(pageName, slideNumber = 1) {
@@ -69,7 +72,10 @@ function createDemoNumberInput(defaultValue, dimension) {
 }
 
 document.addEventListener('DOMContentLoaded', (e) => {
-    setSlide(localStorage.getItem('slide'))
+    for (var i = 0; i < slides.length; ++i) {
+        revealIndices.push(0);
+    }
+    setSlide(localStorage.getItem('slide'));
 
     // populate matrix inputs and vector inputs
     for(let matrixInput of document.getElementsByTagName('x-matrix-input')) {
@@ -91,6 +97,7 @@ document.addEventListener('keydown', (e) => {
     if (document.activeElement.nodeName != 'INPUT') {
         if (e.key === 'ArrowRight' || e.key === 'd') incrementSlide(1);
         if (e.key === 'ArrowLeft'  || e.key === 'a') incrementSlide(-1);
-        if (e.key === ' ') setRevealVisibility(currentRevealIndex + 1, slides[currentSlide - 1]);
+        if (e.key === ' ') setRevealVisibility(revealIndices[currentSlide - 1] + 1);
+        if (e.key === 'Shift') setRevealVisibility(revealIndices[currentSlide - 1] - 1);
     }
 });
