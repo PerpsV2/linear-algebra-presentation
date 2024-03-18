@@ -25,7 +25,6 @@ body {
 em {
     font-style: italic;
 }
-
 h1 {
     font-size: 2rem;
 }
@@ -59,6 +58,12 @@ p {
     line-height: 3.4rem;
 }
 
+ul {
+    font-size: 2rem;
+    line-height: 3.2rem;
+    list-style: inside;
+}
+
 a {
     font-size: 1em;
 }
@@ -73,7 +78,7 @@ label {
     font-size: 1.2rem;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, label {
+h1, h2, h3, h4, h5, h6, p, a, label, ul {
     color: var(--text-color);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -85,12 +90,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Utilities */
 .evenly-space {
     justify-content: space-between;
-    gap: 0;
 }
 
 .evenly-space-around {
     justify-content: space-around;
-    gap: 0;
 }
 
 .horizontal-flex {
@@ -105,12 +108,12 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
 }
 
-.flex-gap {
-    gap: 30px;
+.small-flex-gap {
+    gap: 2rem;
 }
 
-.float {
-    float: true;
+.flex-gap {
+    gap: 5rem;
 }
 
 flex-container {
@@ -472,25 +475,6 @@ flex-item.light-bg {
 grid-container {
     display: grid;
 }
-
-.dual-grid {  
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 5rem;
-    grid-auto-flow: row;
-    grid-template-areas:
-      "grid-left grid-right";
-}
-
-.grid-left {
-    grid-area: "grid-left";
-}
-
-.grid-right {
-    grid-area: "grid-right";
-}
-  
 
 /* Slide Images */
 
