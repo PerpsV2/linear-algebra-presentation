@@ -19,33 +19,40 @@
                     <div class="vertically-center-content">
                         <h1 class="large">What is Linear Algebra?</h1>
                     </div>
-                    <p data-reveal-index="1">Linear algebra is a branch of mathematics which mainly deals with <em>vector spaces</em> and <em>linear transformations</em>.<br>
-                        These concepts can be represented through <x-hl>vectors</x-hl> and <x-hl>matrices</x-hl>, which are special types of quantities. <br class="large">
+                    <p>
+                        <span data-reveal-index="1">
+                        Linear algebra is a branch of mathematics which mainly deals with <em>vector spaces</em> and <em>linear transformations</em>.<br>
+                        These concepts can be represented through <x-hl>vectors</x-hl> and <x-hl>matrices</x-hl>.<br class="large"></span>
 
-                        The basics of many of these concepts can be explained much more clearly through a geometric intuition.<br class="large">
+                        <span data-reveal-index="2">
+                        The basics of many of these concepts can be explained much more clearly through a geometric intuition.</span>
                     </p>
                     <!-- Matrix and vector notation example -->
                     <flex-container class="horizontal-flex evenly-space-around">
-                        <div class="vertically-center-content" data-reveal-index="2">
+                        <div class="vertically-center-content" data-reveal-index="3">
                             <p class="equation">
                                 $$
+                                \Large{
                                 \begin{bmatrix}
                                     2 \\
                                     -4 \\
                                     0
                                 \end{bmatrix}
+                                }
                                 $$
                             </p>
                             <h2>3-Dimensional Vector</h2>
                         </div>
-                        <div class="vertically-center-content" data-reveal-index="2">
+                        <div class="vertically-center-content" data-reveal-index="3">
                             <p class="equation">
                                 $$
+                                \Large{
                                 \begin{bmatrix}
                                     0 &  2 & -3 \\
                                     4 & -1 & -8 \\
                                     9 &  0 & -8
                                 \end{bmatrix}
+                                }
                                 $$
                             </p>
                             <h2>3x3 Matrix</h2>
@@ -59,37 +66,45 @@
                     <h1 class="large" data-reveal-index="1">What is a Vector?</h1>
                 </div>
                 <p>
-                    <span data-reveal-index="2">In short, <em>vectors are special type of quantity which can't be represented by just one value</em>, but 
-                    the exact definition of a vector varies slightly from field to field.</span><br class="large">
+                    <span data-reveal-index="1">
+                    In short, vectors are a special type of quantity which cannot be represented by just one value.<br class="large"></span>
 
-                    <span data-reveal-index="3">For instance, in physics, a vector is anything with a <x-hl>magnitude</x-hl> and a <x-hl>direction</x-hl>,
-                    and in other cases, a vector can simply be thought of as a list of numbers.</span><br class="large">
+                    <span data-reveal-index="2">
+                    The exact value of a vector varies slightly from field to field. For instance, in physics, a vector is anything with a 
+                    <x-hl>magnitude</x-hl> and a <x-hl>direction</x-hl>, while in other cases, a vector can simply be thought of as a list of numbers.<br class="large"></span>
 
-                    <span data-reveal-index="4">A generalized definition of a vector however, is anything in which <em>vector addition</em> and 
-                    <em>scalar multiplication</em> can be meaningfully applied to.</span><br class="large">
+                    <span data-reveal-index="3">
+                    Generally, a vector is anything in which <em>vector addition</em> and <em>scalar multiplication</em> can be meaningfully applied to.<br class="large"></span>
 
-                    <span data-reveal-index="5">In this section, we'll look over the different ways to represent a vector.</span>
+                    <span data-reveal-index="4">
+                    In this section, we'll look over the different ways to represent a vector.</span>
                 </p>     
             </div>
             <!-- SLIDE #3 -->
             <div class="slide before-shown">
                 <div class="vertically-center-content">
-                    <h1 class="large">Visual Interpretation</h1>
+                    <h1 class="large">Magnitude and Direction</h1>
                 </div>
-                <flex-container class="horizontal-flex flex-gap">
-                    <p>
-                        Visually, vectors are usually drawn as an arrow where the length is the magnitude of the vector.<br class="large">
+                <p>
+                    <span data-reveal-index="1">
+                    This interpretation is most often used in physics, where the magnitude represents the strength/amount of some quantity, 
+                    while the direction represents which way it is in.<br class="large"></span>
 
-                        <span data-reveal-index="1">It is important to realize that a vector can have <em>any</em> amount of dimensions. The space we choose to draw the vector in 
-                        depends on how many dimensions the vector has.</span><br>
+                    <span data-reveal-index="2" class="large">Example:<br></span>
+                    <span data-reveal-index="3">
+                    Velocity is a vector quantity, it has a speed (magnitude), and a direction.<br></span>
 
-                        <span data-reveal-index="2">In this example, we will be working with a 2D vector.</span><br class="large">
+                    <span data-reveal-index="4">
+                    Speed is a scalar quantity. This means that it is not affected by direction, and can be represented by one value.<br class="large"></span>
+                </p> 
+                <flex-container class="horizontal-flex evenly-space-around">
+                    <figure data-reveal-index="5">
+                        <figcaption>Examples of vector quantities.</figcaption>
+                    </figure>
 
-                        <span data-reveal-index="3">To draw the arrow, first determine the direction it will be pointing in. The length of the arrow represents the magnitude.<br>
-                        As long as the direction and magnitude stay the same, this vector can be moved anywhere in space, but generally it is drawn 
-                        from the origin \((0, 0)\) for readability sakes.</span>
-                    </p>  
-                    <img src="../media/images/2D-vector-visual4.png" width="300", height="500" class="image-box" id="vector-img-0">  
+                    <figure data-reveal-index="6">
+                        <figcaption>Examples of scalar quantities.</figcaption>
+                    </figure>
                 </flex-container>
             </div>
             <!-- SLIDE #4 -->
@@ -151,6 +166,31 @@
 
                     Note: Row vectors and column vectors are <em>not</em> interchangeable within equations.
                 </p>
+            </div>
+            <!-- SLIDE #7 -->
+            <div class="slide before-shown">
+                <div class="vertically-center-content">
+                    <h1 class="large">Matrix Notation</h1>
+                </div>
+                <flex-container class="horizontal-flex flex-gap">
+                    <p class="equation">
+                    $$
+                    \begin{bmatrix}
+                        x_{1} \\
+                        x_{2} \\
+                        \vdots \\
+                        x_{m}
+                    \end{bmatrix}
+                    $$
+                    </p>
+                    <p>
+                        This is the form of a column vector in matrix notation. Each number represents an individual component.<br class="large">
+
+                        The number of components in this vector (m), represents the dimension.<br class="large">
+                        
+                    </p>
+                </flex-container>
+                
             </div>
             <!-- Vector Demo Slide -->
             <div class="slide before-shown">

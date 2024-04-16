@@ -74,6 +74,10 @@ br.large {
     margin: 3.2rem 0;
 }
 
+span.large {
+    font-size: 3rem;
+}
+
 label {
     font-size: 1.2rem;
 }
