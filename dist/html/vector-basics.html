@@ -16,7 +16,7 @@
 
             <!-- SLIDE #1 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">What is Linear Algebra?</h1>
                 </div>
 
@@ -30,8 +30,8 @@
                 </p>
 
                 <!-- Matrix and vector notation example -->
-                <flex-container class="horizontal-flex evenly-space-around">
-                    <div class="vertically-center-content" data-reveal-index="3">
+                <div class="flex horizontal space-around">
+                    <div class="flex vertical center" data-reveal-index="3">
                         <p class="equation">
                             $$
                             \Large{
@@ -45,7 +45,7 @@
                         </p>
                         <h2>3-Dimensional Vector</h2>
                     </div>
-                    <div class="vertically-center-content" data-reveal-index="3">
+                    <div class="flex vertical center" data-reveal-index="3">
                         <p class="equation">
                             $$
                             \Large{
@@ -59,12 +59,12 @@
                         </p>
                         <h2>3x3 Matrix</h2>
                     </div>
-                </flex-container>
+                </div>
             </section>
 
             <!-- SLIDE #2 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large" data-reveal-index="1">What is a Vector?</h1>
                 </div>
                 
@@ -86,7 +86,7 @@
 
             <!-- SLIDE #3 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">Magnitude and Direction</h1>
                 </div>
 
@@ -104,7 +104,7 @@
                 </p> 
 
                 <!-- Examples of different physical quantities -->
-                <flex-container class="horizontal-flex evenly-space-around">
+                <section class="flex horizontal space-around">
                     <div data-reveal-index="5">
                         <h2 class="large">Scalar Quantities</h2>
                         <ul>
@@ -123,16 +123,16 @@
                             <li>Force</li>
                         </ul>
                     </div>
-                </flex-container>
+                </section>
             </section>
 
             <!-- SLIDE #4 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">Visual Interpretation</h1>
                 </div> 
 
-                <flex-container class="horizontal-flex flex-gap">
+                <div class="flex horizontal flex-gap">
                     <p>
                         <span data-reveal-index="1">
                         Visually, vectors are drawn as an arrow starting from the origin, where the length is the magnitude.<br class="large"></span>
@@ -147,16 +147,16 @@
                         the actual value in any way.</span>
                     </p>
                     <img data-reveal-index="2" src="../media/images/magnitude-direction-visual.png" width="420" height="600" class="image-box" id="vector-img-0">  
-                </flex-container>
+                </div>
             </section>
 
             <!-- SLIDE #5 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">Vector Components</h1>
                 </div>
 
-                <flex-container class="horizontal-flex flex-gap">
+                <div class="flex horizontal flex-gap">
                     <p>
                         <span data-reveal-index="1">
                         The coordinates of the arrow tip can be used as another method of representing a vector; that is through individual <x-hl>components</x-hl>.</span>
@@ -174,12 +174,12 @@
                         Generally this form is better for performing operations on and doing math with so most of the vectors we'll be dealing with will be in component form.</span>
                     </p>
                     <img data-reveal-index="2" src="../media/images/components-visual.png" width="420" height="600" class="image-box" id="vector-img-0">  
-                </flex-container>
+                </div>
             </section>
 
             <!-- SLIDE #6 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">Vector Notation</h1>
                 </div>
 
@@ -202,10 +202,10 @@
 
             <!-- SLIDE #7 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">Row and Column Vectors</h1>
                     <div class="info-box" data-reveal-index="1">
-                        <flex-container class="horizontal-flex center-align flex-gap">
+                        <div class="flex horizontal center flex-gap">
                             <p>
                                 <x-hl>Column Vector</x-hl>
                                 \(
@@ -222,7 +222,7 @@
                                     \end{bmatrix}
                                 \)
                             </p>
-                        </flex-container>
+                        </div>
                     </div>
                 </div>
 
@@ -238,7 +238,7 @@
 
             <!-- SLIDE #8 -->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">Vector Variables</h1>
                 </div>
 
@@ -247,7 +247,7 @@
                     <br class="large">
                 </p>
 
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <p data-reveal-index="2">
                         Ex. \(\pmb{v}\) or \(\vec{v}\)
                     </p>
@@ -259,7 +259,7 @@
                     <br class="large">
                 </p>
 
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <p data-reveal-index="4">
                         Ex. \(\left\|\vec{v}\right\|\) or \(\mid\vec{v}\mid\)
                     </p>
@@ -268,7 +268,7 @@
 
             <!-- SLIDE #9-->
             <section class="slide before-shown">
-                <div class="vertically-center-content">
+                <div class="flex vertical center">
                     <h1 class="large">Summary</h1>
                 </div>
                 <p>
@@ -291,21 +291,21 @@
                     <br class="large">
                 </p>
 
-                <div class="vertically-center-content" data-reveal-index="5">
+                <div class="flex vertical center" data-reveal-index="5">
                     <a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-operations', 1)"><p>Proceed to next section</p></a>
                 </div>
             </section>
 
             <!-- Vector Demo Slide -->
             <section class="slide before-shown">
-                <flex-container class="horizontal-flex flex-gap"> 
+                <div class="flex horizontal flex-gap"> 
 
-                    <div class="vertically-center-content" id="vector-demo-container">
+                    <div class="flex vertical center" id="vector-demo-container">
                         <h1>Using Three.js to render visualizations</h1>
                         <canvas class="demo-canvas" id="vector-demo-canvas"></canvas>
                     </div>
 
-                    <flex-container class="vertical-flex center-align">
+                    <div class="flex vertical center">
                         <h2>Settings</h2>
 
                         <!-- Demo Input -->
@@ -351,23 +351,23 @@
                             </button>
 
                         </div>
-                    </flex-container>
+                    </div>
 
-                </flex-container>
+                </div>
             </section>
         </main>
 
         <!-- Footer -->
-        <flex-container class="horizontal-flex center-align evenly-space" id="footer">
+        <div class="flex horizontal center space-around" id="footer">
             <button onclick="incrementSlide(-1)" id="back-button"></button>
             
-            <flex-container class="vertical-flex center-align evenly-space" id="slide-information">
+            <div class="flex vertical center space-around" id="slide-information">
                 <a class="hover-underline-link" href="navigation.html#vector-basics"><h2 id="chapter-title">Vector Basics</h2></a>
                 <h3 id="slide-number">#1</h3>
-            </flex-container>
+            </div>
             
             <button onclick="incrementSlide(1)" id="forward-button"></button>
-        </flex-container>
+        </div>
 
         <!-- Progress bar -->
         <div id="progress-bar"></div>
