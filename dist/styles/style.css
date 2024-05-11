@@ -25,6 +25,11 @@ body {
 em {
     font-style: italic;
 }
+
+strong {
+    font-weight: bold;
+}
+
 h1 {
     font-size: 2rem;
 }
@@ -53,14 +58,19 @@ h1.large {
     font-size: 3.2rem;
 }
 
+h2.large {
+    font-size: 2.6rem;
+    margin: 1.8rem 0;
+}
+
 p {
     font-size: 2.2rem;
     line-height: 3.4rem;
 }
 
 ul {
-    font-size: 2rem;
-    line-height: 3.2rem;
+    font-size: 1.8rem;
+    line-height: 2.8rem;
     list-style: inside;
 }
 
@@ -481,7 +491,6 @@ grid-container {
 }
 
 /* Slide Images */
-
 #vector-img-0 {
     margin-top: 0;
 }
