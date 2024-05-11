@@ -78,6 +78,10 @@ a {
     font-size: 1em;
 }
 
+figcaption {
+    font-size: 1.5rem;
+}
+
 br.large {
     display: block;
     content: "";
@@ -92,7 +96,7 @@ label {
     font-size: 1.2rem;
 }
 
-h1, h2, h3, h4, h5, h6, p, a, label, ul {
+h1, h2, h3, h4, h5, h6, p, a, label, ul, figcaption {
     color: var(--text-color);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
@@ -121,6 +125,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .flex.space-around {
     justify-content: space-around;
+}
+
+.flex.space-between {
+    justify-content: space-between;
 }
 
 .flex.flex-gap {

@@ -11,25 +11,25 @@
         <title>Linear Algebra - Introduction</title>
     </head>
     <body id="introduction-page">
-        <div class="slides-content-div">
+        <main class="slides-content-div">
             <!-- SLIDE #1 -->
-            <section class="slide before-shown">
+            <article class="slide before-shown">
                 <div class="center-content"> 
                     <h1 class="large"><u>Disclaimer</u></h1>
                     <div class="text-align-center">
-                        <div class="info-box">
+                        <section class="info-box">
                             <p>First and foremost, I am not an expert in the topics covered and the slides <br>
                                 aren't meant to be a comprehensive explanation of the content.<br><br>
                                 This is a hobby project done mostly for my own entertainment, and there is a <br>
                                 good chance not all of the content is completely factual.<br>
                             </p>
-                        </div>
+                        </section>
                         <p><br>*Slides may only work in full screen.</p>
                     </div>
                 </div>
-            </section>
+            </article>
             <!-- SLIDE #2 -->
-            <section class="slide before-shown">
+            <article class="slide before-shown">
                 <div class="flex vertical center text-align-center"> 
                     <h1 class="large">Basic Guide</h1>
                     <p>
@@ -53,16 +53,19 @@
                         </span>
                     </p>
                 </div>
-            </section>
+            </article>
             <!-- SLIDE #3 -->
-            <div class="slide before-shown"><div class="center-content"> 
-                <p>Head to the <a href="javascript:;" onclick="setPage('vector-basics', 1)">next section</a> 
-                    or return to <a href="javascript:;" onclick="setSlide(1)">the start</a></p>
-            </div></div>
-        </div>
+            <article class="slide before-shown">
+                <div class="center-content"> 
+                    <p>Head to the <a href="javascript:;" onclick="setPage('vector-basics', 1)">next section</a> 
+                        or return to <a href="javascript:;" onclick="setSlide(1)">the start</a>
+                    </p>
+                </div>
+        </article>
+        </main>
 
         <!-- Footer -->
-        <div class="flex horizontal center space-around" id="footer">
+        <footer class="flex horizontal center space-between" id="footer">
             <button onclick="incrementSlide(-1)" id="back-button"></button>
             
             <div class="flex vertical center space-around" id="slide-information">
@@ -71,7 +74,7 @@
             </div>
             
             <button onclick="incrementSlide(1)" id="forward-button"></button>
-        </div>
+        </footer>
 
         <!-- Progress bar -->
         <div id="progress-bar"></div>
