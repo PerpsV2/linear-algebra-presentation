@@ -119,7 +119,7 @@ h1, h2, h3, h4, h5, h6 {
     flex-direction: row;
 }
 
-.flex.center {
+.flex.align-center {
     align-items: center;
 }
 
@@ -154,13 +154,6 @@ h1, h2, h3, h4, h5, h6 {
     height: calc(100vh - 80px - var(--footer-height));
     margin: 40px 40px calc(40px + var(--footer-height)) 40px;
     overflow: hidden;
-}
-
-.vertically-center-content {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .center-content {
@@ -367,33 +360,29 @@ x-hl {
 }
 
 /* Navigation Page */
-.section-nav {
+.nav {
+    background-color: var(--mid-grey);
     box-shadow: var(--shadow-color) 20px 20px;
     border-radius: 10px;
-    background-color: var(--mid-grey);
     width: min(800px, 90%);
     margin: 0 0 40px 0;
 }
 
-.section-nav .nav-label {
+.nav .nav-header {
+    padding: 1rem;
     margin: 0 0.5rem;
-    padding: 1rem
 }
 
-.section-nav .nav-link-item {
+.nav .nav-link-container {
     padding: 0 24px;
     line-height: 0;
 }
 
-.section-nav :last-child {
+.nav .nav-link-container:last-child {
     border-radius: 0 0 10px 10px;
 }
 
-.dark-bg {
-    background-color: var(--dark-grey);
-}
-
-.light-bg {
+.nav .nav-link-container:nth-child(2n) {
     background-color: var(--light-grey);
 }
 
@@ -463,7 +452,7 @@ x-hl {
     margin-top: 1px;
 }
 
-/* Progress Bar - indicates the progress of the current section */
+/* Progress Bar - indicates the progress through the current section */
 #progress-bar {
     background-color: black;
     position: absolute;
@@ -483,11 +472,6 @@ x-hl {
     bottom: 0;
     left: 0;
     border-radius: 0 2px 2px 0;
-}
-
-/* Grids */
-grid-container {
-    display: grid;
 }
 
 /* Slide Images */
