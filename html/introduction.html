@@ -11,65 +11,70 @@
         <title>Linear Algebra - Introduction</title>
     </head>
     <body id="introduction-page">
-        <div class="slides-content-div">
+        <main class="slides-content-div">
             <!-- SLIDE #1 -->
-            <div class="slide before-shown"><div class="center-content"> 
-                <h1 class="large"><u>Disclaimer</u></h1>
-                <div class="text-align-center">
-                    <div class="info-box">
-                        <p>First and foremost, I am not an expert in the topics covered and the slides <br>
-                            aren't meant to be a comprehensive explanation of the content. At the time <br>
-                            of writing, much of the content planned to be included I've either not fully <br>
-                            understood, or learnt at all.<br><br>
-                            This is a hobby project done mostly for my own entertainment, and there is a <br>
-                            good chance not all of the content is completely factual.<br>
-                        </p>
+            <article class="slide before-shown">
+                <div class="center-content"> 
+                    <h1 class="large"><u>Disclaimer</u></h1>
+                    <div class="text-align-center">
+                        <section class="info-box">
+                            <p>First and foremost, I am not an expert in the topics covered and the slides <br>
+                                aren't meant to be a comprehensive explanation of the content.<br><br>
+                                This is a hobby project done mostly for my own entertainment, and there is a <br>
+                                good chance not all of the content is completely factual.<br>
+                            </p>
+                        </section>
+                        <p><br>*Slides may only work in full screen.</p>
                     </div>
-                    <p><br>*Slides may only work in full screen.</p>
                 </div>
-            </div></div>
+            </article>
             <!-- SLIDE #2 -->
-            <div class="slide before-shown"><flex-container class="vertical-flex small-flex-gap center-content text-align-center"> 
-                <h1 class="large">Basic Guide</h1>
-                <p>
-                    Click space to reveal more content within a slide.<br class="large">
+            <article class="slide before-shown">
+                <div class="flex vertical align-center text-align-center"> 
+                    <h1 class="large">Basic Guide</h1>
+                    <p>
+                        Click space to reveal more content within a slide.<br class="large">
 
-                    <span data-reveal-index="1">
-                        Text which is <x-hl>highlighted</x-hl> or <em>italicized</em> signifies a key word or something important.<br class="large">
-                    </span>
-                    
-                    <span data-reveal-index="2">
-                        Some text can link back to <a href="javascript:;" onclick="setSlide(1)">previous</a> slides.<br class="large">
-                    </span>
-    
-                    <span data-reveal-index="3">
-                        Throughout the presentation, some demos will be available to help visualize concepts.<br class="large">
-                    </span>
-                    
-                    <span data-reveal-index="4">
-                        The arrow keys or 'a' and 'd' can be used to quickly switch slides, and the section <br>
-                        title in the footer can be clicked to return back to the navigation page.
-                    </span>
-                </p>
-            </flex-container></div>
+                        <span data-reveal-index="1">
+                            Text which is <x-hl>highlighted</x-hl> or <em>italicized</em> signifies a key word or something important.<br class="large">
+                        </span>
+                        
+                        <span data-reveal-index="2">
+                            Some text can link back to <a href="javascript:;" onclick="setSlide(1)">previous</a> slides.<br class="large">
+                        </span>
+        
+                        <span data-reveal-index="3">
+                            Throughout the presentation, some demos will be available to help visualize concepts.<br class="large">
+                        </span>
+                        
+                        <span data-reveal-index="4">
+                            The arrow keys or 'a' and 'd' can be used to quickly switch slides, and the section <br>
+                            title in the footer can be clicked to return back to the navigation page.
+                        </span>
+                    </p>
+                </div>
+            </article>
             <!-- SLIDE #3 -->
-            <div class="slide before-shown"><div class="center-content"> 
-                <p>Head to the <a href="javascript:;" onclick="setPage('vector-basics', 1)">next section</a> 
-                    or return to <a href="javascript:;" onclick="setSlide(1)">the start</a></p>
-            </div></div>
-        </div>
+            <article class="slide before-shown">
+                <div class="center-content"> 
+                    <p>Head to the <a href="javascript:;" onclick="setPage('vector-basics', 1)">next section</a> 
+                        or return to <a href="javascript:;" onclick="setSlide(1)">the start</a>
+                    </p>
+                </div>
+        </article>
+        </main>
 
         <!-- Footer -->
-        <flex-container class="horizontal-flex center-align evenly-space" id="footer">
+        <footer class="flex horizontal align-center space-between" id="footer">
             <button onclick="incrementSlide(-1)" id="back-button"></button>
             
-            <flex-container class="vertical-flex center-align evenly-space" id="slide-information">
+            <div class="flex vertical align-center space-around" id="slide-information">
                 <a class="hover-underline-link" href="navigation.html#introduction"><h2 id="chapter-title">Introduction</h2></a>
                 <h3 id="slide-number">#1</h3>
-            </flex-container>
+            </div>
             
             <button onclick="incrementSlide(1)" id="forward-button"></button>
-        </flex-container>
+        </footer>
 
         <!-- Progress bar -->
         <div id="progress-bar"></div>

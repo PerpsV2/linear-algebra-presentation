@@ -1,30 +1,202 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <link rel="stylesheet", href="../styles/reset.css"/>
+        <link rel="stylesheet" href="../styles/reset.css"/>
         <link rel="stylesheet" href="../styles/style.css"/>
         <script src="../scripts/slides.js"></script>
+        <script type="text/javascript"
+            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
         <title>Linear Algebra - Vector Operations</title>
     </head>
     <body id="vector-operations-page">
-        <div class="slides-content-div">
-            <div class="slide before-shown"><div class="center-content">
-                <h2>Cool Title</h2>
-                <p>Cool text.</p>
-            </div></div>
-        </div>
+
+        <main class="slides-content-div">
+            <!-- SLIDE #1 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Operations</h1>
+                </div>
+                <p>
+                    <span data-reveal-index="1">
+                    Now that we've covered the basics of a vector, we can look at the operations unique to them. 
+                    This section will cover <x-hl>vector addition</x-hl> and <x-hl>scalar multiplication</x-hl>.</span>
+                    <br class="large">
+
+                    <span  data-reveal-index="1">
+                    These concepts are key in defining a <em>vector space</em>, and subsequently in giving a more formal definition of a vector.</span>
+                    <br class="large">
+
+                    [[Vector Addition]] [[Scalar Multiplication]]
+
+                </p>
+            </article>
+            <!-- SLIDE #2 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Addition</h1>
+                </div>
+                <p>
+                    <span data-reveal-index="1">
+                    Vector addition is defined with two vectors of the same dimension.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    Geometrically, we can think of it as placing the starting point of one vector at the end point of another vector. 
+                    The vector formed between the origin and the new end point would be the sum.</span>
+                    <br class="large">
+                </p>
+                <!-- Video and equation-->
+                <div class="flex horizontal flex-gap">
+                    <video width="156" height="90" class="image-box" id="vector-operations-media-0" data-reveal-index="3" controls>
+                        <source src="../media/videos/vector-addition-visual.mp4" type="video/mp4">
+                        Video tag is not supported.
+                    </video>
+                    <p>
+                        <span data-reveal-index="4">
+                        Mathematically, vector addition can be calculated by summing up each corresponding component of the two vectors, and creating a new vector with them.</span>
+
+                        <span data-reveal-index="5">
+                        $$
+                        \vec{a} + \vec{b} =
+                        \begin{bmatrix}
+                            a_{1} + b_{1} &  a_{2} + b_{2} & \cdots & a_{n} + b_{n}
+                        \end{bmatrix}
+                        $$</span>
+                    </p>
+                </div>
+            </article>
+            <!-- SLIDE #3 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Addition Commutativity</h1>
+                </div>
+                
+                <div class="flex horizontal align-center">
+                    <p>
+                        <span data-reveal-index="1">
+                        Like ordinary addition, vector addition is <em>commutative</em>, which means that the vectors can be added in any order without affecting the sum.</span>
+                        <br class="large">
+
+                        <span data-reveal-index="3">
+                        Vector addition is also associative which means that different groupings of addition don't affect the sum.
+                        <br class="large">
+
+                        The associative law states that \(\vec{a} + (\vec{b} + \vec{c}) = (\vec{a} + \vec{b}) + \vec{c}\)</span>
+                    </p>
+
+                    <video width="138" height="90" class="image-box" id="vector-operations-media-0" data-reveal-index="2" controls>
+                        <source src="../media/videos/vector-addition-commutativity.mp4" type="video/mp4">
+                        Video tag is not supported.
+                    </video>
+                </div>
+            </article>
+            <!-- SLIDE #4 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Addition Components</h1>
+                </div>
+            
+                <div class="flex horizontal align-center flex-gap">
+                    <p>
+                        <span data-reveal-index="1">
+                        Notice how we can construct a vector by summing up its components together.</span>
+                        <br class="large">
+
+                        <span data-reveal-index="2">
+                        Ex. \(\begin{bmatrix} 4 \\ -1 \end{bmatrix} = \begin{bmatrix} 4 \\ 0 \end{bmatrix} + \begin{bmatrix} 0 \\ -1 \end{bmatrix}\)</span>
+                        <br class="large">
+
+                        <span data-reveal-index="3">
+                        Subsequently, adding two vectors together is equivalent to adding each of the components of those vectors together.</span>
+                    </p>
+                    <video width="135" height="90" class="image-box" id="vector-operations-media-3" data-reveal-index="3" controls>
+                        <source src="../media/videos/component-addition-visual.mp4" type="video/mp4">
+                        Video tag is not supported.
+                    </video>
+                </div>  
+                
+            </article>
+            <!-- SLIDE #5 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Scalar Multiplication</h1>
+                </div>
+
+                <div class="flex horizontal flex-gap">
+                    <section>
+                        <!-- Text -->
+                        <p>
+                            <span data-reveal-index="1">
+                            Scalar multiplication is defined with one vector and one scalar value.</span>
+                            <br class="large">
+        
+                            <span data-reveal-index="2">
+                            Geometrically, scalar multiplication changes the magnitude of a vector by a factor of the scalar value. 
+                            A negative scalar value will result in the vector flipping directions.</span>
+                            <br class="large">
+    
+                            <span data-reveal-index="4">
+                            Mathematically, scalar multiplication can be calculated by multiplying each component of the vector with the scalar value.</span>
+                        </p>
+                        <!-- Equation -->
+                        <div class="flex vertical align-center">
+                            <p>
+                            <span data-reveal-index="5">
+                            $$
+                            x\vec{a} =
+                            \begin{bmatrix}
+                                xa_{1} & xa_{2} & \cdots & xa_{n}
+                            \end{bmatrix}
+                            $$</span>
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Video -->
+                    <video width="300" height="300" class="image-box" id="vector-operations-media-1" data-reveal-index="3" controls>
+                        <source src="../media/videos/scalar-multiplication-visual.mp4" type="video/mp4">
+                        Video tag is not supported.
+                    </video>
+                </div>
+            </article>
+            <!-- SLIDE #6 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Operations</h1>
+                </div>
+            </article>
+            <!-- SLIDE #7 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Operations</h1>
+                </div>
+            </article>
+            <!-- SLIDE #8 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Operations</h1>
+                </div>
+            </article>
+            <!-- SLIDE #9 -->
+            <article class="slide before-shown">
+                <div class="flex vertical align-center">
+                    <h1 class="large">Vector Operations</h1>
+                </div>
+            </article>
+        </main>
 
         <!-- Footer -->
-        <flex-container class="horizontal-flex center-align evenly-space" id="footer">
-            <flex-item><button onclick="incrementSlide(-1)" id="back-button"></button></flex-item>
-            <flex-item>
-                <flex-container class="vertical-flex center-align evenly-space" id="slide-information">
-                    <flex-item><a class="hover-underline-link" href="navigation.html#vector-operations"><h2 id="chapter-title">Vector Operations</h2></a></flex-item>
-                    <flex-item><h3 id="slide-number">#1</h3></flex-item>
-                </flex-container>
-            </flex-item>
-            <flex-item><button onclick="incrementSlide(1)" id="forward-button"></button></flex-item>
-        </flex-container>
+        <footer class="flex horizontal align-center space-between" id="footer">
+            <button onclick="incrementSlide(-1)" id="back-button"></button>
+            
+            <div class="flex vertical align-center space-around" id="slide-information">
+                <a class="hover-underline-link" href="navigation.html#vector-operations"><h2 id="chapter-title">Vector Operations</h2></a>
+                <h3 id="slide-number">#1</h3>
+            </div>
+            
+            <button onclick="incrementSlide(1)" id="forward-button"></button>
+        </footer>
 
         <!-- Progress bar -->
         <div id="progress-bar"></div>

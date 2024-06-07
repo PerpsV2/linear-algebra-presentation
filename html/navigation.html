@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html id="navigation-page">
+<html id="navigation-page" lang="en">
     <head>
         <link rel="stylesheet", href="../styles/reset.css"/>
         <link rel="stylesheet" href="../styles/style.css"/>
@@ -7,31 +7,29 @@
         <title>Linear Algebra Presentation</title>
     </head>
     <body>
-        <div class="content-div vertically-center-content">
+        <div class="content-div flex vertical align-center">
             <h1>Navigation</h1>
-            <div class="section-nav" id="introduction">
-                <h2 class="nav-label">Section 0 - Introduction</h2>
-                <flex-container class="vertical-flex evenly-space">
-                    <flex-item class="nav-link-item light-bg"><h3>
-                        <a class="hover-underline-link" href="javascript:;" onclick="setPage('introduction', 1)">Disclaimer</a>
-                    </h3></flex-item>
-                    <flex-item class="nav-link-item"><h3>
-                        <a class="hover-underline-link" href="javascript:;" onclick="setPage('introduction', 2)">Basic Guide</a>
-                    </h3></flex-item>
-                </flex-container>
-            </div>
+            <nav class="nav flex vertical space-around" id="introduction">
+                <h2 class="nav-header">Section 0 - Introduction</h2>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('introduction', 1)">Disclaimer</a></h3></div>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('introduction', 2)">Basic Guide</a></h3></div>
+            </nav>
 
-            <div class="section-nav" id="vector-operations">
-                <h2 class="nav-label">Section 1 - Basics</h2>
-                <flex-container class="vertical-flex evenly-space">
-                    <flex-item class="nav-link-item light-bg"><h3>
-                        <a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 1)">What is Linear Algebra?</a>
-                    </h3></flex-item>
-                    <flex-item class="nav-link-item"><h3>
-                        <a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 2)">What is a Vector?</a>
-                    </h3></flex-item>
-                </flex-container>
-            </div>
+            <nav class="nav flex vertical space-around" id="vector-basics">
+                <h2 class="nav-header">Section 1 - Vector Basics</h2>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 1)">What is Linear Algebra?</a></h3></div>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 2)">What is a Vector?</a></h3></div>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 3)">Magnitude and Direction</a></h3></div>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 5)">Vector Components</a></h3></div>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 6)">Vector Notation</a></h3></div>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 8)">Variable Notation</a></h3></div>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-basics', 9)">Summary</a></h3></div>
+            </nav>
+
+            <nav class="nav flex vertical space-around" id="vector-operations">
+                <h2 class="nav-header">Section 2 - Vector Operations</h2>
+                <div class="nav-link-container"><h3><a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-operations', 1)">Vector Operations</a></h3></div>
+            </nav>
         </div>
     </body>
 </html>
