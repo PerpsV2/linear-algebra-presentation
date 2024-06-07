@@ -105,6 +105,14 @@ h1, h2, h3, h4, h5, h6 {
     margin: 1em 0;
 }
 
+img {
+    width: 100%;
+}
+
+video {
+    width: 100%;
+}
+
 /* Utilities */
 .flex {
     display: flex;
@@ -137,6 +145,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .flex.small-flex-gap {
     gap: 2rem;
+}
+
+.align-self-center {
+    align-self: center;
 }
 
 /* Page Content */
@@ -475,6 +487,29 @@ x-hl {
 }
 
 /* Slide Images */
-#vector-img-0 {
-    margin-top: 0;
+#vector-basics-img-0 {
+    width: 400px;
+    height: auto;
+}
+
+#vector-basics-img-1 {
+    width: 400px;
+    height: auto;
+}
+
+#vector-operations-media-0 {
+    width: 580px;
+    height: auto;
+}
+
+#vector-operations-media-1 {
+    align-self: center;
+    width: 600px;
+    height: auto;
+}
+
+#vector-operations-media-3 {
+    align-self: center;
+    width: 800px;
+    height: auto;
 }
