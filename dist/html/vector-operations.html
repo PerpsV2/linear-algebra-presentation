@@ -19,17 +19,21 @@
                 </div>
                 <p>
                     <span data-reveal-index="1">
-                    Now that we've covered the basics of a vector, we can look at the operations unique to them. 
-                    This section will cover <x-hl>vector addition</x-hl> and <x-hl>scalar multiplication</x-hl>.</span>
+                    Vectors have a few operations analagous to the basic algebraic operations. This section we'll primarily look at <em>vector 
+                    addition</em> and <em>scalar multiplication</em> as these are key in definiting a <em>vector space</em>.
                     <br class="large">
-
-                    <span  data-reveal-index="1">
-                    These concepts are key in defining a <em>vector space</em>, and subsequently in giving a more formal definition of a vector.</span>
-                    <br class="large">
-
-                    [[Vector Addition]] [[Scalar Multiplication]]
 
                 </p>
+                <div class="flex horizontal flex-gap align-center center-flex">
+                    <figure data-reveal-index="2" class="flex vertical align-center">
+                        <img src="../media/images/vector-addition-image.png" width="724" height="418" class="image-box" id="vector-operations-img-0">  
+                        <figcaption>Vector Addition</figcaption>
+                    </figure>
+                    <figure data-reveal-index="2" class="flex vertical align-center">
+                        <img src="../media/images/scalar-multiplication-image.png" width="291" height="294" class="image-box" id="vector-operations-img-1">  
+                        <figcaption>Scalar Multiplication</figcaption>
+                    </figure>
+                </div>
             </article>
             <!-- SLIDE #2 -->
             <article class="slide before-shown">
@@ -38,7 +42,7 @@
                 </div>
                 <p>
                     <span data-reveal-index="1">
-                    Vector addition is defined with two vectors of the same dimension.</span>
+                    <x-hl>Vector addition</x-hl> is defined with two vectors of the same dimension.</span>
                     <br class="large">
 
                     <span data-reveal-index="2">
@@ -75,11 +79,11 @@
                 <div class="flex horizontal align-center">
                     <p>
                         <span data-reveal-index="1">
-                        Like ordinary addition, vector addition is <em>commutative</em>, which means that the vectors can be added in any order without affecting the sum.</span>
+                        Like ordinary addition, vector addition is <x-hl>commutative</x-hl>, which means that the vectors can be added in any order without affecting the sum.</span>
                         <br class="large">
 
                         <span data-reveal-index="3">
-                        Vector addition is also associative which means that different groupings of addition don't affect the sum.
+                        Vector addition is also <x-hl>associative</x-hl> which means that different groupings of addition don't affect the sum.
                         <br class="large">
 
                         The associative law states that \(\vec{a} + (\vec{b} + \vec{c}) = (\vec{a} + \vec{b}) + \vec{c}\)</span>
@@ -94,7 +98,7 @@
             <!-- SLIDE #4 -->
             <article class="slide before-shown">
                 <div class="flex vertical align-center">
-                    <h1 class="large">Vector Addition Components</h1>
+                    <h1 class="large">Vector Addition With Components</h1>
                 </div>
             
                 <div class="flex horizontal align-center flex-gap">
@@ -108,7 +112,7 @@
                         <br class="large">
 
                         <span data-reveal-index="3">
-                        Subsequently, adding two vectors together is equivalent to adding each of the components of those vectors together.</span>
+                        Subsequently, adding two vectors is equivalent to adding each component of those two vectors together.</span>
                     </p>
                     <video width="135" height="90" class="image-box" id="vector-operations-media-3" data-reveal-index="3" controls>
                         <source src="../media/videos/component-addition-visual.mp4" type="video/mp4">
@@ -128,12 +132,12 @@
                         <!-- Text -->
                         <p>
                             <span data-reveal-index="1">
-                            Scalar multiplication is defined with one vector and one scalar value.</span>
+                            <x-hl>Scalar multiplication</x-hl> is defined with one vector and one scalar value.</span>
                             <br class="large">
         
                             <span data-reveal-index="2">
-                            Geometrically, scalar multiplication changes the magnitude of a vector by a factor of the scalar value. 
-                            A negative scalar value will result in the vector flipping directions.</span>
+                            Geometrically, scalar multiplication changes the magnitude of a vector by a factor of the scalar value. The direction is unaffected 
+                            for positive scalars but flipped for negative scalars.</span>
                             <br class="large">
     
                             <span data-reveal-index="4">
@@ -163,26 +167,118 @@
             <!-- SLIDE #6 -->
             <article class="slide before-shown">
                 <div class="flex vertical align-center">
-                    <h1 class="large">Vector Operations</h1>
+                    <h1 class="large">Negative of a Vector/Additive Inverse</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    Multiplying a vector by -1 produces a special result, where the magnitude is the same but the direction is flipped.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    This is the <x-hl>negative of a vector</x-hl> also known as the <x-hl>additive inverse</x-hl> because adding it to its 
+                    positive counterpart produces a <x-hl>null vector</x-hl>, a vector with a magnitude of zero \(\begin{bmatrix}0 & 0 & 0\end{bmatrix}\).</span>
+                    <br class="large">
+                </p>
+
+                <div class="flex horizontal flex-gap space-around align-center">
+                    <img data-reveal-index="3" src="../media/images/positive-vector.png" width="627" height="427" class="image-box" id="vector-operations-img-2">  
+                    <p data-reveal-index="3">
+                        These two vectors are <br>negatives of each other.
+                    </p>
+                    <img data-reveal-index="3" src="../media/images/negative-vector.png" width="627" height="427" class="image-box" id="vector-operations-img-2">  
                 </div>
             </article>
             <!-- SLIDE #7 -->
             <article class="slide before-shown">
                 <div class="flex vertical align-center">
-                    <h1 class="large">Vector Operations</h1>
+                    <h1 class="large">Vector Subtraction</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    <em>Vector subtraction</em> is a special case of vector addition. We add the first vector with the negative of the second vector.</span>
+                    <br>
+
+                    <span data-reveal-index="2">
+                    Unlike vector addition, vector subtraction is not commutative nor is it associative.</span>
+                    <br class="large">
+                </p>
+
+                <div class="flex horizontal space-around align-center flex-gap">
+                    <p>
+                        <span data-reveal-index="3">
+                        Mathematically, vector subtraction is calculated by taking the difference between each component rather than the sum.</span>
+                        <br class="large">
+
+                        <span data-reveal-index="4">
+                        Using the same vectors from the addition examples.
+                        \(
+                            \begin{bmatrix}3 \\ 3\end{bmatrix} - 
+                            \begin{bmatrix}4 \\ -1\end{bmatrix} = 
+                            \begin{bmatrix}3 - 4 \\ 3 - (-1)\end{bmatrix} =
+                            \begin{bmatrix}-1 \\ 4\end{bmatrix}
+                        \)
+                        </span>
+                    </p>
+                    <video width="444" height="300" class="image-box" id="vector-operations-media-4" data-reveal-index="4" controls>
+                        <source src="../media/videos/vector-subtraction-visualization.mp4" type="video/mp4">
+                        Video tag is not supported.
+                    </video>
                 </div>
             </article>
             <!-- SLIDE #8 -->
             <article class="slide before-shown">
                 <div class="flex vertical align-center">
-                    <h1 class="large">Vector Operations</h1>
+                    <h1 class="large">As an Aside</h1>
                 </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    Note that we can also perform <em>scalar division</em> by taking the reciprocal of the scalar and multiplying it with the vector.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    Because the two main operations are vector addition and scalar multiplication, we won't talk about vector subtraction or scalar 
+                    division very much.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    It is worth noting that we can multiply two vectors together as well, but since vector multiplication doesn't have a clear 
+                    interpretation, there are multiple operations for it.</span>
+                    <br class="large">
+                </p>
             </article>
             <!-- SLIDE #9 -->
             <article class="slide before-shown">
                 <div class="flex vertical align-center">
-                    <h1 class="large">Vector Operations</h1>
+                    <h1 class="large">Summary</h1>
                 </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    The two big operations relating to vectors are vector addition and scalar multiplication.</span>
+                    <br>
+                    <span data-reveal-index="2">
+                    <x-hl>Vector addition</x-hl> adds two vectors by summing up each corresponding component, and creating a new vector with the results.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    <x-hl>Scalar multiplication</x-hl> multiplies the magnitude of a vector by a scalar and/or flips its direction. It can be calulated by
+                    multiplying each component with the scalar.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="4">
+                    Multiplying a vector by -1 produces a vector with the same magnitude but opposite direction. This is its <x-hl>negative</x-hl> 
+                    or <x-hl>additive inverse</x-hl> and when added with its positive counterpart, the sum is a <x-hl>null vector</x-hl> 
+                    (\(\begin{bmatrix}0 & 0 & 0\end{bmatrix}\)).</span>
+                    <br class="large">
+
+                    <span data-reveal-index="5">
+                    <x-hl>Vector subtraction</x-hl> works by summing the first vector with the negative of the second vector.</span>
+
+                    <a data-reveal-index="6" class="hover-underline-link" href="vector-space.html">Next Section →</a>
+                </p>
             </article>
         </main>
 

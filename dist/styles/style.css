@@ -131,6 +131,10 @@ video {
     align-items: center;
 }
 
+.flex.center-flex {
+    justify-content: center;
+}
+
 .flex.space-around {
     justify-content: space-around;
 }
@@ -497,8 +501,23 @@ x-hl {
     height: auto;
 }
 
+#vector-operations-img-0 {
+    width: 600px;
+    height: auto;
+}
+
+#vector-operations-img-1 {
+    width: 350px;
+    height: auto;
+}
+
+#vector-operations-img-2 {
+    width: 500px;
+    height: auto;
+}
+
 #vector-operations-media-0 {
-    width: 580px;
+    width: 600px;
     height: auto;
 }
 
@@ -511,5 +530,11 @@ x-hl {
 #vector-operations-media-3 {
     align-self: center;
     width: 800px;
+    height: auto;
+}
+
+#vector-operations-media-4 {
+    align-self: center;
+    width: 500px;
     height: auto;
 }
