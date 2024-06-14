@@ -30,6 +30,10 @@ strong {
     font-weight: bold;
 }
 
+x-hl {
+    color: var(--highlight-color);
+}
+
 h1 {
     font-size: 2rem;
 }
@@ -54,18 +58,18 @@ h6 {
     font-size: 0.67rem;
 }
 
-h1.large {
-    font-size: 3.2rem;
-}
-
 h2.large {
     font-size: 2.6rem;
     margin: 1.8rem 0;
 }
 
-p {
-    font-size: 2.2rem;
-    line-height: 3.4rem;
+.slide h1 {
+    font-size: 2.7cqw;
+}
+
+.slide p {
+    font-size: 1.8cqw;
+    line-height: 2.9cqw;
 }
 
 ul {
@@ -82,14 +86,10 @@ figcaption {
     font-size: 1.5rem;
 }
 
-br.large {
+.slide br.large {
     display: block;
     content: "";
-    margin: 3.2rem 0;
-}
-
-span.large {
-    font-size: 2.8rem;
+    margin: 2.6cqw 0;
 }
 
 label {
@@ -105,6 +105,10 @@ h1, h2, h3, h4, h5, h6 {
     margin: 1em 0;
 }
 
+.slide h1 {
+    margin: 0.7cqw;
+}
+
 img {
     width: 100%;
 }
@@ -112,6 +116,8 @@ img {
 video {
     width: 100%;
 }
+
+/* Slide Content */
 
 /* Utilities */
 .flex {
@@ -131,6 +137,10 @@ video {
     align-items: center;
 }
 
+.flex.justify-center {
+    justify-content: center;
+}
+
 .flex.space-around {
     justify-content: space-around;
 }
@@ -147,6 +157,14 @@ video {
     gap: 2rem;
 }
 
+.flex.center-content {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .align-self-center {
     align-self: center;
 }
@@ -160,21 +178,14 @@ video {
 }
 
 /* Div to store specifically slides */
-.slides-content-div {
+.slide-container {
     position: relative;
-    width: calc(100vw - 80px);
-    height: calc(100vh - 80px - var(--footer-height));
+    background-color: black;
+    aspect-ratio: 32 / 13;
+    max-width: calc(100vw - 80px);
+    max-height: calc(100vh - 80px - var(--footer-height));
     margin: 40px 40px calc(40px + var(--footer-height)) 40px;
     overflow: hidden;
-}
-
-.center-content {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .hover-underline-link {
@@ -316,10 +327,6 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 }
 
 /* Slide Content - stuff that appears in slides */
-x-hl {
-    color: var(--highlight-color);
-}
-
 .info-box, .demo-canvas, .settings-panel {
     background-color: var(--light-grey);
     border-color: var(--dark-grey);
@@ -343,11 +350,8 @@ x-hl {
     padding: 0;
 }
 
-.settings-panel {
-    margin-top: 30px;
-}
-
 .slide {
+    background-color: red;
     transition: var(--slide-anim-time);
     height: 100%;
     position: absolute;
@@ -359,100 +363,105 @@ x-hl {
 }
 
 /* Slide hide/show animation */
-.slide.before-shown {
+.slide.before-shown, .slide.after-shown {
     visibility: hidden;
     opacity: 0;
+}
+
+.slide.before-shown {
     transform: translate(100%, 0);
 }
 
 .slide.after-shown {
-    visibility: hidden;
-    opacity: 0;
     transform: translate(-100%, 0);
 }
 
 /* Navigation Page */
-.nav {
+.nav-bar {
     background-color: var(--mid-grey);
     box-shadow: var(--shadow-color) 20px 20px;
     border-radius: 10px;
     width: min(800px, 90%);
     margin: 0 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
-.nav .nav-header {
+.nav-bar .nav-header {
     padding: 1rem;
     margin: 0 0.5rem;
 }
 
-.nav .nav-link-container {
+.nav-bar .nav-link-container {
     padding: 0 24px;
     line-height: 0;
 }
 
-.nav .nav-link-container:last-child {
+.nav-bar .nav-link-container:last-child {
     border-radius: 0 0 10px 10px;
 }
 
-.nav .nav-link-container:nth-child(2n) {
+.nav-bar .nav-link-container:nth-child(2n) {
     background-color: var(--light-grey);
 }
 
 /* Footer */
 #footer {
+    background-color: var(--mid-grey);
     height: var(--footer-height);
     position: fixed;
     bottom: 0;
     width: 100%;
-    background-color: var(--mid-grey);
 }
 
 /* Change Slide Buttons */
 #back-button, #forward-button {
-    width: 0;
-    height: 0;
     background-color: transparent;
-    border: none;
     border-top: 30px solid transparent;
     border-bottom: 30px solid transparent;
+    width: 0;
+    height: 0;
     transition: 0.1s;
     transform: scale(1, 1);
 }
 
 #back-button {
     border-right: 60px solid var(--button-color);
+    border-left: none;
     margin-left: 50px;
 }
 
 #forward-button {
     border-left: 60px solid var(--button-color);
+    border-right: none;
     margin-right: 50px;
 }
 
 #back-button:hover:enabled {
-    border-right: 60px solid var(--button-hover-color);
+    border-right-color: var(--button-hover-color);
     transform: scale(1.1, 1.1);
 }
 
 #forward-button:hover:enabled {
-    border-left: 60px solid var(--button-hover-color);
+    border-left-color: var(--button-hover-color);
     transform: scale(1.1, 1.1);
 }
 
 #back-button:active:enabled {
-    border-right: 60px solid var(--button-click-color);
+    border-right-color: var(--button-click-color);
 }
 
 #forward-button:active:enabled {
-    border-left: 60px solid var(--button-click-color);
+    border-left-color: var(--button-click-color);
 }
 
 #back-button:disabled {
-    border-right: 60px solid transparent;
+    border-right-color: transparent;
 }
 
 #forward-button:disabled {
-    border-left: 60px solid transparent;
+    border-left-color: transparent;
 }
 
 /* Slide Information - contains information about the current slide e.g. slide number and chapter title */
@@ -478,12 +487,12 @@ x-hl {
     content: '';
     transition: var(--slide-anim-time);
     background-color: var(--highlight-color);
+    border-radius: 0 2px 2px 0;
     position: absolute;
     height: 5px;
     width: calc(var(--progress-bar-progress) * 1vw);
     bottom: 0;
     left: 0;
-    border-radius: 0 2px 2px 0;
 }
 
 /* Slide Images */
@@ -497,8 +506,23 @@ x-hl {
     height: auto;
 }
 
+#vector-operations-img-0 {
+    width: 30cqw;
+    height: auto;
+}
+
+#vector-operations-img-1 {
+    width: 17.5cqw;
+    height: auto;
+}
+
+#vector-operations-img-2 {
+    width: 500px;
+    height: auto;
+}
+
 #vector-operations-media-0 {
-    width: 580px;
+    width: 600px;
     height: auto;
 }
 
@@ -511,5 +535,11 @@ x-hl {
 #vector-operations-media-3 {
     align-self: center;
     width: 800px;
+    height: auto;
+}
+
+#vector-operations-media-4 {
+    align-self: center;
+    width: 500px;
     height: auto;
 }

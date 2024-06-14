@@ -37,23 +37,24 @@ function setSlide(slideNumber) {
 }
 
 function updateRevealVisibility() {
-    function traverseSlideElements(root) {
-        for(element of root.children) {
+    function traverseSlideElements(root, maxIndex) {
+        for (element of root.children) {
+            let elementRevealIndex = element.dataset.revealIndex;
             // TODO: fix traverse slide elements from looping through all the mathjax elements in a slide
-            if (typeof element.dataset.revealIndex !== 'undefined') {
-                element.style.transition
-                if (revealIndices[currentSlide - 1] < element.dataset.revealIndex) element.style.visibility = 'hidden';
-                else element.style.visibility = 'visible';
+            if (typeof elementRevealIndex !== 'undefined') {
+                maxIndex = elementRevealIndex > maxIndex ? elementRevealIndex : maxIndex;
+                element.style.visibility = revealIndices[currentSlide - 1] < elementRevealIndex ? 'hidden' : 'visible';
             }
-            traverseSlideElements(element);       
+            maxIndex = traverseSlideElements(element, maxIndex);       
         }
+        return maxIndex || 0;
     }
-    traverseSlideElements(slides[currentSlide - 1]);
+    return traverseSlideElements(slides[currentSlide - 1], 0);
 }
 
 function setRevealVisibility(value) {
     revealIndices[currentSlide - 1] = value;
-    updateRevealVisibility();
+    revealIndices[currentSlide - 1] = Math.max(Math.min(updateRevealVisibility(), value), 0);
 }
 
 function setPage(pageName, slideNumber = 1) {
