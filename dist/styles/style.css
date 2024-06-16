@@ -177,7 +177,6 @@ h1, h2, h3, h4, h5, h6 {
 /* Slide Container - contains every slide in the section */
 .slide-container {
     position: relative;
-    background-color: black;
     aspect-ratio: 32 / 13;
     max-width: calc(100vw - 80px);
     max-height: calc(100vh - 80px - var(--footer-height));
