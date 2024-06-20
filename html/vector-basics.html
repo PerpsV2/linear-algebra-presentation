@@ -4,9 +4,7 @@
         <link rel="stylesheet" href="../styles/reset.css">
         <link rel="stylesheet" href="../styles/style.css">
         <script src="../scripts/slides.js"></script>
-        <script type="text/javascript"
-            src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-        </script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <title>Linear Algebra - Vector Basics</title>
     </head>
     <body id="vector-basics-page">
@@ -28,7 +26,7 @@
                 </p>
 
                 <!-- Matrix and vector notation example -->
-                <section class="flex horizontal space-around">
+                <div class="flex horizontal space-around">
                     <figure class="vertical-center-flex" data-reveal-index="3">
                         <p class="equation">
                             $$
@@ -57,7 +55,7 @@
                         </p>
                         <figcaption>3x3 Matrix</figcaption>
                     </figure>
-                </section>
+                </div>
             </article>
 
             <!-- SLIDE #2 -->
@@ -102,7 +100,7 @@
                 </p> 
 
                 <!-- Examples of different physical quantities -->
-                <section class="flex horizontal space-around">
+                <div class="flex horizontal space-around">
                     <section data-reveal-index="5">
                         <h2>Scalar Quantities</h2>
                         <ul>
@@ -121,7 +119,7 @@
                             <li>Force</li>
                         </ul>
                     </section>
-                </section>
+                </div>
             </article>
 
             <!-- SLIDE #4 -->
@@ -130,10 +128,11 @@
                     <h1>Visual Interpretation</h1>
                 </div> 
 
-                <section class="flex horizontal flex-gap">
+                <div class="flex horizontal flex-gap">
                     <p>
                         <span data-reveal-index="1">
-                        Visually, vectors are drawn as an arrow starting from the origin, where the length is the magnitude.<br class="large"></span>
+                        Visually, vectors are drawn as an arrow starting from the origin, where the length is the magnitude.</span>
+                        <br class="large">
     
                         <span data-reveal-index="3">
                         It is important to realize that a vector can have any amount of dimensions. Most of the examples will be using 2D vectors 
@@ -145,7 +144,7 @@
                         the actual value in any way.</span>
                     </p>
                     <img data-reveal-index="2" src="../media/images/magnitude-direction-visual.png" width="483" height="632" class="image-box" id="vector-basics-img-0">  
-                </section>
+                </div>
             </article>
 
             <!-- SLIDE #5 -->
@@ -154,7 +153,7 @@
                     <h1>Vector Components</h1>
                 </div>
 
-                <section class="flex horizontal flex-gap">
+                <div class="flex horizontal flex-gap">
                     <p>
                         <span data-reveal-index="1">
                         The coordinates of the arrow tip can be used as another method of representing a vector; that is through individual <x-hl>components</x-hl>.</span>
@@ -171,8 +170,8 @@
                         <span data-reveal-index="4">
                         Generally this form is better for performing operations on and doing math with so most of the vectors we'll be dealing with will be in component form.</span>
                     </p>
-                    <img data-reveal-index="2" src="../media/images/components-visual.png" width="483" height="632" class="image-box" id="vector-basics-img-1">  
-                </section>
+                    <img data-reveal-index="2" src="../media/images/components-visual.png" alt="Vector Components Visual" width="483" height="632" class="image-box" id="vector-basics-img-1">  
+                </div>
             </article>
 
             <!-- SLIDE #6 -->
@@ -202,7 +201,7 @@
             <article class="slide before-shown">
                 <div class="vertical-center-flex">
                     <h1>Row and Column Vectors</h1>
-                    <section class="info-box" data-reveal-index="1">
+                    <div class="info-box" data-reveal-index="1">
                         <figure class="flex horizontal align-center flex-gap">
                             <p>
                                 <x-hl>Column Vector</x-hl>
@@ -221,7 +220,7 @@
                                 \)
                             </p>
                         </figure>
-                    </section>
+                    </div>
                 </div>
 
                 <p data-reveal-index="2">
