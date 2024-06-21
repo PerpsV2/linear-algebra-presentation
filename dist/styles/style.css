@@ -506,50 +506,46 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 }
 
 /* Slide Images */
-#vector-basics-img-0 {
+#magnitude-direction-image {
     width: 20cqw;
-    height: auto;
 }
 
-#vector-basics-img-1 {
+#components-image {
     width: 20cqw;
-    height: auto;
 }
 
-#vector-operations-img-0 {
+#vector-addition-image {
     width: 30cqw;
-    height: auto;
 }
 
-#vector-operations-img-1 {
+#scalar-multiplication-image {
     width: 17.5cqw;
-    height: auto;
 }
 
-#vector-operations-img-2 {
+#additive-inverse-1 {
     width: 30cqw;
-    height: auto;
 }
 
-#vector-operations-media-0 {
-    width: 35cqw;
-    height: auto;
-}
-
-#vector-operations-media-1 {
-    align-self: center;
-    width: 35cqw;
-    height: auto;
-}
-
-#vector-operations-media-3 {
-    align-self: center;
-    width: 45cqw;
-    height: auto;
-}
-
-#vector-operations-media-4 {
-    align-self: center;
+#additive-inverse-2 {
     width: 30cqw;
-    height: auto;
+}
+
+#vector-addition-video {
+    width: 35cqw;
+}
+
+#vector-addition-commutativity-video {
+    width: 35cqw;
+}   
+
+#vector-addition-components-video  {
+    width: 35cqw;
+}
+
+#scalar-multiplication-video {
+    width: 35cqw;
+}
+
+#vector-subtraction-video {
+    width: 30cqw;
 }
