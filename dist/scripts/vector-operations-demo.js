@@ -31,12 +31,14 @@ var objs = demoScene.sceneObjects;
 demoScene.addMaterialWithColor('xArrowMat', new THREE.Vector3(1.0, 0.0, 0.0));
 demoScene.addMaterialWithColor('yArrowMat', new THREE.Vector3(0.0, 0.0, 1.0));
 demoScene.addMaterialWithColor('zArrowMat', new THREE.Vector3(0.0, 1.0, 0.0));
+demoScene.addMaterialWithColor('addArrowMat', new THREE.Vector3(1.0, 1.0, 0.0));
 
 // add meshes to demo scene
 objs.vector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 objs.xComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.xArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.yArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 objs.zComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+objs.addVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.addArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
 toggleComponentVectors();
 
 // once document is fully loaded, set dimension and start drawing
@@ -51,6 +53,7 @@ function anim() {
 
     // read the values so the input appears in the form XZY
     let vec = Utils.readVectorInput3(vectorInput);
+    let addVec = Utils.readVectorInput3(additionInput);
 
     // draw meshes
     Objects.drawGridLines(objs.grid);
@@ -58,6 +61,7 @@ function anim() {
     Objects.drawArrow(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, 0, 0));
     Objects.drawArrow(objs.zComponentVector, new THREE.Vector3(vec.x, 0, 0), new THREE.Vector3(0, 0, vec.z));
     Objects.drawArrow(objs.yComponentVector, new THREE.Vector3(vec.x, 0, vec.z), new THREE.Vector3(0, vec.y, 0));
+    Objects.drawArrow(objs.addVector, new THREE.Vector3(vec.x, vec.y, vec.z), new THREE.Vector3(addVec.x, addVec.y, addVec.z));
 }
 
 // update zoom when slider is adjusted manually
