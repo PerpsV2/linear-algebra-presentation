@@ -67,6 +67,12 @@ export function readVectorInput3(vectorInput) {
     return new THREE.Vector3(vectorInput.children[0].value, vectorInput.children[2].value, vectorInput.children[1].value);
 }
 
+export function setVectorInput3(vectorInput, x, y, z) {
+    vectorInput.children[0].value = x;
+    vectorInput.children[2].value = y;
+    vectorInput.children[1].value = z;
+}
+
 export function interpolateMatrix(startMatrix, endMatrix, alpha) {
     var startPosition = new THREE.Vector3();
     var startRotation = new THREE.Quaternion();

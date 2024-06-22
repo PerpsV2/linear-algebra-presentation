@@ -30,7 +30,7 @@ class DemoScene {
 
     matrix = new THREE.Matrix4();
     
-    uniforms = {
+    #uniforms = {
         transformation: { type: 'mat4', value: this.matrix },
         color: { type: 'vec3', value: new THREE.Vector3(1, 1, 1) }
     };
@@ -38,7 +38,7 @@ class DemoScene {
     BASE_MATERIAL = new THREE.ShaderMaterial({
         fragmentShader: basicFragment,
         vertexShader: basicVertex,
-        uniforms: this.uniforms
+        uniforms: this.#uniforms
     });
 
     constructor(canvas, canvasContainer, displayScale, cellSize = 1, gridSize = 20, axisWidth = 0.04) {
@@ -70,7 +70,7 @@ class DemoScene {
         this.#oCamera.lookAt(0, 0, 0);
 
         // create materials
-        this.matrix.set(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+        this.matrix.set(1, 0, 0, 0, 0, 1, 0, 0, -0, -0, -1, -0, 0, 0, 0, 1);
 
         const axisMaterial = this.BASE_MATERIAL.clone();
         const lineMaterial = this.BASE_MATERIAL.clone();
