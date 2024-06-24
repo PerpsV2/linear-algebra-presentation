@@ -13,8 +13,8 @@ class DemoScene {
     renderer;
 
     pCameraEnabled;
-    materials = {};
-    sceneObjects = {};
+    #materials = {};
+    #sceneObjects = {};
     #frustumAspectRatio;
     #displayScale;
     #canvas;
@@ -77,15 +77,15 @@ class DemoScene {
         lineMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.4, 0.4, 0.4)};
         const arrowMaterial = this.BASE_MATERIAL.clone();
         arrowMaterial.uniforms.color = {type: 'vec3', value: new THREE.Vector3(0.8, 0.0, 0.6)};
-        this.materials.axisMat = axisMaterial;
-        this.materials.lineMat = lineMaterial;
-        this.materials.arrowMat = arrowMaterial;
+        this.#materials.axisMat = axisMaterial;
+        this.#materials.lineMat = lineMaterial;
+        this.#materials.arrowMat = arrowMaterial;
         
         // create objects
-        this.sceneObjects.grid = Objects.createGridMesh(this.#bgScene, lineMaterial, cellSize, gridSize);
-        this.sceneObjects.xAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, gridSize * 2, axisWidth, axisWidth);
-        this.sceneObjects.yAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, axisWidth, gridSize * 2, axisWidth);
-        this.sceneObjects.zAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, axisWidth, axisWidth, gridSize * 2);
+        this.#sceneObjects.grid = Objects.createGridMesh(this.#bgScene, lineMaterial, cellSize, gridSize);
+        this.#sceneObjects.xAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, gridSize * 2, axisWidth, axisWidth);
+        this.#sceneObjects.yAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, axisWidth, gridSize * 2, axisWidth);
+        this.#sceneObjects.zAxis = Objects.createBoxMesh(this.#bgScene, axisMaterial, axisWidth, axisWidth, gridSize * 2);
 
         // bind canvas control event handlers
         this.addMouseMoveHandler(canvas, this);
@@ -95,12 +95,24 @@ class DemoScene {
     }
 
     addMaterial(name) {
-        this.materials[name] = this.BASE_MATERIAL.clone();
-        return this.materials[name];
+        this.#materials[name] = this.BASE_MATERIAL.clone();
+        return this.#materials[name];
     }
 
     addMaterialWithColor(name, color) {
         this.addMaterial(name).uniforms.color = {type: 'vec3', value: color};
+    }
+
+    getMaterial(name) {
+        return this.#materials[name];
+    }
+
+    addObject(name, mesh) {
+        this.#sceneObjects[name] = mesh;
+    }
+
+    getObject(name) {
+        return this.#sceneObjects[name];
     }
 
     setCamera2D() {
@@ -131,8 +143,8 @@ class DemoScene {
             if (!thisObj.pCameraEnabled) return;
 
             e.preventDefault();
-            var deltaX = (e.clientX - thisObj.#mouseX) * 0.001;
-            var deltaY = (e.clientY - thisObj.#mouseY) * 0.001; 
+            let deltaX = (e.clientX - thisObj.#mouseX) * 0.001;
+            let deltaY = (e.clientY - thisObj.#mouseY) * 0.001; 
             thisObj.#mouseX = e.clientX;
             thisObj.#mouseY = e.clientY;
             thisObj.rotateCamera(deltaX, deltaY);
@@ -163,8 +175,8 @@ class DemoScene {
     }
 
     animate(animateFunc) {
-        var thisObj = this;
-        var animateWrapper = function() {
+        let thisObj = this;
+        let animateWrapper = function() {
             requestAnimationFrame(function(){thisObj.animate(animateFunc)}.bind(thisObj));
             thisObj.renderer.setSize(window.innerWidth * thisObj.#displayScale, window.innerHeight * thisObj.#displayScale);
             thisObj.#frustumAspectRatio = thisObj.#canvas.offsetWidth / thisObj.#canvas.offsetHeight;

@@ -7,8 +7,6 @@ import DemoScene from './demoScene.js';
 const arrowbodyWidth = 0.04;
 const arrowheadWidth = 0.16;
 const arrowheadLength = 0.25;
-const transformTransitionTime = 1; // in seconds
-const transformTransitionFPS = 30;
 
 // settings to control demo
 var vectorInput = document.getElementById("vector-input");
@@ -25,7 +23,6 @@ var demoCanvas = document.getElementById("vector-demo-canvas");
 var demoContainer = demoCanvas.parentElement;
 var demoScene = new DemoScene(demoCanvas, demoContainer, 0.6);
 demoScene.mouseSensitivity = 1.7;
-var objs = demoScene.sceneObjects;
 
 // add materials to demo scene
 demoScene.addMaterialWithColor('xArrowMat', new THREE.Vector3(1.0, 0.0, 0.0));
@@ -34,11 +31,11 @@ demoScene.addMaterialWithColor('zArrowMat', new THREE.Vector3(0.0, 1.0, 0.0));
 demoScene.addMaterialWithColor('addArrowMat', new THREE.Vector3(1.0, 1.0, 0.0));
 
 // add meshes to demo scene
-objs.vector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.arrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.xComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.xArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.yComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.yArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.zComponentVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.zArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
-objs.addVector = Objects.createArrowMesh(demoScene.scene, demoScene.materials.addArrowMat, arrowbodyWidth, arrowheadWidth, arrowheadLength);
+demoScene.addObject('vector', Objects.createArrowMesh(demoScene.scene, demoScene.getMaterial('arrowMat'), arrowbodyWidth, arrowheadWidth, arrowheadLength));
+demoScene.addObject('xComponentVector', Objects.createArrowMesh(demoScene.scene, demoScene.getMaterial('xArrowMat'), arrowbodyWidth, arrowheadWidth, arrowheadLength));
+demoScene.addObject('yComponentVector', Objects.createArrowMesh(demoScene.scene, demoScene.getMaterial('yArrowMat'), arrowbodyWidth, arrowheadWidth, arrowheadLength));
+demoScene.addObject('zComponentVector', Objects.createArrowMesh(demoScene.scene, demoScene.getMaterial('zArrowMat'), arrowbodyWidth, arrowheadWidth, arrowheadLength));
+demoScene.addObject('addVector', Objects.createArrowMesh(demoScene.scene, demoScene.getMaterial('addArrowMat'), arrowbodyWidth, arrowheadWidth, arrowheadLength));
 toggleComponentVectors();
 
 // once document is fully loaded, set dimension and start drawing
@@ -56,12 +53,12 @@ function anim() {
     let addVec = Utils.readVectorInput3(additionInput);
 
     // draw meshes
-    Objects.drawGridLines(objs.grid);
-    Objects.drawArrow(objs.vector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, vec.y, vec.z));
-    Objects.drawArrow(objs.xComponentVector, new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, 0, 0));
-    Objects.drawArrow(objs.zComponentVector, new THREE.Vector3(vec.x, 0, 0), new THREE.Vector3(0, 0, vec.z));
-    Objects.drawArrow(objs.yComponentVector, new THREE.Vector3(vec.x, 0, vec.z), new THREE.Vector3(0, vec.y, 0));
-    Objects.drawArrow(objs.addVector, new THREE.Vector3(vec.x, vec.y, vec.z), new THREE.Vector3(addVec.x, addVec.y, addVec.z));
+    Objects.drawGridLines(demoScene.getObject('grid'));
+    Objects.drawArrow(demoScene.getObject('vector'), new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, vec.y, vec.z));
+    Objects.drawArrow(demoScene.getObject('xComponentVector'), new THREE.Vector3(0, 0, 0), new THREE.Vector3(vec.x, 0, 0));
+    Objects.drawArrow(demoScene.getObject('yComponentVector'), new THREE.Vector3(vec.x, 0, 0), new THREE.Vector3(0, 0, vec.z));
+    Objects.drawArrow(demoScene.getObject('zComponentVector'), new THREE.Vector3(vec.x, 0, vec.z), new THREE.Vector3(0, vec.y, 0));
+    Objects.drawArrow(demoScene.getObject('addVector'), new THREE.Vector3(vec.x, vec.y, vec.z), new THREE.Vector3(addVec.x, addVec.y, addVec.z));
 }
 
 // update zoom when slider is adjusted manually
@@ -73,8 +70,8 @@ zoomSlider.oninput = (e) => {
 }
 
 function setInputDimension(dimension) {
-    Utils.setVectorInputDimension(vectorInput, dimension);
-    Utils.setVectorInputDimension(additionInput, dimension);
+    Utils.setInputDimension(vectorInput, dimension);
+    Utils.setInputDimension(additionInput, dimension);
 }
 
 // set demo dimension to 2D
@@ -105,21 +102,21 @@ function evaluateOperation() {
     if (showAdditionMenu) {
         let vector = Utils.readVectorInput3(vectorInput);
         let additionVector = Utils.readVectorInput3(additionInput);
-        Utils.setVectorInput3(vectorInput,  Number(vector.x) +  Number(additionVector.x),  Number(vector.y) +  Number(additionVector.y),  Number(vector.z) +  Number(additionVector.z));
+        Utils.setVectorInput3(vectorInput, Number(vector.x) + Number(additionVector.x), Number(vector.y) + Number(additionVector.y), Number(vector.z) + Number(additionVector.z));
     }
     else {
         let vector = Utils.readVectorInput3(vectorInput);
         let scalar = scalarInput.value;
-        Utils.setVectorInput3(vectorInput, Number(scalar) * Number(vector.x),  Number(scalar) *  Number(vector.y),  Number(scalar) *  Number(vector.z));
+        Utils.setVectorInput3(vectorInput, Number(scalar) * Number(vector.x), Number(scalar) * Number(vector.y), Number(scalar) * Number(vector.z));
     }
 }
 
 // toggle visible component vectors
 function toggleComponentVectors() {
     showComponentVectors = !showComponentVectors;
-    Objects.setArrowVisiblity(objs.xComponentVector, showComponentVectors);
-    Objects.setArrowVisiblity(objs.yComponentVector, showComponentVectors);
-    Objects.setArrowVisiblity(objs.zComponentVector, showComponentVectors);
+    Objects.setArrowVisiblity(demoScene.getObject('xComponentVector'), showComponentVectors);
+    Objects.setArrowVisiblity(demoScene.getObject('yComponentVector'), showComponentVectors);
+    Objects.setArrowVisiblity(demoScene.getObject('zComponentVector'), showComponentVectors);
 }
 
 window.setDemo2D = setDemo2D;

@@ -40,16 +40,10 @@ export function nearlyEqual(a, b, epsilon) {
 }
 
 // disable/enable some inputs of a matrix/vector to fit a certain dimension
-export function setMatrixInputDimension(matrixInput, dimension) {
-    var matrixInputsArray = Array.from(matrixInput.children);
-    matrixInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
-    matrixInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
-}
-
-export function setVectorInputDimension(vectorInput, dimension) {
-    var vectorInputsArray = Array.from(vectorInput.children);
-    vectorInputsArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
-    vectorInputsArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
+export function setInputDimension(input, dimension) {
+    var inputArray = Array.from(input.children);
+    inputArray.filter((input) => input.dataset.dimension > dimension).forEach((input) => {input.disabled = true; input.value = input.dataset.default;});
+    inputArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
 }
 
 // create a 4x4 THREE matrix using a matrix input
