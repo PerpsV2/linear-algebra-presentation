@@ -549,3 +549,23 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 #vector-subtraction-video {
     width: 30cqw;
 }
+
+#two-dimensional-standard-basis-image {
+    width: 15cqw;
+}
+
+#three-dimensional-standard-basis-image {
+    width: 15cqw;
+}
+
+#linear-combination-1 {
+    width: 35cqw;
+}
+
+#linear-combination-2 {
+    width: 20cqw;
+}
+
+#linear-combination-3 {
+    width: 25cqw;
+}

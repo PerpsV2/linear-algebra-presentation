@@ -22,7 +22,8 @@
                     <br class="large">
                     
                     <span data-reveal-index="2">
-                    In particular, we'll look at bases, linear independence, span, dimension, and how they all relate.<br></span>
+                    In particular, we'll look at <em>bases</em>, <em>linear independence</em>, <em>span</em>, <em>dimension</em>, 
+                    and how they all relate.<br></span>
                     <span data-reveal-index="3">
                     We'll also briefly talk about vector subspaces.</span>
                 </p>
@@ -35,7 +36,7 @@
 
                 <p>
                     <span data-reveal-index="1">
-                    Since the highlight of this section is on vector bases, we'll spend the most time explaining these.<br>
+                    Since the highlight of this section is on <em>vector bases</em>, we'll spend the most time explaining these.<br>
                     Recall from section #2, we can write a vector as a sum of its components.<br></span>
                     <span data-reveal-index="2">
                     \(
@@ -47,8 +48,8 @@
                     <br class="large">
 
                     <span data-reveal-index="3">
-                    Let's build on this by breaking these components down into a scalar value and vector which is all
-                    zeros except for a value which is a 1.<br></span>
+                    Let's build on this by breaking these components down into a scalar value and <em>vector which is all
+                    zeros except for a value which is a 1</em>.<br></span>
                     <span data-reveal-index="4">
                     \(
                         \begin{bmatrix}4 \\ -1\end{bmatrix} =
@@ -87,21 +88,123 @@
 
                 <p>
                     <span data-reveal-index="1">
-                    These 'all zeros except a one' vectors are part of the standard basis. Elements of a basis are
-                    called basis vector</span>
+                    These 'all zeros except a one' vectors are part of the <x-hl>standard basis</x-hl>. Elements of a basis are
+                    called <x-hl>basis vectors</x-hl>.</span>
                     <br class="large">
 
                     <span data-reveal-index="2">
                     We can think of these basis vectors as the base units of a vector space. Every other vector
                     in the vector space can be produced using them.</span>
                     <br class="large">
+                </p>
+
+                <div class="flex horizontal align-center flex-gap">
+                    <img data-reveal-index="3" src="../media/images/2d-standard-basis.png" width="586" height="586" class="image-box" id="two-dimensional-standard-basis-image">  
+                    <img data-reveal-index="3" src="../media/images/3d-standard-basis.png" width="500" height="500" class="image-box" id="three-dimensional-standard-basis-image">  
+                    <p>
+                        <span data-reveal-index="4">
+                        Each standard basis vector is a normalized vector facing in the positive direction of a
+                        coordinate axis.</span>
+                        <br class="large">
+
+                        <span data-reveal-index="5">
+                        For 2-3 dimensions, we represent these standard basis vectors with the variables <x-hl>\(\hat{i}\)</x-hl>,
+                        <x-hl>\(\hat{j}\)</x-hl>, and <x-hl>\(\hat{k}\)</x-hl>.</span>
+                    </p>
+                </div>
+            </article>
+            <!-- SLIDE #4 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Linear Combinations</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    Vectors which are produced using only vector addition and scalar multiplication are callled
+                    <x-hl>linear combinations</x-hl>.<br></span>
+                    <span data-reveal-index="2">
+                    As we saw before, every vector in \(\mathbb{R}^n\) space is a linear combination of
+                    these standard base units (standard basis vectors).</span>
+                    <br class="large">
 
                     <span data-reveal-index="3">
-                    Each standard basis vector is a normalized vector facing in the positive direction of a
-                    coordinate axis.<br></span>
+                    Here are some visual examples of different vectors represented as linear combinations of the
+                    standard basis vectors:<br></span>
+                </p>
+
+                <div class="flex horizontal flex-gap align-center">
+                    <img data-reveal-index="4" src="../media/images/linear-combination-1.png" width="580" height="250" class="image-box" id="linear-combination-1">  
+                    <img data-reveal-index="5" src="../media/images/linear-combination-2.png" width="440" height="440" class="image-box" id="linear-combination-2">  
+                    <img data-reveal-index="6" src="../media/images/linear-combination-3.png" width="500" height="400" class="image-box" id="linear-combination-3">  
+                </div>
+            </article>
+            <!-- SLIDE #5 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Vector Bases</h1>
+                </div>
+
+                <div class="flex horizontal flex-gap align-center">
+                    <p>
+                        <span data-reveal-index="1">
+                        Now, remember how the basis vectors we picked were somewhat arbitrary.<br></span>
+                        <span data-reveal-index="3">
+                        There's no reason why we couldn't pick something other than \(\begin{bmatrix}1 & 0\end{bmatrix}\) 
+                        and \(\begin{bmatrix}0 & 1\end{bmatrix}\):<br></span>
+                    </p>
+                    
+                    <figure class="info-box" data-reveal-index="2">
+                        <p>
+                            $$
+                            \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                            4\begin{bmatrix}1 \\ 0\end{bmatrix} -
+                            1\begin{bmatrix}0 \\ 1\end{bmatrix}
+                            $$
+                        </p>
+                        <figcaption>Example from before</figcaption>
+                    </figure>
+                </div>  
+                
+                <p>
                     <span data-reveal-index="4">
-                    For 2-3 dimensions, we represent these standard basis vectors with the variables \(\hat{i}\),
-                    \(\hat{j}\), and \(\hat{k}\).</span>
+                    What if we picked different basis vectors, like \(\begin{bmatrix}2 & 0\end{bmatrix}\) and 
+                    \(\begin{bmatrix}0 & 2\end{bmatrix}\) instead?<br></span>
+                    <span data-reveal-index="5">
+                    \(
+                    \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                    2\begin{bmatrix}2 \\ 0\end{bmatrix} -
+                    0.5\begin{bmatrix}0 \\ 2\end{bmatrix}
+                    \)</span>
+                    <br class="large">
+
+                    <span data-reveal-index="6">
+                    What if we picked \(\begin{bmatrix}1 & 1\end{bmatrix}\) and \(\begin{bmatrix}0 & 1\end{bmatrix}\)?<br></span>
+                    <span data-reveal-index="7">
+                    \(
+                    \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                    4\begin{bmatrix}1 \\ 1\end{bmatrix} -
+                    5\begin{bmatrix}0 \\ 1\end{bmatrix}
+                    \)</span>
+                    <br class="large">
+                </p>
+            </article>
+            <!-- SLIDE #6 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Vector Bases</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    These are examples of a <em>non-standard basis</em>, or just generally a <x-hl>basis</x-hl>.<br>
+                    A vector space can have multiple bases, and for a standard R^n vector space, there are in fact infinitely
+                    many of them.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    For the basis containing \(\begin{bmatrix}1 & 1\end{bmatrix}\) and \(\begin{bmatrix}0 & 1\end{bmatrix}\),
+                    our linear combination examples from before would look like this:</span>
                 </p>
             </article>
         </main>
