@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="../styles/reset.css">
+        <link rel="stylesheet" href="../styles/style.css">
+        <script src="../scripts/slides.js"></script>
+        <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <title>Linear Algebra - Properties of Vector Spaces</title>
+    </head>
+    <body id="vector-operations-page">
+
+        <main class="slide-container">
+            <!-- SLIDE #1 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Overview</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    In this section, we'll look at some of the properties of \(\mathbb{R}^n\) vector spaces.</span>
+                    <br class="large">
+                    
+                    <span data-reveal-index="2">
+                    In particular, we'll look at bases, linear independence, span, dimension, and how they all relate.<br></span>
+                    <span data-reveal-index="3">
+                    We'll also briefly talk about vector subspaces.</span>
+                </p>
+            </article>
+            <!-- SLIDE #2 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Overview</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    Since the highlight of this section is on vector bases, we'll spend the most time explaining these.<br>
+                    Recall from section #2, we can write a vector as a sum of its components.<br></span>
+                    <span data-reveal-index="2">
+                    \(
+                    \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                    \begin{bmatrix}4 \\ 0\end{bmatrix} +
+                    \begin{bmatrix}0 \\ -1\end{bmatrix}
+                    \)
+                    </span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    Let's build on this by breaking these components down into a scalar value and vector which is all
+                    zeros except for a value which is a 1.<br></span>
+                    <span data-reveal-index="4">
+                    \(
+                        \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                        4\begin{bmatrix}1 \\ 0\end{bmatrix} -
+                        1\begin{bmatrix}0 \\ 1\end{bmatrix}
+                    \)
+                    </span>
+                </p>
+
+                <div class="flex horizontal align-center flex-gap" data-reveal-index="5">
+                    <p>
+                        This works for any vector in \(\mathbb{R}^n\) space:
+                    </p>
+                    <p data-reveal-index="6">
+                        $$
+                        \begin{bmatrix}2.5 \\ 5\end{bmatrix} =
+                        2.5\begin{bmatrix}1 \\ 0\end{bmatrix} -
+                        5\begin{bmatrix}0 \\ 1\end{bmatrix}
+                        $$
+                    </p>
+                    <p data-reveal-index="7">
+                        $$
+                        \begin{bmatrix}-2 \\ 6 \\ 5\end{bmatrix} =
+                        -2\begin{bmatrix}1 \\ 0 \\ 0\end{bmatrix} +
+                        6\begin{bmatrix}0 \\ 1 \\ 0\end{bmatrix} +
+                        5\begin{bmatrix}0 \\ 0 \\ 1\end{bmatrix}
+                        $$
+                    </p>
+                </div>
+            </article>
+            <!-- SLIDE #3 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Standard Basis</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    These 'all zeros except a one' vectors are part of the standard basis. Elements of a basis are
+                    called basis vector</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    We can think of these basis vectors as the base units of a vector space. Every other vector
+                    in the vector space can be produced using them.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    Each standard basis vector is a normalized vector facing in the positive direction of a
+                    coordinate axis.<br></span>
+                    <span data-reveal-index="4">
+                    For 2-3 dimensions, we represent these standard basis vectors with the variables \(\hat{i}\),
+                    \(\hat{j}\), and \(\hat{k}\).</span>
+                </p>
+            </article>
+        </main>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <button onclick="incrementSlide(-1)" id="back-button"></button>
+            
+            <div id="slide-information">
+                <a class="hover-underline-link" href="navigation.html#vector-space-properties"><h2 id="chapter-title">Properties of Vector Spaces</h2></a>
+                <h3 id="slide-number">#1</h3>
+            </div>
+            
+            <button onclick="incrementSlide(1)" id="forward-button"></button>
+        </footer>
+
+        <!-- Progress bar -->
+        <div id="progress-bar"></div>
+    </body>
+</html>
