@@ -142,7 +142,7 @@
             <!-- SLIDE #5 -->
             <article class="slide before-shown">
                 <div class="vertical-center-flex">
-                    <h1>Vector Bases</h1>
+                    <h1>Non-Standard Vector Bases</h1>
                 </div>
 
                 <div class="flex horizontal flex-gap align-center">
@@ -192,7 +192,7 @@
             <!-- SLIDE #6 -->
             <article class="slide before-shown">
                 <div class="vertical-center-flex">
-                    <h1>Vector Bases</h1>
+                    <h1>Vector Bases Examples</h1>
                 </div>
 
                 <p>
@@ -205,6 +205,124 @@
                     <span data-reveal-index="2">
                     For the basis containing \(\begin{bmatrix}1 & 1\end{bmatrix}\) and \(\begin{bmatrix}0 & 1\end{bmatrix}\),
                     our linear combination examples from before would look like this:</span>
+                </p>
+
+                <div class="flex horizontal flex-gap align-center">
+                    <img data-reveal-index="3" src="../media/images/linear-combination-non-standard-1.png" width="550" height="650" class="image-box" id="linear-combination-4">  
+                    <img data-reveal-index="4" src="../media/images/linear-combination-non-standard-2.png" width="400" height="400" class="image-box" id="linear-combination-5">  
+                    <p>
+                        <span data-reveal-index="5">
+                        Although we changed our base units, every vector in the vector space can still be written as linear combinations of them.</span>
+                    </p>
+                </div>
+            </article>
+            <!-- SLIDE #7 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Linear Independence</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    Essentially what we've learned is that every element of a vector space is a linear combination of its basis vectors.<br></span>
+                    <span data-reveal-index="2">
+                    What if in our previous \(\mathbb{R}^2\) examples of bases we had more than just two basis vectors?<br>
+                    Ex. \(\begin{bmatrix}0 & 1\end{bmatrix}\), \(\begin{bmatrix}1 & 0\end{bmatrix}\), and \(\begin{bmatrix}1 & 1\end{bmatrix}\)</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    The problem now is that vectors are a linear combination of the basis in multiple distinct ways:</span>
+                </p>
+
+                <div class="flex horizontal flex-gap align-center">
+                    <p data-reveal-index="3">
+                        Ex.<br>
+                        \(
+                        \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                        4\begin{bmatrix}1 \\ 0\end{bmatrix} -
+                        1\begin{bmatrix}0 \\ 1\end{bmatrix}
+                        \)<br>
+                        \(
+                        \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                        4\begin{bmatrix}1 \\ 1\end{bmatrix} -
+                        5\begin{bmatrix}0 \\ 1\end{bmatrix}
+                        \)<br>
+                        \(
+                        \begin{bmatrix}4 \\ -1\end{bmatrix} =
+                        2\begin{bmatrix}1 \\ 0\end{bmatrix} -
+                        3\begin{bmatrix}0 \\ 1\end{bmatrix} +
+                        2\begin{bmatrix}1 \\ 1\end{bmatrix}
+                        \)<br>
+                        Etc.
+                    </p>
+                    <p>
+                        <span data-reveal-index="4">
+                        We want a basis to be the <em>simplest</em> vector set which generates the vector space.<br></span>
+                        <span data-reveal-index="5">
+                        Because of this, one of the requirements of a basis is that it has to be <x-hl>linearly independent</x-hl>. Every vector in 
+                        the basis has to <em>not</em> be a linear combination of the other basis vectors.<br></span>
+                        <span data-reveal-index="6">
+                        In the previous example, \(\begin{bmatrix}1 & 1\end{bmatrix}\) can be written as \(\begin{bmatrix}1 & 0\end{bmatrix}\) +
+                        \(\begin{bmatrix}0 & 1\end{bmatrix}\) making the basis linearly <em>dependent</em>.</span>
+                    </p>
+                </div>
+            </article>
+            <!-- SLIDE #8 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Linear Independence Examples</h1>
+                </div>
+
+                <div class="flex horizontal space-around"> 
+                    <div class="vertical-center-flex">
+                        <img data-reveal-index="1" src="../media/images/linear-independence-1.png" width="187" height="187" class="image-box" id="linear-independence-1">
+                        <p data-reveal-index="2">
+                            <br>
+                            This set is linearly <em>dependent</em>. <br>
+                            Linearly independent vectors can't <br>
+                            be parallel to each other as one <br>
+                            vector is just a scaled version of <br>
+                            the other.
+                        </p>
+                    </div>
+                    <div class="vertical-center-flex">
+                        <img data-reveal-index="3" src="../media/images/linear-independence-2.png" width="187" height="187" class="image-box" id="linear-independence-2">
+                        <p data-reveal-index="4">
+                            <br>
+                            This set is linearly <em>independent</em>. <br>
+                            Individually, each vector can only <br>
+                            produce combinations parallel to <br>
+                            themselves. One vector can't be <br>
+                            used to create the other. <br>
+                        </p>
+                    </div>
+                    <div class="vertical-center-flex">
+                        <img data-reveal-index="5" src="../media/images/linear-independence-3.png" width="187" height="187" class="image-box" id="linear-independence-3">
+                        <p data-reveal-index="6">
+                            <br>
+                            This set is linearly <em>dependent</em>. <br>
+                            Even though none of the vectors <br>
+                            are parallel to each other, one <br>
+                            can still be written as a linear <br>
+                            combination of the others.
+                        </p>
+                    </div>
+                </div>
+            </article>
+            <!-- SLIDE #9 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Linear Span</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    The <x-hl>linear span</x-hl> (or just <x-hl>span</x-hl>) of a set of vectors is basically every linear combination we 
+                    can make using that initial set.</span>
+                    <br class="large">
+
+                    For example:
+                    The span of the standard basis  
                 </p>
             </article>
         </main>

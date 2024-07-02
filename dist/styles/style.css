@@ -569,3 +569,23 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 #linear-combination-3 {
     width: 25cqw;
 }
+
+#linear-combination-4 {
+    width: 17.5cqw;
+}
+
+#linear-combination-5 {
+    width: 20cqw;
+}
+
+#linear-independence-1 {
+    width: 17.5cqw;
+}
+
+#linear-independence-2 {
+    width: 17.5cqw;
+}
+
+#linear-independence-3 {
+    width: 17.5cqw;
+}
