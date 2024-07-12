@@ -26,7 +26,19 @@
                     and how they all relate.<br></span>
                     <span data-reveal-index="3">
                     We'll also briefly talk about vector subspaces.</span>
+                    <br class="large">
                 </p>
+
+                <div class="flex horizontal flex-gap align-center justify-center">
+                    <figure data-reveal-index="4" class="vertical-center-flex">
+                        <img data-reveal-index="4" src="../media/images/3d-standard-basis.png" width="500" height="500" class="image-box" id="linear-span-3d">
+                        <figcaption>3D Standard Basis</figcaption>
+                    </figure>
+                    <figure data-reveal-index="4" class="vertical-center-flex">
+                        <img data-reveal-index="4" src="../media/images/3d-linear-span.png" width="660" height="660" class="image-box" id="linear-span-3d">
+                        <figcaption>3D Basis Span Representation</figcaption>
+                    </figure>
+                </div>
             </article>
             <!-- SLIDE #2 -->
             <article class="slide before-shown">
@@ -99,8 +111,8 @@
                 </p>
 
                 <div class="flex horizontal align-center flex-gap">
-                    <img data-reveal-index="3" src="../media/images/2d-standard-basis.png" width="586" height="586" class="image-box" id="two-dimensional-standard-basis-image">  
-                    <img data-reveal-index="3" src="../media/images/3d-standard-basis.png" width="500" height="500" class="image-box" id="three-dimensional-standard-basis-image">  
+                    <img data-reveal-index="3" src="../media/images/2d-standard-basis.png" width="586" height="586" class="image-box" id="standard-basis-image-2d">  
+                    <img data-reveal-index="3" src="../media/images/3d-standard-basis.png" width="500" height="500" class="image-box" id="standard-basis-image-3d">  
                     <p>
                         <span data-reveal-index="4">
                         Each standard basis vector is a normalized vector facing in the positive direction of a
@@ -320,10 +332,112 @@
                     The <x-hl>linear span</x-hl> (or just <x-hl>span</x-hl>) of a set of vectors is basically every linear combination we 
                     can make using that initial set.</span>
                     <br class="large">
-
-                    For example:
-                    The span of the standard basis  
                 </p>
+
+                <div class="flex horizontal flex-gap space-around" data-reveal-index="2">
+                    <div class="vertical-center-flex info-box">
+                        <p data-reveal-index="2">
+                            The standard basis \(\{\begin{bmatrix}1 & 0\end{bmatrix}, \begin{bmatrix}0 & 1\end{bmatrix}\}\) <br>
+                            spans all of \(\mathbb{R}^2\) space. 
+                            <br class="large">
+                        </p>
+                        
+                        <img data-reveal-index="3" src="../media/images/2d-linear-span.png" width="627" height="627" class="image-box" id="linear-span-2d">
+                    </div>
+
+                    <div class="vertical-center-flex info-box" data-reveal-index="4">
+                        <p data-reveal-index="4">
+                            The standard basis <br>
+                            \(\{\begin{bmatrix}1 & 0 & 0\end{bmatrix}, \begin{bmatrix}0 & 1 & 0\end{bmatrix}, \begin{bmatrix}0 & 0 & 1\end{bmatrix}\}\) <br>
+                            spans all of \(\mathbb{R}^3\) space.
+                        </p>
+
+                        <img data-reveal-index="5" src="../media/images/3d-linear-span.png" width="660" height="660" class="image-box" id="linear-span-3d">
+                    </div>
+
+                    <p data-reveal-index="6">
+                        *In the slides, when <br>
+                        referring to every <br>
+                        element in the vector <br>
+                        pace, only a few <br>
+                        key vectors will be drawn.
+                    </p>
+                </div>
+            </article>
+            <!-- SLIDE #10 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Cardinality</h1>
+                </div>
+
+                <p data-reveal-index="1">
+                    Logically it follows that a basis with n elements spans a vector space with n dimensions. This gives us a better
+                    definition of dimension in the context of vector sapces, where the dimension is equal to the number of basis vectors,
+                    aka the cardinality
+                    <br class="large">
+                </p>
+
+                <p class="info-box" data-reveal-index="2">
+                    As an aside: A basis in \(\mathbb{R}^n\) space can have a cardinality &lt; \(n\).
+                    Take the basis \(\{\begin{bmatrix}1 & 0 & 0\end{bmatrix}, \begin{bmatrix}0 & 1 & 0\end{bmatrix}\}\).<br>
+                    Although this basis is in \(\mathbb{R}^3\) space, its cardinality is \(\mathbb{R}^2\) and as such, its span
+                    would be appear as a plane in space.<br>
+                    This is an example of a <x-hl>vector subspace</x-hl>.<br>
+                    (A vector whose elements are all members of another vector space)
+                </p>
+            </article>
+            <!-- SLIDE #11 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Summary</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    Vectors produced using only vector addition and scalar multiplication are called <x-hl>linear combinations</x-hl>.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    Every vector space has at least one <x-hl>basis</x-hl> consisting of <x-hl>basis vectors</x-hl>. These basis vectors can generate 
+                    every element in the vector space through linear combinations.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    The basis of a vector space has to be <x-hl>linearly independent</x-hl>. That means all of its elements are not linear 
+                    combinations of the other elements.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="4">
+                    The <x-hl>standard basis</x-hl> of R^n vector space is a basis consisting of unit vectors facing in the positive 
+                    direction of a coordinate axis.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="5">
+                    The <x-hl>linear span</x-hl> or just <x-hl>span</x-hl> of a set of vectors is every linear combination we can make 
+                    using the initial set.</span>
+                    <br class="large">
+                </p>
+            </article>
+            <!-- SLIDE #12 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Summary</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    The <em>dimension</em> of a vector space is defined as the <x-hl>cardinality</x-hl> of its bases, another way of saying the 
+                    number of basis vectors.</span>
+                    <br class="large">
+    
+                    <span data-reveal-index="2">
+                    A <x-hl>vector subspace</x-hl> is a vector space whose elements are all members of another vector space.</span>
+                    <br class="large">
+                </p>
+
+                <div class="vertical-center-flex" data-reveal-index="3">
+                    <a class="hover-underline-link" href="javascript:;" onclick="setPage('linear-maps', 1)"><p>Proceed to next section</p></a>
+                </div>
             </article>
         </main>
 

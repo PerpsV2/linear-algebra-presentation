@@ -550,11 +550,11 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
     width: 30cqw;
 }
 
-#two-dimensional-standard-basis-image {
+#standard-basis-image-2d {
     width: 15cqw;
 }
 
-#three-dimensional-standard-basis-image {
+#standard-basis-image-3d {
     width: 15cqw;
 }
 
@@ -587,5 +587,13 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 }
 
 #linear-independence-3 {
+    width: 17.5cqw;
+}
+
+#linear-span-2d {
+    width: 17.5cqw;
+}
+
+#linear-span-3d {
     width: 17.5cqw;
 }
