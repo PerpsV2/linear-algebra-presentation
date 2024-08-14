@@ -46,6 +46,13 @@ export function setInputDimension(input, dimension) {
     inputArray.filter((input) => input.dataset.dimension <= dimension).forEach((input) => input.disabled = false);
 }
 
+export function setInputState(input, state) {
+    var inputArray = Array.from(input.children);
+    for (var i = 0; i < inputArray.length; ++i) {
+        inputArray[i].disabled = !state;
+    }
+}
+
 // create a 4x4 THREE matrix using a matrix input
 export function readMatrixInput4(matrixInput) {
     var matrixInputs = matrixInput.children;
