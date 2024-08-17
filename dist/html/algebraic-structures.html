@@ -14,6 +14,296 @@
                 <div class="vertical-center-flex">
                     <h1>Introduction</h1>
                 </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    This section is a bit different than the others as it doesn't really have anything to do with linear algebra.<br>
+                    Instead, it covers <em>sets</em>, <em>binary operations</em>, and explains some key <em>algebraic structures</em> as seen in 
+                    abstract algebra with an emphasis on fields.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    Knowing these other structures simplifies the explanation of <em>vector spaces</em> and is also just nice for future reference.<br> 
+                    (plus abstract algebra is cool)</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    We'll start with a set, then a group, and each slide will specialize from there.</span>
+                </p>
+            </article>
+            <!-- SLIDE #2 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Sets</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    All structures in algebra consist of something known as a <x-hl>set</x-hl>.<br>
+                    Though they aren't a structure by themselves, these sets are collections of different items called <x-hl>elements</x-hl>.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    Sets can have any number of elements or infinite elements, and these elements can be anything.</span>
+                    <br class="large">
+                </p>
+
+                <div class="flex horizontal align-center flex-gap">
+                    <ul>
+                        <h2 data-reveal-index="3">Examples:<br></h2>
+                        <li data-reveal-index="4">The set of all people named John (finite set of people)<br></li>
+                        <li data-reveal-index="5">Integers/Rational numbers/Real numbers.<br>(infinite set of numbers)<br></li>
+                        <li data-reveal-index="6">Every even number from 1-100 (finite set of numbers)<br></li>
+                    </ul>
+
+                    <div data-reveal-index="7" class="flex horizontal small-flex-gap info-box">
+                        <img src="../media/images/algebraic-structures/set.png" width="605" height="305" class="image-box" id="set-diagram">
+                        <p>
+                            We'll use a diagram like<br>
+                            this to show what each<br> 
+                            structure consists of.<br>
+                        </p>
+                    </div>
+                </div> 
+            </article>
+            <!-- SLIDE #3 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Binary Operations</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    Simply put, a <x-hl>binary operation</x-hl> takes two elements from a set and produces some result.<br>
+                    (Addition, multiplication, vector addition, exponentiation, etc.)<br></span>
+                    <span data-reveal-index="2">
+                    We'll cover four main properties an operation might possess: </span>
+                    <br class="large">
+                </p>
+
+                <ul>
+                    <h2 data-reveal-index="3">For an operation \(\circ\)<br></h2>
+                    <li data-reveal-index="4"><x-hl>Closure</x-hl>: When the operation \(\circ\) is applied on two elements in a set, the result is also in that set.<br>
+                    We say the set is closed under the operation \(\circ\).<br></li>
+                    <li data-reveal-index="5"><x-hl>Associativity</x-hl>: The statement \((a \circ b) \circ c = a \circ (b \circ c)\) always holds true.<br></li>
+                    <li data-reveal-index="6"><x-hl>Commutativity</x-hl>: The statement \(a \circ b = b \circ a\) always holds true (order doesn't matter)<br></li>
+                </ul>
+                <br class="large">
+
+                <ul>
+                    <h2 data-reveal-index="7">For an operation \(\circ\) and an operation \(\star\)<br></h2>
+                    <li data-reveal-index="8"><x-hl>Distributivity</x-hl>: The statement \(a \circ (b \star c) = (a \circ b) \star (a \circ c)\)<br></li>
+                </ul>
+                <br class="large">
+            </article>
+
+            <!-- SLIDE #4 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Identity</h1>
+                </div>
+
+                <p>  
+                    <span data-reveal-index="1">
+                    For a set and an operation ∘, an <x-hl>identity</x-hl> is a unique identity element which satisfies the axiom<br>
+                    \(a \circ e = e \circ a = a\)<br>
+                    (similar to how anything + 0 gives back the same thing, or how anything * 1 also gives back the same thing)</span>
+                    <br class="large">
+                </p>
+
+                <div class="vertical-center-flex" data-reveal-index="2">
+                    <h1>Inverse</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="3">
+                    For a set and an operation \(\circ\), each element of the set may also have an <x-hl>inverse</x-hl> for \(\circ\), which satisfies the axiom<br>
+                    \(a \circ a^{-1} = a^{-1} \circ a = e\)<br>
+                    (similar to how anything + its negative gives back \(0\), or the identity)</span>
+                    <br class="large">
+
+                    <span data-reveal-index="4">
+                    Inverse elements are a generalization of <em>negatives</em> and <em>reciprocals</em>.</span>
+                </p>
+            </article>
+
+            <!-- SLIDE #4 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Groups</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    For a set to be an algebraic structure, it needs a binary operation which follows certain rules known as <em>axioms</em>.<br>
+                    These axioms would be like the properties we looked at earlier.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    <x-hl>Groups</x-hl> are the most basic algebraic structure. They must be equipped with a binary operation which is <em>closed</em> and <em>associative</em>.
+                    There must also be an identity and inverse for the operation.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    An example would be the integers only equipped with addition.</span>
+                    <br class="large">
+                </p>
+
+                <div class="info-box" data-reveal-index="4">
+                    <p>
+                        As an aside, if the binary operation is also commutative, the structure is known as an <em>abelian group</em> or a <em>commutative group</em>.
+                    </p>
+                </div>
+                
+            </article>
+
+            <!-- SLIDE #5 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Group Diagram</h1>
+                    <br class="large">
+                    <img src="../media/images/algebraic-structures/group.png" width="1755" height="805" class="image-box" id="group-diagram">  
+                </div>
+            </article>
+
+            <!-- SLIDE #6 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Rings</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    <x-hl>Rings</x-hl> are a more specialized structure than a group. Rings have two operations, 
+                    traditionally called <em>addition</em> (+) and <em>multiplication</em> (*).</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    Addition must be closed, associative, commutative, have an identity, and have inverses /negatives.
+                    Multiplication must be closed, associative, and have an identity, but commutativity and inverses are not required, so a ring has no concept of a reciprocal.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    An example would be the integers with addition and multiplication.</span>
+                    <br class="large">
+                </p>
+
+                <div class="info-box" data-reveal-index="4">
+                    <p>
+                        As an aside, if multiplication is commutative, the structure is known as a <em>commutative ring</em>.
+                        Most of the time when working with rings they are commutative so this may not be explicitly stated.
+                    </p>
+                </div>
+            </article>
+
+            <!-- SLIDE #7 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Ring Diagram</h1>
+                    <br class="large">
+                    <img src="../media/images/algebraic-structures/ring.png" width="2605" height="855" class="image-box" id="group-diagram">  
+                </div>
+            </article>
+
+            <!-- SLIDE #8 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Fields</h1>
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    <x-hl>Fields</x-hl> are a more specialized structure than a ring. They also have addition and multiplication.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    Addition must be closed, associative, commutative, have an identity, and have inverses/negatives. (same as before)<br>
+                    Multiplication must be closed, associative, commutative, have an identity, and have inverses/reciprocals. (same as addition)<br>
+                    Also, multiplication must be <em>distributive</em> over addition: \(a *(b + c) = (a * b) + (a * c)\)</span>
+                    <br class="large">
+                    
+                    <span data-reveal-index="3">
+                    An example would be the rational numbers or all real numbers.</span>
+                    <br class="large">
+                </p>
+
+                <div class="info-box" data-reveal-index="4">
+                    <p>
+                        Fields also indirectly imply the existence of <em>subtraction</em> and <em>division</em>, as they are the same as addition and multiplication but the
+                        second argument is inverted.
+                    </p>
+                </div>
+            </article>
+
+            <!-- SLIDE #9 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Field Diagram</h1>
+                    <br class="large">
+                    <img src="../media/images/algebraic-structures/field.png" width="2605" height="1105" class="image-box" id="group-diagram">  
+                </div>
+            </article>
+
+            <!-- SLIDE #10 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Binary Operations and Axioms Summary</h1> 
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    <x-hl>Sets</x-hl> are a collection of finite or infinite <x-hl>elements</x-hl>. Every algebraic structure consists of at least one.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    A set is said to be <x-hl>closed</x-hl> under a binary operation if the result of applying that operation on two elements is always still within the set.</span>
+                    <br class="large">
+                    
+                    <span data-reveal-index="3">If a binary operation is <x-hl>associative</x-hl>, parentheses in an expression can be moved freely around.<br></span>
+                    <span data-reveal-index="4">f it's <x-hl>commutative</x-hl>, the two arguments can be swapped. All without changing the value.<br></span>
+                    <span data-reveal-index="5">An operation can also be <x-hl>distributive</x-hl> over another, where the distrubitive property applies.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="6">
+                    When an operation is applied between its <x-hl>identity</x-hl> and any element, the result is the unchanged element.<br></span>
+                    <span data-reveal-index="7">
+                    When an operation is applied between an element and its <x-hl>inverse</x-hl>, the result is the identity.<br>
+                    Inverse elements are a generalization of <em>negatives</em> and <em>reciprocals</em>.</span>
+                </p>
+            </article>
+
+            <!-- SLIDE #11 -->
+            <article class="slide before-shown">
+                <div class="vertical-center-flex">
+                    <h1>Algebraic Structures Summary</h1> 
+                </div>
+
+                <p>
+                    <span data-reveal-index="1">
+                    <x-hl>Algebraic structures</x-hl> are a set equipped with some operation that follows certain <em>axioms</em>.<br>
+                    These operations are always at least <em>closed and associative</em>.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="2">
+                    <x-hl>Groups</x-hl> are the most basic algebraic structure. They have one operation which has an identity and inverses.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="3">
+                    <x-hl>Rings</x-hl> are structures that have two operations, <em>addition</em> and <em>multiplication</em>. 
+                    Addition is commutative, and has an identity and inverses. Multiplication only has an identity.</span>
+                    <br class="large">
+
+                    <span data-reveal-index="4">
+                    <x-hl>Fields</x-hl> also have two operations, addition and multiplication. Both addition and multiplication are commutative, 
+                    and have an identity and inverses. Multiplication must also be distributive over addition.</span>
+                    <br>
+                    <span data-reveal-index="5">
+                    <em>Subtraction</em> and <em>division</em> are the same as addition and multiplication but the second argument is inverted.</span>
+                </p>
+
+                <div class="vertical-center-flex" data-reveal-index="6">
+                    <a class="hover-underline-link" href="javascript:;" onclick="setPage('vector-space', 1)"><p>Next Section →</p></a>
+                </div>
             </article>
         </main>
 

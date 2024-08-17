@@ -597,3 +597,12 @@ input[type="radio"].demo-input:checked::after, input[type="checkbox"].demo-input
 #linear-span-3d {
     width: 17.5cqw;
 }
+
+#set-diagram {
+    width: 15cqw;
+    align-self: start;
+}
+
+#group-diagram {
+    width: 60cqw;
+}
